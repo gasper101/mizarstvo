@@ -1,0 +1,268 @@
+/* Definiranje spremenljivk za barve - "Lesni" pridih */
+:root {
+    --primary-color: #c49b63; /* Zlato-rjava, barva hrasta */
+    --primary-dark: #a88350;
+    --dark-bg: #111111;
+    --body-font: 'Montserrat', sans-serif;
+    --heading-font: 'Playfair Display', serif;
+}
+
+body {
+    font-family: var(--body-font);
+    color: #444;
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+h1{
+    color: white;
+}
+
+/* Navigacija */
+.navbar {
+    padding: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+/* Stil navigacije ko se skrola dol */
+.navbar.scrolled {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px 0;
+}
+.navbar.scrolled .navbar-brand,
+.navbar.scrolled .nav-link {
+    color: #1a1a1a !important;
+}
+.navbar.scrolled .navbar-toggler-icon {
+    filter: invert(1); /* Črna ikona na belem */
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 15px !important;
+}
+
+.btn-contact {
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    color: #fff !important;
+    padding: 5px 20px !important;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+.btn-contact:hover,
+.navbar.scrolled .btn-contact:hover {
+    background: var(--primary-color);
+    color: #fff !important;
+}
+.navbar.scrolled .btn-contact {
+    color: #1a1a1a !important;
+    border-color: #1a1a1a;
+}
+
+/* Hero Sekcija */
+.hero-section {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+    position: relative;
+    /* Parallax efekt */
+    background-attachment: fixed; 
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); /* Zatemnitev slike */
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: 700;
+}
+@media(max-width: 768px) {
+    .main-title { font-size: 2.5rem; }
+}
+
+/* Gumbi */
+.btn-custom {
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 0; /* Ostri robovi za premium izgled */
+    padding: 12px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    border: none;
+    transition: all 0.3s;
+}
+.btn-custom:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-5px);
+}
+
+/* Splošne sekcije */
+.section-padding {
+    padding: 80px 0;
+}
+.text-primary-custom {
+    color: var(--primary-color) !important;
+}
+.section-title {
+    font-size: 2.5rem;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin-top: 15px;
+}
+.text-center .section-title::after {
+    margin: 15px auto 0;
+}
+
+/* Service Cards */
+.service-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #eee;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    border-color: transparent;
+}
+.icon-box {
+    color: var(--primary-color);
+}
+
+/* Parallax Separator */
+.parallax-separator {
+    background: url('https://images.unsplash.com/photo-1504198458649-3128b932f49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+    background-attachment: fixed;
+    padding: 100px 0;
+    position: relative;
+}
+.parallax-separator::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.parallax-separator > div {
+    position: relative;
+    z-index: 2;
+}
+
+/* Galerija */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.gallery-item img {
+    width: 100%;
+    height: 300px; /* Fiksna višina za poravnavo */
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.gallery-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(196, 155, 99, 0.9); /* Primary color with opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Kontakt Forma */
+.form-control {
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+}
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: none;
+}
+
+
+/* --- STILI ZA PODSTRAN KUHINJE --- */
+.page-header {
+    height: 60vh; /* Manjša višina kot na prvi strani */
+    background: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+    position: relative;
+    margin-top: 76px; /* Da ne skrijemo pod navbar */
+}
+
+.step-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    opacity: 0.3;
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 0;
+}
+.process-step h4 {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 15px;
+}
+
+/* --- STILI ZA MODAL / GALERIJO --- */
+/* Naredimo modalno ozadje temno */
+.modal-backdrop.show {
+    opacity: 0.9;
+}
+
+/* Slike v vrtiljaku */
+.carousel-item img {
+    max-height: 85vh; /* Omejimo višino da ne gre čez ekran */
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    border-radius: 2px;
+}
+
+/* Gumbi za navigacijo v galeriji */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(0,0,0,0.5); /* Temno ozadje za puščice */
+    border-radius: 50%;
+    background-size: 50%;
+}
+
+.mb-1{
+    color:white;
+}
