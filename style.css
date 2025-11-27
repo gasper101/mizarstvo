@@ -217,7 +217,7 @@ h1{
 
 /* --- STILI ZA PODSTRAN KUHINJE --- */
 .page-header {
-    height: 60vh; /* Manjša višina kot na prvi strani */
+    height: 100vh; /* Manjša višina kot na prvi strani */
     background: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
     position: relative;
     margin-top: 76px; /* Da ne skrijemo pod navbar */
@@ -264,5 +264,30 @@ h1{
 }
 
 .mb-1{
+    color:white;
+}
+
+.mb-4{
+    color:white;
+}
+
+.logo-img {
+    height: 40px; /* Standardna višina logotipa */
+    transition: all 0.3s ease;
+    width: auto; /* Avtomatska širina glede na višino */
+}
+
+/* Prilagoditev logotipa ko je navigacija skrolana */
+.navbar.scrolled .logo-img {
+    height: 30px; /* Manjša višina ob skrolanju */
+}
+
+/* Poskrbimo, da je 'brand' del navigacije centriran z logotipom, če je logotip manjsi */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-dark{
     color:white;
 }
