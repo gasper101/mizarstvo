@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // --- 4. AKTIVNO STANJE POVEZAVE OB SKROLANJU (SAMO NA INDEX.HTML) ---
     
-    if (!isKuhinjePage) {
+    if (!isKuhinjePage && window.innerWidth >= 992) {
         const observerOptions = {
             root: null,
             rootMargin: '0px',

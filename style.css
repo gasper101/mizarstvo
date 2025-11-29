@@ -50,6 +50,18 @@ h1{
     filter: invert(1); /* Črna ikona na belem */
 }
 
+.navbar-toggler {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-dark) !important; 
+    transition: all 0.2s ease;
+}
+
+.navbar.scrolled .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2879%2c 79%2c 78%2c 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    filter: none;
+    filter: none; /* Odstranimo filter, ker je barva že nastavljena */
+}
+
 .nav-link {
     position: relative;
     font-weight: 500;
@@ -390,4 +402,21 @@ h1{
     background: var(--primary-color);
     color: white !important;
     border-color: var(--primary-color); /* Zlata obroba ob hoverju */
+}
+
+
+/*intro styling */
+.hero-section .main-title,
+.hero-section .lead {
+    opacity: 0;
+    animation: fadeInDown 1s ease-out 0.3s forwards; /* 0.3s delay */
+}
+
+.hero-section .lead {
+    animation-delay: 0.6s; /* Drugi element se pojavi kasneje */
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
