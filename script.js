@@ -180,4 +180,29 @@ document.addEventListener("DOMContentLoaded", function() {
             observer.observe(element);
         });
     }
+
+    //to the top button
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    // Če gumb obstaja, dodamo logiko
+    if (scrollToTopBtn) {
+        // A. Prikaži/skrij gumb
+        window.addEventListener('scroll', function() {
+            // Prikažemo, ko je skrol večji od 300px
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // B. Premik na vrh ob kliku (gladka animacija)
+        scrollToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prepreči skok na #
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Ključ za gladko animacijo
+            });
+        });
+    }
 });
