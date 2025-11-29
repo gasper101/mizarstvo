@@ -157,4 +157,27 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+
+
+    const animElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (animElements.length > 0) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Dodaj razred, ko je element viden
+                    entry.target.classList.add('is-visible');
+                    // Preneha opazovati element po animaciji
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.2 // Sproži animacijo, ko je 10% elementa vidnega
+        });
+
+        animElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
 });
