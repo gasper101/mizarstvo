@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Sprememba navigacije ob skrolanju
     const navbar = document.getElementById('mainNav');
+    const isKuhinjePage = document.title.includes('Kuhinje');
     
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
@@ -38,6 +39,76 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    //za active podcrtavo
+    if (isKuhinjePage) {
+        // Ker smo na kuhinje.html, ročno dodamo razred 'active'
+        const kuhinjeLink = document.querySelector('.dropdown-item[href="kuhinje.html"]');
+        if (kuhinjeLink) {
+            // Aktivira 'Kuhinje po meri'
+            kuhinjeLink.classList.add('active');
+            // Aktivira nadrejeni 'Storitve'
+            const storitveLink = kuhinjeLink.closest('.dropdown').querySelector('.nav-link');
+            if (storitveLink) {
+                 storitveLink.classList.add('active');
+            }
+        }
+    }
+
+
+    // --- 4. AKTIVNO STANJE POVEZAVE OB SKROLANJU (SAMO NA INDEX.HTML) ---
+    
+    if (!isKuhinjePage) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 
+        };
+
+        const sections = document.querySelectorAll('.section-padding, .hero-section, .page-header');
+        
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                // Uporabimo 'let' da lahko kasneje spremenimo navLink
+                let navLink = document.querySelector(`.nav-link[href="index.html#${id}"], .nav-link[href="#${id}"]`);
+                
+                if (entry.isIntersecting) {
+                    // Odstrani aktivni razred z vseh povezav
+                    document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // *** KLJUČNI POPRAVEK: Ročno poiščemo 'Storitve' link ***
+                    if (id === 'storitve') {
+                        // Poišči glavno povezavo 'Storitve' preko strukture (.nav-item.dropdown > .nav-link)
+                        navLink = document.querySelector('.nav-item.dropdown > .nav-link');
+                    }
+
+                    // Določi aktivno povezavo
+                    if (navLink) {
+                        // NE DODAJ aktivnega razreda gumbu Kontakt (.btn-contact)
+                        if (!navLink.classList.contains('btn-contact')) {
+                            navLink.classList.add('active');
+                        }
+                    }
+                    
+                    // Posebna obravnava za AKTIVIRANJE PODLINKOV, če je aktivna sekcija podrejena dropdown meniju
+                    const parentDropdown = navLink ? navLink.closest('.dropdown') : null;
+                    if (parentDropdown) {
+                        // Ta blok ponovno aktivira nadrejeni link (Storitve), kar je redundantno ampak varno
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Začnemo opazovati vse sekcije
+        sections.forEach(section => {
+            if (section.getAttribute('id')) {
+                sectionObserver.observe(section);
+            }
+        });
+    }
     //galerija
     const galleryItems = document.querySelectorAll('.gallery-item');
     const galleryModalElement = document.getElementById('galleryModal');
