@@ -17,17 +17,23 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Zapri mobilni meni ko kliknemo na povezavo
-    const navLinks = document.querySelectorAll('.nav-link');
+    const linksToCloseMenu = document.querySelectorAll('.nav-link:not([data-bs-toggle="dropdown"]), .dropdown-item');
+    
     const menuToggle = document.getElementById('navbarNav');
-    const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
 
-    navLinks.forEach((l) => {
-        l.addEventListener('click', () => {
-            if (menuToggle.classList.contains('show')) {
-                bsCollapse.toggle();
-            }
+    // Preverimo varnostno, če element obstaja
+    if (menuToggle) {
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+
+        linksToCloseMenu.forEach((l) => {
+            l.addEventListener('click', () => {
+                // Zapremo meni samo, če je trenutno odprt (ima razred 'show')
+                if (menuToggle.classList.contains('show')) {
+                    bsCollapse.hide();
+                }
+            });
         });
-    });
+    }
 
     // Smooth scroll za starejše brskalnike (opcijsko, ker CSS scroll-behavior: smooth večinoma deluje)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -61,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.3 
+            threshold: 0.5 
         };
 
         const sections = document.querySelectorAll('.section-padding, .hero-section, .page-header');
