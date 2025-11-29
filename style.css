@@ -482,7 +482,7 @@ h1{
 
 .scroll-to-top:hover {
     background-color: var(--primary-dark);
-    transform: translateY(-3px); 
+    transform: translateY(-3px) translateX(-50%); 
     color: white; 
 }
 
