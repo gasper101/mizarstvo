@@ -51,12 +51,32 @@ h1{
 }
 
 .nav-link {
+    position: relative;
     font-weight: 500;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 0 15px !important;
+    text-decoration: none !important;
+    padding-right: 25px !important;
 }
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 0; 
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease-out;
+}
+
+.nav-link:hover::after {
+    width: calc(100% - 30px); 
+}
+
+
 
 .btn-contact {
     border: 1px solid var(--primary-color);
@@ -290,4 +310,60 @@ h1{
 
 .navbar-dark{
     color:white;
+}
+
+
+/* Styling za Dropdown Meni */
+.dropdown-menu {
+    border-radius: 0; /* Ostri robovi kot gumbi */
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 0; /* Odstrani padding okoli seznama */
+    margin-top: 10px; /* Malo prostora pod navbarom */
+}
+
+.dropdown-item {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-family: var(--body-font);
+    transition: all 0.2s;
+}
+
+/* Barva teksta v meniju */
+.dropdown-item {
+    color: #444;
+}
+
+/* Hover efekt - Zlata barva */
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Črta ločnica */
+.dropdown-divider {
+    margin: 0;
+    border-color: #eee;
+}
+
+.dropdown-arrow {
+    font-size: 0.7em; /* Manjša puščica */
+    transition: color 0.3s ease, transform 0.3s ease;
+    vertical-align: 0.1em; /* Fino centriranje z besedilom */
+}
+
+/* Ob hoverju spremenimo barvo ikone v zlato */
+.nav-link:hover .dropdown-arrow {
+    color: var(--primary-color) !important;
+}
+
+/* Stil za ikono ko je navbar bel (scrolled) */
+.navbar.scrolled .dropdown-arrow {
+    /* Trikotnik mora biti črn v scrolled stanju */
+    color: #1a1a1a !important; 
+}
+
+/* Ikona je bela v transparentnem stanju (navbar-dark) */
+.navbar-dark .dropdown-arrow {
+    color: #fff !important;
 }
