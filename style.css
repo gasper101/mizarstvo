@@ -85,19 +85,31 @@ h1{
 .btn-contact {
     border: 1px solid var(--primary-color);
     border-radius: 0;
-    color: #fff !important;
+    color: #fff !important; /* Bela v default (dark) stanju */
     padding: 5px 20px !important;
     margin-left: 10px;
-    transition: 0.3s;
+    transition: all 0.3s; /* Dodano all, da vključuje obrobo in barvo */
+    background: transparent; /* Da ni nobenega BG */
 }
-.btn-contact:hover,
-.navbar.scrolled .btn-contact:hover {
+
+/* Gumb Kontakt ko je navigacija skrolana (bela) */
+.navbar.scrolled .btn-contact {
+    color: #1a1a1a !important; /* Črna v scrolled (light) stanju */
+    border-color: #1a1a1a; /* Črna obroba */
+}
+
+/* Hover efekt v obeh stanjih */
+.btn-contact:hover {
     background: var(--primary-color);
     color: #fff !important;
+    border-color: var(--primary-color); /* Zlata obroba ob hoverju */
 }
-.navbar.scrolled .btn-contact {
-    color: #1a1a1a !important;
-    border-color: #1a1a1a;
+
+
+/* Posebna obravnava za hover, ko je navigacija skrolana (mora ostati bela pisava) */
+.navbar.scrolled .btn-contact:hover {
+    color: #fff !important; 
+    background: var(--primary-color);
 }
 
 /* Hero Sekcija */
@@ -370,4 +382,12 @@ h1{
 /* Ikona je bela v transparentnem stanju (navbar-dark) */
 .navbar-dark .dropdown-arrow {
     color: #fff !important;
+}
+
+
+
+.btn-contact.active {
+    background: var(--primary-color);
+    color: white !important;
+    border-color: var(--primary-color); /* Zlata obroba ob hoverju */
 }

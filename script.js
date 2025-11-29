@@ -86,10 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     // Določi aktivno povezavo
                     if (navLink) {
-                        // NE DODAJ aktivnega razreda gumbu Kontakt (.btn-contact)
-                        if (!navLink.classList.contains('btn-contact')) {
-                            navLink.classList.add('active');
-                        }
+                        navLink.classList.add('active');
+                        
                     }
                     
                     // Posebna obravnava za AKTIVIRANJE PODLINKOV, če je aktivna sekcija podrejena dropdown meniju
