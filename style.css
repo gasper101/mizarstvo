@@ -70,7 +70,7 @@ h1{
     letter-spacing: 1px;
     padding: 0 15px !important;
     text-decoration: none !important;
-    padding-right: 25px !important;
+    padding-right: 10px !important;
 }
 
 .nav-link::after {
@@ -490,3 +490,5 @@ h1{
     opacity: 1;
     visibility: visible;
 }
+
+/*nov stil da je meni na levi */
