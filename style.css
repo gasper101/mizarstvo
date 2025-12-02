@@ -193,12 +193,39 @@ h1{
 .service-card {
     transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid #eee;
+    position: relative;
+    overflow: hidden;
 }
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
     border-color: transparent;
 }
+
+.service-card::after {
+    content: "(klikni za več)";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Barva ozadja, da se tekst poudari */
+    background: var(--primary-color); 
+    color: #fff;
+    padding: 5px 0;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+    /* Skrijemo ga pod dno kartice */
+    transform: translateY(100%); 
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover::after {
+    /* Ob hoverju ga premaknemo navzgor, da se prikaže */
+    transform: translateY(0);
+}
+
+
 .icon-box {
     color: var(--primary-color);
 }
@@ -491,4 +518,14 @@ h1{
     visibility: visible;
 }
 
-/*nov stil da je meni na levi */
+.check-list li {
+    color: #444; /* Standardna barva telesa */
+}
+
+.material-feature {
+    transition: all 0.3s ease-in-out;
+}
+
+.material-feature:hover {
+    transform: translateX(10px); /* Blago premakne tekst v desno */
+}
