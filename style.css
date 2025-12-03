@@ -54,6 +54,7 @@ h1{
     border: 2px solid var(--primary-color);
     color: var(--primary-dark) !important; 
     transition: all 0.2s ease;
+    margin-right:10px;
 }
 
 .navbar.scrolled .navbar-toggler-icon {
@@ -72,6 +73,7 @@ h1{
     text-decoration: none !important;
     padding-right: 10px !important;
 }
+
 
 .nav-link::after {
     content: '';
@@ -380,10 +382,17 @@ h1{
 /* Styling za Dropdown Meni */
 .dropdown-menu {
     border-radius: 0; /* Ostri robovi kot gumbi */
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 0; /* Odstrani padding okoli seznama */
-    margin-top: 10px; /* Malo prostora pod navbarom */
+    /*border: 1px solid #494848;*/
+    border:none;
+    background: transparent !important; 
+    
+    /* To doda učinek zamegljenega stekla */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Za Safari */
+    
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+    padding: 0;
+    margin-top: 20px; 
 }
 
 .dropdown-item {
@@ -393,9 +402,30 @@ h1{
     transition: all 0.2s;
 }
 
+/*ce hoces meni pod gumbom sam odstrani to*/
+@media (min-width: 992px) {
+    .nav-item.dropdown {
+        position: static !important;
+    }
+    #mainNav .container {
+        position: relative;
+    }
+    #produktiDropdown {
+        position: absolute !important;
+        left: 0 !important; 
+        right: auto !important; 
+
+        top: 120% !important; 
+        
+        width: auto; 
+        margin-top: 0; 
+        
+    }
+}
+
 /* Barva teksta v meniju */
 .dropdown-item {
-    color: #444;
+    color: #c0bdbd;
 }
 
 /* Hover efekt - Zlata barva */
