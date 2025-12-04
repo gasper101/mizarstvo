@@ -202,4 +202,36 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+
+
+    //menjavanje slik na gl strnai
+    const heroSection = document.getElementById('domov');
+    const imageProgressBar = document.getElementById('imageProgressBar');
+    const rotatingImages = [
+        "url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')", 
+        "url('https://images.unsplash.com/photo-1588854337236-6889d631faa8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", 
+        "url('https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" 
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeBackgroundImage() {
+        if (!heroSection && !imageProgressBar) return; 
+        
+        imageProgressBar.classList.remove('running');
+        void imageProgressBar.offsetWidth;
+        imageProgressBar.classList.add('running');
+
+        heroSection.style.backgroundImage = rotatingImages[currentImageIndex];
+
+        currentImageIndex = (currentImageIndex + 1) % rotatingImages.length;
+    }
+
+    // 4. Zaženemo menjavo slik
+    if (heroSection) {
+        changeBackgroundImage(); 
+        
+        // Nastavimo interval menjave (npr. vsakih 6 sekund = 6000 milisekund)
+        setInterval(changeBackgroundImage, 6000); 
+    }
 });

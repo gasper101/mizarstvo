@@ -129,10 +129,13 @@ h1{
 /* Hero Sekcija */
 .hero-section {
     height: 100vh;
-    background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
     position: relative;
-    /* Parallax efekt */
-    background-attachment: fixed; 
+    
+    transition: background-image 1s ease-in-out; /* 2-sekundni fade efekt */
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 .overlay {
@@ -415,7 +418,7 @@ h1{
         left: 0 !important; 
         right: auto !important; 
 
-        top: 140% !important; 
+        top: 150% !important; 
         
         width: auto; 
         margin-top: 0; 
@@ -602,4 +605,39 @@ h1{
 
 .material-feature:hover {
     transform: translateX(10px); /* Blago premakne tekst v desno */
+}
+
+
+
+/*loading na prvi strani*/
+.progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px; /* Višina bara */
+    background-color: rgba(255, 255, 255, 0.3); /* Pol-prosojna bela podlaga */
+    z-index: 10; /* nad vsebino */
+}
+
+/* Dejanski bar, ki se polni (barva primarne barve) */
+.progress-bar-fill {
+    width: 0; 
+    height: 100%;
+    background-color: var(--primary-color); /* Zlato-rjava barva */
+}
+
+/* CSS animacija, ki teče 6 sekund (interval menjave slike) */
+@keyframes fillProgress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Razred, ki sproži animacijo */
+.progress-bar-fill.running {
+    animation: fillProgress 6s linear forwards;
 }
