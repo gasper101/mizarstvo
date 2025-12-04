@@ -40,7 +40,7 @@ h1{
 .navbar.scrolled {
     background: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 10px 0;
+    padding: 20px 0;
 }
 .navbar.scrolled .navbar-brand,
 .navbar.scrolled .nav-link {
@@ -384,11 +384,7 @@ h1{
     border-radius: 0; /* Ostri robovi kot gumbi */
     /*border: 1px solid #494848;*/
     border:none;
-    background: transparent !important; 
-    
-    /* To doda učinek zamegljenega stekla */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); /* Za Safari */
+    background: white;
     
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
     padding: 0;
@@ -402,6 +398,10 @@ h1{
     transition: all 0.2s;
 }
 
+/* Barva teksta v meniju */
+.dropdown-item {
+    color: #444;
+}
 /*ce hoces meni pod gumbom sam odstrani to*/
 @media (min-width: 992px) {
     .nav-item.dropdown {
@@ -415,18 +415,28 @@ h1{
         left: 0 !important; 
         right: auto !important; 
 
-        top: 120% !important; 
+        top: 140% !important; 
         
         width: auto; 
         margin-top: 0; 
         
     }
+
+    .dropdown-menu{
+        background: transparent !important; 
+    
+        /* To doda učinek zamegljenega stekla */
+        backdrop-filter: blur(20px); 
+        -webkit-backdrop-filter: blur(10px); /* Za Safari */
+    }
+
+    /* Barva teksta v meniju */
+    .dropdown-item {
+        color: #c0bdbd;
+    }
+
 }
 
-/* Barva teksta v meniju */
-.dropdown-item {
-    color: #c0bdbd;
-}
 
 /* Hover efekt - Zlata barva */
 .dropdown-item:hover, .dropdown-item:focus {
@@ -462,6 +472,40 @@ h1{
     color: #fff !important;
 }
 
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background:white;
+        /* Omejimo višino in omogočimo skrolanje znotraj menija, če je telefon majhen */
+        max-height: 80vh; 
+        overflow-y: auto;
+        color: #444;
+        padding: 20px;
+        margin-right:10px;
+    }
+
+    .nav-link{
+        color:#444;
+    }
+
+    .btn-contact{
+        color:#444 !important;
+    }
+
+    .navbar-dark .dropdown-arrow {
+        color: #444 !important;
+    }
+
+    .nav-link.show{
+        color: #444 !important;
+    }
+
+    .nav-link:focus{
+        color:#444 !important;
+    }
+
+
+}
 
 
 .btn-contact.active {
