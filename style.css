@@ -405,40 +405,6 @@ h1{
 .dropdown-item {
     color: #444;
 }
-/*ce hoces meni pod gumbom sam odstrani to*/
-@media (min-width: 992px) {
-    .nav-item.dropdown {
-        position: static !important;
-    }
-    #mainNav .container {
-        position: relative;
-    }
-    #produktiDropdown {
-        position: absolute !important;
-        left: 0 !important; 
-        right: auto !important; 
-
-        top: 150% !important; 
-        
-        width: auto; 
-        margin-top: 0; 
-        
-    }
-
-    .dropdown-menu{
-        background: transparent !important; 
-    
-        /* To doda učinek zamegljenega stekla */
-        backdrop-filter: blur(20px); 
-        -webkit-backdrop-filter: blur(10px); /* Za Safari */
-    }
-
-    /* Barva teksta v meniju */
-    .dropdown-item {
-        color: #c0bdbd;
-    }
-
-}
 
 
 /* Hover efekt - Zlata barva */
@@ -474,6 +440,69 @@ h1{
 .navbar-dark .dropdown-arrow {
     color: #fff !important;
 }
+
+.dropdown-item .dropdown-desc {
+    font-size: 0.75rem; 
+    font-weight: 400; 
+    line-height: 1.2;
+    margin-top: 2px;
+    
+    /* KLJUČNO: Skrijemo besedilo in mu odstranimo višino, da se ne vidi */
+    max-height: 0; 
+    opacity: 0;
+    overflow: hidden;
+    
+    /* Gladko prehajanje, ki se ujema s hitrostjo širjenja (0.2s) */
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+@media (min-width: 992px) {
+    .nav-item.dropdown {
+        position: static !important;
+    }
+    #mainNav .container {
+        position: relative;
+    }
+    #produktiDropdown {
+        position: absolute !important;
+        left: 0 !important; 
+        right: auto !important; 
+
+        top: 150% !important; 
+        
+        width: auto; 
+        margin-top: 0; 
+        
+    }
+
+    .dropdown-menu{
+        background: transparent !important; 
+    
+        /* To doda učinek zamegljenega stekla */
+        backdrop-filter: blur(20px); 
+        -webkit-backdrop-filter: blur(10px); /* Za Safari */
+    }
+
+    /* Barva teksta v meniju */
+    .dropdown-item {
+        color: #c0bdbd;
+        padding: 8px 20px;
+    }
+
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        padding: 10px 20px; 
+    }
+
+    /* KLJUČNO: Barva opisa mora biti bela ob hoverju */
+    .dropdown-item:hover .dropdown-desc {
+        color: #fff;
+        max-height: 50px; 
+        opacity: 1;
+    }
+
+}
+
 
 
 @media (max-width: 991px) {
