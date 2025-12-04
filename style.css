@@ -641,3 +641,42 @@ h1{
 .progress-bar-fill.running {
     animation: fillProgress 6s linear forwards;
 }
+
+
+#galerija .carousel-control-prev,
+#galerija .carousel-control-next {
+    width: 5%; /* Manjša širina za puščice */
+    opacity: 0.8; 
+    transition: opacity 0.2s ease;
+}
+
+#galerija .carousel-control-prev:hover,
+#galerija .carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Stil puščic (da se ujemajo z vašo temo) */
+#galerija .carousel-control-prev-icon,
+#galerija .carousel-control-next-icon {
+    /* Uporabimo primarno barvo za ozadje puščic */
+    background-color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Okrogle puščice */
+}
+
+/* Opcijski stil za "placeholder" (kmalu več projektov) */
+.gallery-placeholder {
+    background-color: #f1f1f1;
+    border: 1px dashed #ccc;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gallery-placeholder .gallery-overlay {
+    position: static;
+    opacity: 1;
+    color: #444;
+}
