@@ -536,6 +536,19 @@ h1{
         color:#444 !important;
     }
 
+    .navbar-toggler{
+        margin-top:10px !important;
+    }
+
+    .container{
+        width:100vw;
+        margin-right:0px;
+        margin-left:0px;
+    }
+
+    #mainNav{
+        width:100vw;
+    }
 
 }
 
@@ -708,4 +721,16 @@ h1{
     position: static;
     opacity: 1;
     color: #444;
+}
+
+
+#galleryCarouselMobile .carousel-control-prev,
+#galleryCarouselMobile .carousel-control-next {
+    width: 15%; 
+    opacity: 1; 
+}
+
+html, body {
+    overflow-x: hidden; 
+    width: 100vw; 
 }
