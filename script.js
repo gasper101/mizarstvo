@@ -234,4 +234,26 @@ document.addEventListener("DOMContentLoaded", function() {
         // Nastavimo interval menjave (npr. vsakih 6 sekund = 6000 milisekund)
         setInterval(changeBackgroundImage, 6000); 
     }
+
+
+
+    var lightboxModal = document.getElementById('lightboxModal');
+    
+    // Če modal obstaja
+    if (lightboxModal) {
+        lightboxModal.addEventListener('show.bs.modal', function (event) {
+            // Gumb (povezava), ki je sprožil modal
+            var button = event.relatedTarget;
+            
+            // Pridobitev podatkov iz atributov (data-bs-img-src in data-bs-img-alt)
+            var imageSrc = button.getAttribute('data-bs-img-src');
+            var imageAlt = button.getAttribute('data-bs-img-alt');
+            
+            // Nastavitev src in alt atributov modalne slike
+            var modalImage = lightboxModal.querySelector('#lightboxImage');
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+        });
+    }
+
 });
