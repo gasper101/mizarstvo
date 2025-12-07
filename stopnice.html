@@ -12,23 +12,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- NAVBAR (ne spreminjaj) -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><img src="mizarstvo_krebs-removebg.png" alt="Mizarstvo Krebs Logo" class="logo-img"></a>
+            <a class="navbar-brand" href="index.html"><img src="mizarstvo_krebs_nobg.png" alt="Mizarstvo Krebs Logo" class="logo-img"></a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Domov</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#o-nas">O nas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="kuhinje.html">Kuhinje</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#vizualizacija">3D-Vizualizacija</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#materiali">Materiali</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#galerija">Galerija</a></li>
-                    <li class="nav-item"><a class="nav-link btn-contact" href="index.html#kontakt">Kontakt</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Domov</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#o-nas">O nas</a>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Produkti-Proizvodi <i class="fas fa-chevron-down ms-1 dropdown-arrow"></i>
+                        </a>
+                        <ul class="dropdown-menu" id="produktiDropdown" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="index.html#storitve">Vsi produkti</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="kuhinje.html">Kuhinje po meri <small class="dropdown-desc d-block">-Kuhinje visoko kakovostnega razreda</small><small class="dropdown-desc d-block">-Masivne lesene kuhinje</small> <small class="dropdown-desc d-block">-Moderne, klasične kuhinje</small></a></li>
+                            <li><a class="dropdown-item" href="stopnice.html">Stopnice po meri <small class="dropdown-desc d-block">-Lesene stopnice</small> <small class="dropdown-desc d-block">-Celotna stopnišča</small></a></li>
+                            <li><a class="dropdown-item" href="vrata.html">Vrata po meri <small class="dropdown-desc d-block">-Lesena-furnirana notranja vrta</small></a></li>
+                            <li><a class="dropdown-item" href="izdelki.html">Izdelki iz masivnega lesa <small class="dropdown-desc d-block">-Masivni les, furnir</small></a></li>
+                            <li><a class="dropdown-item" href="pohistvo.html">Ostalo pohištvo po meri <small class="dropdown-desc d-block">-Spalnice</small><small class="dropdown-desc d-block">-Predsobe</small><small class="dropdown-desc d-block">-Otroške sobe</small><small class="dropdown-desc d-block">-Kopalnice</small></a></li>
+                            <li><a class="dropdown-item" href="prostori.html">Poslovni prostori <small class="dropdown-desc d-block">-Pisarne</small> <small class="dropdown-desc d-block">-Recepcije</small> <small class="dropdown-desc d-block">-Wc kabine</small></a></li>
+                        </ul>
+                    </li>
+                    
+                    <!---->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#vizualizacija">3D-Vizualizacija</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#materiali">Materiali</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#galerija">Galerija</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link btn-contact" href="index.html#kontakt">Kontakt</a>
+                    </li>
                 </ul>
             </div>
         </div>

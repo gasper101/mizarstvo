@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Sprememba navigacije ob skrolanju
     const navbar = document.getElementById('mainNav');
-    const isKuhinjePage = document.title.includes('Kuhinje');
     
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
@@ -45,22 +44,32 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    //za active podcrtavo
-    if (isKuhinjePage) {
-        // Ker smo na kuhinje.html, ročno dodamo razred 'active'
-        const kuhinjeLink = document.querySelector('.dropdown-item[href="kuhinje.html"]');
-        if (kuhinjeLink) {
-            // Aktivira 'Kuhinje po meri'
-            kuhinjeLink.classList.add('active');
-            // Aktivira nadrejeni 'Storitve'
-            const storitveLink = kuhinjeLink.closest('.dropdown').querySelector('.nav-link');
-            if (storitveLink) {
-                 storitveLink.classList.add('active');
+    const subpages = [
+        'kuhinje.html',
+        'izdelki.html',
+        'pohistvo.html',
+        'prostori.html',
+        'stopnice.html',
+        'vrata.html'
+    ];
+
+    //dobi ime datoteke
+    const currentPage = window.location.pathname.split('/').pop();
+
+    if (subpages.includes(currentPage)) {
+        const activeSubLink = document.querySelector(`.dropdown-item[href="${currentPage}"]`);
+
+        if (activeSubLink) {
+
+            const parentLink = activeSubLink.closest('.dropdown').querySelector('.nav-link');
+
+            if (parentLink) {
+                parentLink.classList.add('active');
             }
         }
     }
 
-    if (!isKuhinjePage && window.innerWidth >= 992) {
+    if (!subpages.includes(currentPage) && window.innerWidth >= 992) {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -170,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, {
             rootMargin: '0px',
-            threshold: 0.2 // Sproži animacijo, ko je 10% elementa vidnega
+            threshold: 0.2
         });
 
         animElements.forEach(element => {
@@ -238,18 +247,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     var lightboxModal = document.getElementById('lightboxModal');
-    
-    // Če modal obstaja
+
     if (lightboxModal) {
         lightboxModal.addEventListener('show.bs.modal', function (event) {
-            // Gumb (povezava), ki je sprožil modal
             var button = event.relatedTarget;
             
-            // Pridobitev podatkov iz atributov (data-bs-img-src in data-bs-img-alt)
             var imageSrc = button.getAttribute('data-bs-img-src');
             var imageAlt = button.getAttribute('data-bs-img-alt');
-            
-            // Nastavitev src in alt atributov modalne slike
+
             var modalImage = lightboxModal.querySelector('#lightboxImage');
             modalImage.src = imageSrc;
             modalImage.alt = imageAlt;
