@@ -494,7 +494,6 @@ h1{
         padding: 10px 20px; 
     }
 
-    /* KLJUČNO: Barva opisa mora biti bela ob hoverju */
     .dropdown-item:hover .dropdown-desc {
         color: #fff;
         max-height: 50px; 
@@ -548,6 +547,10 @@ h1{
 
     #mainNav{
         width:100vw;
+    }
+
+    .nav-link.active{
+        color:#444 !important;
     }
 
 }
@@ -744,4 +747,37 @@ html, body {
 .hover-effect-container:hover img {
     transform: scale(1.03); 
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important;
+}
+
+.dropdown-item:hover .dropdown-desc {
+    overflow: visible !important; 
+}
+
+.dropdown-item.group-link {
+    display: flex;
+    flex-direction: column;
+    cursor: default; 
+}
+
+.dropdown-item.group-link .main-link-text {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.dropdown-item.group-link .dropdown-desc {
+    text-decoration: none;
+    cursor: pointer;     
+    color: inherit;      
+    display: block;   
+    width: fit-content;
+}
+
+.dropdown-item.group-link .dropdown-desc:hover {
+    text-decoration: underline !important;
+    text-decoration-color: rgba(255, 255, 255, 0.8) !important;
+    text-underline-offset: 2px; 
+    text-decoration-thickness: 1px; 
+    opacity: 1 !important;
 }

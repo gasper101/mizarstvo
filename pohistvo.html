@@ -31,18 +31,63 @@
                     </li>
 
                     <li class="nav-item dropdown active">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Produkti-Proizvodi <i class="fas fa-chevron-down ms-1 dropdown-arrow"></i>
                         </a>
                         <ul class="dropdown-menu" id="produktiDropdown" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="index.html#storitve">Vsi produkti</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="kuhinje.html">Kuhinje po meri <small class="dropdown-desc d-block">-Kuhinje visoko kakovostnega razreda</small><small class="dropdown-desc d-block">-Masivne lesene kuhinje</small> <small class="dropdown-desc d-block">-Moderne, klasične kuhinje</small></a></li>
-                            <li><a class="dropdown-item" href="stopnice.html">Stopnice po meri <small class="dropdown-desc d-block">-Lesene stopnice</small> <small class="dropdown-desc d-block">-Celotna stopnišča</small></a></li>
-                            <li><a class="dropdown-item" href="vrata.html">Vrata po meri <small class="dropdown-desc d-block">-Lesena-furnirana notranja vrta</small></a></li>
-                            <li><a class="dropdown-item" href="izdelki.html">Izdelki iz masivnega lesa <small class="dropdown-desc d-block">-Masivni les, furnir</small></a></li>
-                            <li><a class="dropdown-item" href="pohistvo.html">Ostalo pohištvo po meri <small class="dropdown-desc d-block">-Spalnice</small><small class="dropdown-desc d-block">-Predsobe</small><small class="dropdown-desc d-block">-Otroške sobe</small><small class="dropdown-desc d-block">-Kopalnice</small></a></li>
-                            <li><a class="dropdown-item" href="prostori.html">Poslovni prostori <small class="dropdown-desc d-block">-Pisarne</small> <small class="dropdown-desc d-block">-Recepcije</small> <small class="dropdown-desc d-block">-Wc kabine</small></a></li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="kuhinje.html" class="main-link-text">Kuhinje po meri</a>
+                                    
+                                    <a href="kuhinje.html#visok-razred" class="dropdown-desc d-block">-Kuhinje visoko kakovostnega razreda</a>
+                                    <a href="kuhinje.html#masiva" class="dropdown-desc d-block">-Masivne lesene kuhinje</a>
+                                    <a href="kuhinje.html#moderne" class="dropdown-desc d-block">-Moderne, klasične kuhinje</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="stopnice.html" class="main-link-text">Stopnice po meri</a>
+                                    <a href="stopnice.html#lesene-stopnice-obloga" class="dropdown-desc d-block">-Lesene stopnice</a>
+                                    <a href="stopnice.html#celotna-stopnisca-konstrukcija" class="dropdown-desc d-block">-Celotna stopnišča</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="vrata.html" class="main-link-text">Vrata po meri</a>
+                                    <a href="vrata.html#lesena-furnirana-vrata" class="dropdown-desc d-block">-Lesena-furnirana notranja vrata</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="izdelki.html" class="main-link-text">Izdelki iz masivnega lesa</a>
+                                    <a href="izdelki.html#masiva" class="dropdown-desc d-block">-Masivni les, furnir</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="pohistvo.html" class="main-link-text">Ostalo pohištvo po meri</a>
+                                    <a href="pohistvo.html#spalnice" class="dropdown-desc d-block">-Spalnice</a>
+                                    <a href="pohistvo.html#predsobe" class="dropdown-desc d-block">-Predsobe</a>
+                                    <a href="pohistvo.html#otroske_sobe" class="dropdown-desc d-block">-Otroške sobe</a>
+                                    <a href="pohistvo.html#kopalnice" class="dropdown-desc d-block">-Kopalnice</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown-item group-link">
+                                    <a href="prostori.html" class="main-link-text">Poslovni prostori</a>
+                                    <a href="prostori.html#pisarne" class="dropdown-desc d-block">-Pisarne</a>
+                                    <a href="prostori.html#recepcije" class="dropdown-desc d-block">-Recepcije</a>
+                                    <a href="prostori.html#wc" class="dropdown-desc d-block">-Wc kabine</a>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                     
@@ -68,7 +113,7 @@
     </nav>
 
     <!-- HEADER -->
-    <header class="page-header d-flex align-items-center" style="background: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;">
+    <header class="page-header d-flex align-items-center" style="background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;">
         <div class="overlay"></div>
         <div class="container text-center text-white position-relative">
             <h1 class="display-3">Pohištvo za vsak prostor</h1>
@@ -76,48 +121,92 @@
         </div>
     </header>
 
-    <!-- SECTION 1 -->
-    <section class="section-padding bg-white">
-        <div class="container text-center mb-5">
-            <h2 class="section-title">Kaj izdelujemo?</h2>
-        </div>
-
+    <section class="section-padding bg-white" id="pohistvo">
         <div class="container">
-            <div class="row g-4 text-center">
-                <div class="col-md-4">
-                    <i class="fas fa-warehouse fa-3x mb-3 text-primary-custom"></i>
-                    <h4>Vgradne omare</h4>
-                    <p class="text-muted small">Izdelane po meri, z drsnimi ali klasičnimi vrati ter popolno izrabo prostora.</p>
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 order-lg-1 order-2">
+                    <h2 class="section-title mb-4" style="color:black;">Pohištvo po meri za vaš dom</h2>
+                    <p class="text-muted">Ustvarjamo edinstvene in funkcionalne rešitve za vsak prostor. Od vrhunskih kuhinj do pohištva za dnevne in spalne prostore – vse je izdelano natančno po vaših željah in z uporabo visoko kakovostnih materialov.</p>
+
+                    <ul class="list-unstyled pt-3">
+                        <li><i class="fas fa-kitchen-set text-primary-custom me-2"></i> **Kuhinje po meri:** Klasične, moderne, masivne in visoko kakovostne.</li>
+                        <li><i class="fas fa-bed text-primary-custom me-2"></i> **Spalnice in sobe:** Vgradne omare, postelje, otroške sobe.</li>
+                        <li><i class="fas fa-shoe-prints text-primary-custom me-2"></i> **Ostali prostori:** Predsobe, kopalnice in dnevne sobe.</li>
+                        <li><i class="fas fa-stairs text-primary-custom me-2"></i> **Stopnice in vrata:** Celotna lesena stopnišča in notranja vrata.</li>
+                    </ul>
+
+                    <a href="index.html#kontakt" class="btn btn-custom mt-4 align-self-start">Pošlji povpraševanje</a>
                 </div>
 
-                <div class="col-md-4">
-                    <i class="fas fa-bed fa-3x mb-3 text-primary-custom"></i>
-                    <h4>Spalni program</h4>
-                    <p class="text-muted small">Postelje, komode, nočne omarice in garderobne omare.</p>
+                <div class="col-lg-6 order-lg-2 order-1 mb-4">
+                    <img src="https://images.unsplash.com/photo-1659930087003-2d64e33181f7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid shadow-lg rounded hover-effect-container" alt="Moderna notranjost s pohištvom po meri">
                 </div>
 
-                <div class="col-md-4">
-                    <i class="fas fa-tv fa-3x mb-3 text-primary-custom"></i>
-                    <h4>Dnevni regali</h4>
-                    <p class="text-muted small">Moderni, masivni ali minimalistični – po vaših željah.</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2 -->
-    <section class="section-padding bg-light">
+    <section class="section-padding bg-white" id="izdelki">
         <div class="container text-center mb-5">
-            <h2 class="section-title">Galerija</h2>
+            <h2 class="section-title">Pohištvo po meri za vaš dom</h2>
+            <p class="lead text-muted">Načrtujemo in izdelujemo funkcionalno in estetsko dovršeno pohištvo za vsak kotiček vašega doma.</p>
         </div>
 
         <div class="container">
-            <div class="row g-3">
-                <div class="col-md-3 col-6"><img src="https://images.unsplash.com/photo-1672137233327-37b0c1049e77?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-sm" /></div>
-                <div class="col-md-3 col-6"><img src="https://images.unsplash.com/photo-1600493505500-afac3fc363e6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-sm" /></div>
-                <div class="col-md-3 col-6"><img src="https://images.unsplash.com/photo-1649361811423-a55616f7ab11?q=80&w=1058&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-sm" /></div>
-                <div class="col-md-3 col-6"><img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-sm" /></div>
+
+            <div class="row align-items-center mb-5 pb-5 border-bottom" id="spalnice">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-lg hover-effect-container" alt="Moderna spalnica po meri">
+                </div>
+                <div class="col-lg-6 ps-lg-5 text-lg-start text-center">
+                    <i class="fas fa-moon fa-3x mb-3 text-primary-custom"></i>
+                    <h3 class="mt-2">Spalnice po meri</h3>
+                    <p class="text-muted">Izdelamo **spalne oaze** s posteljami po meri, vgradnimi omarami z drsnimi vrati in stilskimi nočnimi omaricami. Naši projekti poskrbijo za **maksimalen izkoristek prostora** in ustvarjanje mirnega ambienta, ki je ključen za dober počitek. Od rustikalnega masivnega lesa do modernega minimalizma.</p>
+                </div>
             </div>
+
+            <div class="row align-items-center mb-5 pb-5 border-bottom" id="predsobe">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1630699294288-3bc2ae7bf361?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-lg hover-effect-container" alt="Funkcionalna predsoba">
+                </div>
+                <div class="col-lg-6 order-lg-1 pe-lg-5 text-lg-start text-center">
+                    <i class="fas fa-door-open fa-3x mb-3 text-primary-custom"></i>
+                    <h3 class="mt-2">Urejene predsobe</h3>
+                    <p class="text-muted">**Prvi vtis** doma se začne v predsobi. Oblikujemo **elegantne in funkcionalne** garderobne omare, klopi za obuvanje in sisteme polic, ki so popolnoma prilagojeni dimenziji vašega vhoda. Poskrbimo za urejenost in optimalno shranjevanje čevljev in oblačil.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 pb-5 border-bottom" id="otroske_sobe">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1613685301918-59b1039422cc?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-lg hover-effect-container" alt="Otroška soba po meri">
+                </div>
+                <div class="col-lg-6 ps-lg-5 text-lg-start text-center">
+                    <i class="fas fa-puzzle-piece fa-3x mb-3 text-primary-custom"></i>
+                    <h3 class="mt-2">Igrive otroške sobe</h3>
+                    <p class="text-muted">Izdelujemo **varno, igrivo in prilagodljivo** pohištvo, ki raste z vašim otrokom. Poseben poudarek dajemo trajnosti in zdravim materialom. Od vgradnih pisalnih miz do kreativnih posteljnih sistemov – omogočite otroku optimalen prostor za učenje in igro.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center" id="kopalnice">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid rounded shadow-lg hover-effect-container" alt="Kopalniško pohištvo">
+                </div>
+                <div class="col-lg-6 order-lg-1 pe-lg-5 text-lg-start text-center">
+                    <i class="fas fa-bath fa-3x mb-3 text-primary-custom"></i>
+                    <h3 class="mt-2">Kopalnice</h3>
+                    <p class="text-muted">Kopalnica zahteva **materiale, odporne na vlago**. Naš kopalniški pohištveni program vključuje stilsko dovršene omarice pod umivalnikom, visoke shranjevalne omare in police, ki združujejo estetiko z visoko funkcionalnostjo v vlažnem okolju.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="section-padding bg-light text-center">
+        <div class="container">
+            <h2 class="section-title">Oglejte si več projektov v galeriji</h2>
+            <p class="lead text-muted mb-4">Želite videti več naših del? Obiščite celotno galerijo!</p>
+            <a href="index.html#galerija" class="btn btn-lg btn-custom align-self-center">Odpri celotno galerijo</a>
         </div>
     </section>
 
