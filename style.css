@@ -781,3 +781,14 @@ html, body {
     text-decoration-thickness: 1px; 
     opacity: 1 !important;
 }
+
+
+/*za slike na templatih*/
+.img-fluid.shadow.rounded {
+    transition: transform 0.3s ease-in-out;
+}
+
+.img-fluid.shadow.rounded:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+}
