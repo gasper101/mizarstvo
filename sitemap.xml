@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/kuhinje.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/stopnice.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/vrata.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/izdelki.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/pohistvo.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mizarstvo-krebs.si/prostori.html</loc>
+    <lastmod>2025-03-21</lastmod>
+    <priority>0.70</priority>
+  </url>
+</urlset>
