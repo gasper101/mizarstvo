@@ -4,9 +4,5 @@
 User-agent: *
 Allow: /
 
-# Prepovej dostop do morebitnih sistemskih map (če jih imaš)
-Disallow: /private/
-Disallow: /tmp/
-
 # Povezava do tvojega sitemapa (nujno za hitrejše indeksiranje)
 Sitemap: https://www.mizarstvo-krebs.si/sitemap.xml

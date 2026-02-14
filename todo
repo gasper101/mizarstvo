@@ -1,2 +1,22 @@
--local images (webp)
--sending function on formspree mby?
+-select images
+-images to webp
+-strip metadata
+-put images in my website
+-use lazy load
+-srcset for responsive sizing
+-fixed size
+-alt 
+
+
+previous scores
+MOBILE:
+-69 performance (blocking requests, image delivery, first + largest content)
+-78 accessibility (labels, alt tags)
+-77 best practices (not using HTTPS for mailto)
+-100 SEO
+
+DESKTOP:
+-96 performance
+-86 accessibility
+-77 best practices 
+-100 seo
