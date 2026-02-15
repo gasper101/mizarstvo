@@ -122,8 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //galerija
     const galleryItems = document.querySelectorAll('.gallery-item');
     const galleryModalElement = document.getElementById('galleryModal');
-    
-    // Preveri, če modal obstaja (da ne javlja napak na podstraneh kjer ga ni)
+
     if (galleryModalElement) {
         const galleryModal = new bootstrap.Modal(galleryModalElement);
         const modalTitle = document.getElementById('galleryModalLabel');
@@ -131,36 +130,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
         galleryItems.forEach(item => {
             item.addEventListener('click', function() {
-                // 1. Dobimo podatke iz kliknjenega elementa
                 const title = this.getAttribute('data-title');
-                // String "img1,img2" pretvorimo v array ["img1", "img2"]
                 const imagesString = this.getAttribute('data-images'); 
                 
-                if (!imagesString) return; // Varovalka če ni slik
+                if (!imagesString) return;
                 
                 const images = imagesString.split(',');
 
-                // 2. Nastavimo naslov
                 modalTitle.textContent = title;
 
-                // 3. Počistimo prejšnje slike
-                carouselContainer.innerHTML = '';
+                //spinner
+                carouselContainer.innerHTML = `
+                    <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Nalaganje...</span>
+                        </div>
+                    </div>`;
 
-                // 4. Zgeneriramo nove slike za vrtiljak
+                let slidesHtml = '';
                 images.forEach((imgUrl, index) => {
                     const isActive = index === 0 ? 'active' : '';
+                    //lazy da se ne takoj nalozijo
+                    const loadingAttr = index === 0 ? 'eager' : 'lazy';
                     
-                    const slideHtml = `
+                    slidesHtml += `
                         <div class="carousel-item ${isActive}">
-                            <img src="${imgUrl}" class="d-block img-fluid" alt="${title} - slika ${index + 1}">
+                            <img src="${imgUrl.trim()}" 
+                                class="d-block img-fluid mx-auto" 
+                                alt="${title} - slika ${index + 1}"
+                                loading="${loadingAttr}">
                         </div>
                     `;
-                    carouselContainer.insertAdjacentHTML('beforeend', slideHtml);
                 });
 
-                // 5. Odpremo modal
+                setTimeout(() => {
+                    carouselContainer.innerHTML = slidesHtml;
+                }, 100);
+
                 galleryModal.show();
             });
+        });
+
+        galleryModalElement.addEventListener('hidden.bs.modal', function () {
+            carouselContainer.innerHTML = '';
         });
     }
 
