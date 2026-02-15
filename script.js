@@ -229,9 +229,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroSection = document.getElementById('domov');
     const imageProgressBar = document.getElementById('imageProgressBar');
     const rotatingImages = [
-        "url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')", 
-        "url('https://images.unsplash.com/photo-1588854337236-6889d631faa8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", 
-        "url('https://images.unsplash.com/photo-1633948393301-d43e3ec0e5cd?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" 
+        "url('slike/kuhinja_5.webp')", 
+        "url('slike/pisarna_3.webp')", 
+        "url('slike/stopnice_11.webp')" 
     ];
 
     let currentImageIndex = 0;
