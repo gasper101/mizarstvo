@@ -3,20 +3,21 @@
     --primary-color: #c49b63; /* Zlato-rjava, barva hrasta */
     --primary-dark: #a88350;
     --dark-bg: #111111;
-    --body-font: 'Montserrat', sans-serif;
     --heading-font: 'Playfair Display', serif;
+    --body-font: 'Montserrat', sans-serif;
 }
 
 body {
     font-family: var(--body-font);
     color: #444;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-font);
-    font-weight: 700;
+    font-weight: 400;
     color: #1a1a1a;
+    font-style: normal;
 }
 
 h1{
@@ -146,8 +147,10 @@ h1{
 
 .main-title {
     font-size: 4rem;
-    font-weight: 700;
+    font-weight: 400;
+    margin-bottom: 50px;
 }
+
 @media(max-width: 768px) {
     .main-title { font-size: 2.5rem; }
 }
@@ -370,14 +373,14 @@ h1{
 }
 
 .logo-img {
-    height: 40px; /* Standardna višina logotipa */
+    height: 60px; /* Standardna višina logotipa */
     transition: all 0.3s ease;
     width: auto; /* Avtomatska širina glede na višino */
 }
 
 /* Prilagoditev logotipa ko je navigacija skrolana */
 .navbar.scrolled .logo-img {
-    height: 30px; /* Manjša višina ob skrolanju */
+    height: 40px; /* Manjša višina ob skrolanju */
 }
 
 /* Poskrbimo, da je 'brand' del navigacije centriran z logotipom, če je logotip manjsi */
@@ -560,6 +563,14 @@ h1{
 
     .nav-link.active{
         color:#444 !important;
+    }
+
+    .logo-img {
+        height: 50px; 
+    }
+
+    .navbar.scrolled .logo-img {
+        height: 40px; 
     }
 
 }
