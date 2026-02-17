@@ -3,8 +3,8 @@
     --primary-color: #c49b63; /* Zlato-rjava, barva hrasta */
     --primary-dark: #a88350;
     --dark-bg: #111111;
-    --heading-font: 'Playfair Display', serif;
-    --body-font: 'Montserrat', sans-serif;
+    --heading-font: 'Raleway', sans-serif;
+    --body-font: 'Montserrat', sans-serif; 
 }
 
 body {
@@ -15,7 +15,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-font);
-    font-weight: 400;
+    font-weight: 500;
     color: #1a1a1a;
     font-style: normal;
 }
@@ -147,7 +147,7 @@ h1{
 
 .main-title {
     font-size: 4rem;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 50px;
 }
 

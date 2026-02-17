@@ -20,3 +20,80 @@ DESKTOP:
 -86 accessibility
 -77 best practices 
 -100 seo
+
+
+FONTI:
+--heading-font: 'Raleway', sans-serif; 500
+--body-font: 'Montserrat', sans-serif; 
+
+--heading-font: 'Playfair Display', serif; 400
+--body-font: 'Montserrat', sans-serif; 
+
+--heading-font: 'Jost', sans-serif; 500
+--body-font: 'Inter', sans-serif; 
+
+--heading-font: 'Merriweather', serif; 500
+--body-font: 'Open Sans', sans-serif; 
+
+--heading-font: 'Lora', serif; 500
+--body-font: 'Mulish', sans-serif; 
+
+
+DARK THEME
+.navbar.navbar-light {
+    background-color: var(--bg-body) !important; /* Uporabi tvojo temno barvo */
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color); /* Nežna linija namesto sence */
+    transition: all 0.3s ease;
+}
+
+/* Stil za povezave v meniju */
+.navbar-light .navbar-nav .nav-link {
+    font-family: var(--body-font);
+    font-weight: 400;
+    color: var(--text-muted) !important; /* Siva barva za manjši poudarek */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem !important;
+    transition: color 0.3s ease;
+}
+
+
+:root {
+    --bg-body: #121212;     
+    --bg-card: #1e1e1e;     
+    --bg-light: #2c2c2c;    
+
+    --text-main: #e6e6e6;   
+    --text-muted: rgb(181 187 193 / 75%) !important;  
+    --text-dark: #121212;    
+
+    --primary-color: #c49b63; 
+    --primary-dark: #a88350;
+
+    --border-color: #333333;
+
+    --heading-font: 'Lora', serif; 
+    --body-font: 'Mulish', sans-serif; 
+}
+
+body {
+    background-color: var(--bg-body); 
+    font-family: var(--body-font);
+    color: var(--text-muted);         
+    line-height: 1.8;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 500;
+    color: var(--text-main);
+    font-style: normal;
+}
+
+.text-muted{
+    color: rgb(181 187 193 / 75%) !important
+}
