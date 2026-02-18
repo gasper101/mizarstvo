@@ -1,9 +1,9 @@
 /* Definiranje spremenljivk za barve - "Lesni" pridih */
 :root {
     --primary-color: #c49b63; /* Zlato-rjava, barva hrasta */
-    --primary-dark: #a88350;
+    --primary-dark: #99733e;
     --dark-bg: #111111;
-    --heading-font: 'Raleway', sans-serif;
+    --heading-font: 'Inter', sans-serif;
     --body-font: 'Montserrat', sans-serif; 
 }
 
@@ -11,6 +11,15 @@ body {
     font-family: var(--body-font);
     color: #444;
     line-height: 1.8;
+    background-color: #F5F2ED;
+}
+
+.bg-white{
+    background-color: #F5F2ED !important;
+}
+
+.bg-light{
+    background-color: #faf8f3 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -267,6 +276,7 @@ h1{
     height: 300px; /* Fiksna višina za poravnavo */
     object-fit: cover;
     transition: transform 0.5s ease;
+    image-rendering: -webkit-optimize-contrast;
 }
 .gallery-overlay {
     position: absolute;
@@ -331,6 +341,7 @@ h1{
 }
 .process-step{
     transition: all 0.4s ease-in-out;
+    padding:10px;
 }
 
 .process-step:hover {
@@ -373,14 +384,19 @@ h1{
 }
 
 .logo-img {
-    height: 60px; /* Standardna višina logotipa */
+    height: 60px; 
     transition: all 0.3s ease;
-    width: auto; /* Avtomatska širina glede na višino */
+    width: auto; 
+}
+
+.logo-img:hover{
+    opacity: 0.6; 
+    transform: translateY(-2px);
 }
 
 /* Prilagoditev logotipa ko je navigacija skrolana */
 .navbar.scrolled .logo-img {
-    height: 40px; /* Manjša višina ob skrolanju */
+    height: 50px; /* Manjša višina ob skrolanju */
 }
 
 /* Poskrbimo, da je 'brand' del navigacije centriran z logotipom, če je logotip manjsi */
@@ -403,7 +419,7 @@ h1{
     
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
     padding: 0;
-    margin-top: 20px; 
+    margin-top: -5px !important; 
 }
 
 .dropdown-item {
@@ -762,6 +778,8 @@ html, body {
 /*hover za slike*/
 .hover-effect-container img {
     transition: transform 0.2s ease-in-out;
+    max-width: 600px;    
+    max-height: 400px;    
 }
 
 .hover-effect-container:hover img {
@@ -811,6 +829,10 @@ html, body {
 .img-fluid.shadow.rounded:hover {
     transform: translateY(-15px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+}
+
+img{
+    image-rendering: -webkit-optimize-contrast;
 }
 
 
