@@ -1,17 +1,23 @@
-/* Definiranje spremenljivk za barve - "Lesni" pridih */
 :root {
-    --primary-color: #c49b63; /* Zlato-rjava, barva hrasta */
-    --primary-dark: #99733e;
-    --dark-bg: #111111;
-    --heading-font: 'Inter', sans-serif;
-    --body-font: 'Montserrat', sans-serif; 
+    --primary-color: #b38e5d;
+    --primary-light: #d4bc96;
+    --primary-dark: #8c6a40;
+
+    --text-main: #2d2d2d;     
+    --text-muted: #666666;
+    --bg-main: #F5F2ED;      
+    --bg-card: #FAF8F5;      
+    --accent-line: rgba(179, 142, 93, 0.2); 
+    --heading-font: 'Arimo', sans-serif;
+    --body-font: 'Montserrat', sans-serif;
 }
 
 body {
     font-family: var(--body-font);
-    color: #444;
-    line-height: 1.8;
-    background-color: #F5F2ED;
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
 .bg-white{
@@ -25,8 +31,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-font);
     font-weight: 500;
-    color: #1a1a1a;
-    font-style: normal;
+    color: var(--text-main);
 }
 
 h1{
@@ -140,24 +145,41 @@ h1{
 .hero-section {
     height: 100vh;
     position: relative;
-    
-    transition: background-image 1s ease-in-out; /* 2-sekundni fade efekt */
-
+    transition: background-image 1s ease-in-out;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
 .overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); /* Zatemnitev slike */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(45,41,38,0.4) 0%, rgba(45,41,38,0.7) 100%) !important;
 }
 
+/* Typography Refinement */
 .main-title {
-    font-size: 4rem;
-    font-weight: 500;
-    margin-bottom: 50px;
+    font-family: var(--heading-font);
+    font-weight: 400; /* Lighter weight is often more elegant for large text */
+    letter-spacing: 0.1rem; 
+    /* text-transform: uppercase;*/
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.hero-section .lead {
+    font-family: var(--body-font);
+    font-weight: 300;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0.02rem;
+    opacity: 0.9;
 }
 
 @media(max-width: 768px) {
@@ -176,11 +198,33 @@ h1{
     border: none;
     transition: all 0.3s;
 }
+
 .btn-custom:hover {
     background: var(--primary-dark);
     color: #fff;
     transform: translateY(-5px);
 }
+
+
+.btn-custom2 {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+    padding: 14px 30px;
+    border-radius: 0; /* Sharp corners feel more architectural/custom */
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-custom2:hover {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-5px);
+}
+
 
 /* Splošne sekcije */
 .section-padding {
@@ -193,6 +237,7 @@ h1{
     font-size: 2.5rem;
     position: relative;
     display: inline-block;
+    color: var(--text-main);
 }
 .section-title::after {
     content: '';
@@ -208,15 +253,18 @@ h1{
 
 /* Service Cards */
 .service-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #eee;
+    background-color: var(--bg-cream);
+    border: none;
+    border-radius: 0;
+    padding: 40px 30px;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
 }
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-    border-color: transparent;
+    background-color: #ffffff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
 }
 
 .service-card::after {
@@ -238,7 +286,6 @@ h1{
 }
 
 .service-card:hover::after {
-    /* Ob hoverju ga premaknemo navzgor, da se prikaže */
     transform: translateY(0);
 }
 
@@ -681,13 +728,50 @@ h1{
 }
 
 .material-feature {
-    transition: all 0.3s ease-in-out;
+    padding: 20px;
+    border-left: 1px solid rgba(179, 142, 93, 0.2); /* Very faint gold line */
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 80%;
+    position: relative;
+    background: transparent;
 }
 
+/* The Hover Effect: The line thickens and the background subtly shifts */
 .material-feature:hover {
-    transform: translateX(10px); /* Blago premakne tekst v desno */
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.3); /* Subtle glass effect */
+    transform: translateX(5px);
+    padding-left: 25px; /* Compansates for the shift */
 }
 
+.text-primary-custom {
+    color: var(--primary-color) !important;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+}
+
+.material-feature:hover .text-primary-custom {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Typography */
+.material-feature h5 {
+    font-family: var(--heading-font);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+    margin-bottom: 0.75rem !important;
+}
+
+.material-feature p.small {
+    font-family: var(--body-font);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 300;
+}
 
 
 /*loading na prvi strani*/
@@ -839,4 +923,17 @@ img{
 footer a:hover {
     color: #fff !important;
     transition: 0.2s;
+}
+
+.btn-outline-light{
+    transition: all 0.3s;
+}
+.btn-outline-light:hover{
+
+    color:white;
+
+    background-color: var(--primary-dark) !important; /* Slightly deeper wood tone */
+    border-color: var(--primary-dark) !important;
+    transform: translateY(-3px); /* Subtle upward float */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Very soft shadow */
 }
