@@ -10,6 +10,8 @@
     --accent-line: rgba(179, 142, 93, 0.2); 
     --heading-font: 'Arimo', sans-serif;
     --body-font: 'Montserrat', sans-serif;
+
+    --wood-texture-opacity: 0.15;
 }
 
 body {
@@ -936,4 +938,36 @@ footer a:hover {
     border-color: var(--primary-dark) !important;
     transform: translateY(-3px); /* Subtle upward float */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Very soft shadow */
+}
+
+
+
+.bg-wood-ghost {
+    background-color: var(--bg-main); /* Uses your beige #F5F2ED */
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Ensures texture doesn't spill out */
+}
+
+.bg-wood-ghost::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Use the exact name of your uploaded image file */
+    background-image: url('slike/texture.jpg'); 
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect like the reference site */
+    
+    /* Blending settings to mix wood with beige */
+    opacity: 0.12; /* Adjust between 0.05 and 0.20 for subtleness */
+    mix-blend-mode: multiply; /* Helps the beige "soak" into the wood grain */
+    
+    z-index: -1;
+    pointer-events: none;
 }
