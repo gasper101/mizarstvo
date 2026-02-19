@@ -274,3 +274,41 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
+
+const aboutSection = document.querySelector('#o-nas');
+const ring1 = document.querySelector('.rings-about');
+//const ring2 = document.querySelector('.rings-about2');
+
+if (aboutSection && ring1) {
+    aboutSection.addEventListener('mousemove', (e) => {
+        const rect = aboutSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        ring1.style.transform = `translate(${x * 40}px, ${y * 40}px) scale(1.05) rotate(${x * 5}deg)`;
+        //ring2.style.transform = `translate(${x * -60}px, ${y * -60}px) scale(1.1) rotate(${x * -10}deg)`;
+    });
+
+    aboutSection.addEventListener('mouseleave', () => {
+        ring1.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+        //ring2.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+    });
+}
+
+const vizSection = document.querySelector('#vizualizacija');
+const vizStump = document.querySelector('.viz-stump');
+
+if (vizSection && vizStump) {
+    vizSection.addEventListener('mousemove', (e) => {
+        const rect = vizSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        vizStump.style.transform = `translate(calc(-49% + ${x * 30}px), calc(-49% + ${y * 30}px)) scale(1.03)`;
+    });
+
+    vizSection.addEventListener('mouseleave', () => {
+        vizStump.style.transform = `translate(-49%, -49%) scale(1)`;
+    });
+}

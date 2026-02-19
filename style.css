@@ -533,6 +533,25 @@ h1{
     transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
 }
 
+/*hover za slike*/
+.hover-effect-container img {
+    transition: transform 0.2s ease-in-out;
+    max-width: 600px;    
+    max-height: 400px;    
+}
+
+.hover-effect-container:hover img {
+    transform: scale(1.03); 
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important;
+}
+
+.about-img{
+    max-width: 700px !important;    
+    max-height: 500px !important; 
+    margin-left: -100px;
+}
+
+
 @media (min-width: 992px) {
     .nav-item.dropdown {
         position: static !important;
@@ -860,19 +879,6 @@ html, body {
     width: 100vw; 
 }
 
-
-/*hover za slike*/
-.hover-effect-container img {
-    transition: transform 0.2s ease-in-out;
-    max-width: 600px;    
-    max-height: 400px;    
-}
-
-.hover-effect-container:hover img {
-    transform: scale(1.03); 
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important;
-}
-
 .dropdown-item:hover .dropdown-desc {
     overflow: visible !important; 
 }
@@ -908,11 +914,11 @@ html, body {
 
 
 /*za slike na templatih*/
-.img-fluid.shadow.rounded {
+.img-fluid {
     transition: transform 0.3s ease-in-out;
 }
 
-.img-fluid.shadow.rounded:hover {
+.img-fluid:hover {
     transform: translateY(-15px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
 }
@@ -976,7 +982,7 @@ footer a:hover {
     position: absolute;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.15; /* Keeps it premium and subtle */
+    opacity: 0.2; /* Keeps it premium and subtle */
     transition: transform 0.8s ease-out;
 }
 
@@ -987,17 +993,18 @@ footer a:hover {
     background-repeat: no-repeat;
 }
 
-/* Wood Grain Flow - Mimics the vertical fibers of a plank */
-.wood-fiber {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,0 Q80,200 40,400 T60,800 M100,0 Q70,300 110,500 T90,800 M150,0 Q180,100 140,400 T160,800' fill='none' stroke='%23b38e5d' stroke-width='0.5' stroke-dasharray='5 10' opacity='0.3'/%3E%3C/svg%3E");
-    background-size: cover;
-}
 
 #o-nas { position: relative; z-index: 1; overflow: hidden; }
 .rings-about { 
     width: 700px; height: 700px; 
     right: -150px; top: -100px; 
     transform: rotate(-10deg); 
+}
+
+.rings-about2 { 
+    width: 400px; height: 400px; 
+    left: -100px; bottom: -100px; 
+    transform: rotate(-50deg); 
 }
 
 
@@ -1012,8 +1019,158 @@ footer a:hover {
     filter: invert(1); opacity: 0.05; 
 }
 
-.gallery-knot { 
-    width: 300px; height: 300px; 
-    right: 10%; top: 5%; 
-    opacity: 0.08; 
+.gallery-knot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    
+    /* Linear Wood Grain - Designed for seamless tiling */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cg fill='none' stroke='%23b38e5d' stroke-linecap='flat'%3E%3C!-- Main Grain Fibers (Shifted Up) --%3E%3Cpath stroke-width='0.8' d='M0 10 L1200 12 M0 110 L1200 108 M0 210 L1200 212' opacity='0.3'/%3E%3C!-- Subtle Organic Variation (Shifted Up) --%3E%3Cpath stroke-width='1.2' d='M0 50 Q 300 45, 600 50 T 1200 55 M0 150 Q 400 155, 800 150 T 1200 145' opacity='0.5'/%3E%3C!-- Fine Wood Pores (Shifted Up) --%3E%3Cpath stroke-width='0.4' stroke-dasharray='100, 50' d='M0 80 L1200 80 M0 180 L1200 180 M0 250 L1200 250' opacity='0.2'/%3E%3C!-- Wide Veneer Shading (Shifted Up) --%3E%3Cpath stroke-width='3' d='M0 120 L1200 122' opacity='0.1'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 1300px 300px;
+    background-repeat: repeat;
+}
+
+/* Reduced animation speed for a more stable, premium look */
+.gallery-drift {
+    animation: woodDrift 60s linear infinite;
+}
+
+@keyframes woodDrift {
+    from { background-position: 0 0; }
+    to { background-position: -1200px 0; }
+}
+
+.section-divider-premium {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    width: 60%;
+    margin: 0 auto;
+    opacity: 0.3;
+}
+
+.section-divider-premium::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-main);
+    padding: 0 15px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+#proces {
+    box-shadow: 0 -20px 30px rgba(0,0,0,0.02); 
+}
+
+.wood-stump, .gallery-knot {
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    pointer-events: none; /* Keep this so they don't block button clicks */
+}
+
+/* 2. When the user hovers over the SECTION, animate the BACKGROUND child */
+
+/* For the About Us section stump */
+#o-nas:hover .wood-stump {
+    transform: scale(1.08) rotate(2deg) translateY(-15px);
+}
+
+/* For the Gallery section lines */
+#galerija:hover .gallery-knot {
+    transform: scale(1.02) translateY(-10px);
+}
+
+/* For the Process section if you have a shape there */
+#proces:hover .wood-rings-premium {
+    transform: scale(1.1) rotate(-1deg);
+}
+
+.viz-stump {
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    pointer-events: none; 
+}
+
+#vizualizacija:hover .viz-stump {
+    transform: scale(1.1) rotate(-3deg) translate(-49%, -49%);
+}
+
+/* Horizontal Process List Wrapper */
+.process-horizontal-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.process-step-item {
+    flex: 1;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+/* Number on top with Underline */
+.step-number-top {
+    font-family: var(--heading-font);
+    font-size: 2rem; /* Reduced size as requested */
+    color: var(--primary-color);
+    opacity: 0.5;
+    display: inline-block;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    position: relative;
+    width: 60px; 
+}
+
+.step-number-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-line);
+    transition: all 0.4s ease;
+}
+
+
+.step-content-bottom h4 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.step-content-bottom p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    padding: 0 10px;
+}
+
+/* Hover Effect */
+.process-step-item:hover {
+    transform: translateY(-5px);
+}
+
+.process-step-item:hover .step-number-top {
+    opacity: 1;
+}
+
+.process-step-item:hover .step-number-top::after {
+    background-color: var(--primary-color);
+    width: 120%; /* Expands slightly on hover */
+    left: -10%;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .process-horizontal-list {
+        flex-direction: column;
+        gap: 40px;
+    }
 }
