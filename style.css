@@ -940,6 +940,9 @@ footer a:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Very soft shadow */
 }
 
+.bg-light{
+    background-color: #fcfbf9;
+}
 
 
 .bg-wood-ghost {
@@ -949,25 +952,68 @@ footer a:hover {
     overflow: hidden; /* Ensures texture doesn't spill out */
 }
 
-.bg-wood-ghost::after {
+#o-nas {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+}
+#o-nas::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 45%;
     height: 100%;
-    
-    /* Use the exact name of your uploaded image file */
-    background-image: url('slike/texture.jpg'); 
-    
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Parallax effect like the reference site */
-    
-    /* Blending settings to mix wood with beige */
-    opacity: 0.12; /* Adjust between 0.05 and 0.20 for subtleness */
-    mix-blend-mode: multiply; /* Helps the beige "soak" into the wood grain */
-    
+    background: var(--primary-light);
+    opacity: 0.2;
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: -1;
+}
+
+
+
+.organic-shape {
+    position: absolute;
     z-index: -1;
     pointer-events: none;
+    opacity: 0.15; /* Keeps it premium and subtle */
+    transition: transform 0.8s ease-out;
+}
+
+/* Wobbly Tree Rings - Not circular, but organic and irregular */
+.wood-stump {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M250,230 C270,232 268,260 250,265 C230,268 235,235 250,230' fill='none' stroke='%23b38e5d' stroke-width='1'/%3E%3Cpath d='M250,180 C320,185 330,280 250,310 C160,320 170,190 250,180' fill='none' stroke='%23b38e5d' stroke-width='1.5'/%3E%3Cpath d='M250,120 C380,130 420,350 250,380 C80,400 100,140 250,120' fill='none' stroke='%23b38e5d' stroke-width='1'/%3E%3Cpath d='M250,50 C450,70 480,450 250,470 C20,490 50,60 250,50' fill='none' stroke='%23b38e5d' stroke-width='0.8' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Wood Grain Flow - Mimics the vertical fibers of a plank */
+.wood-fiber {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,0 Q80,200 40,400 T60,800 M100,0 Q70,300 110,500 T90,800 M150,0 Q180,100 140,400 T160,800' fill='none' stroke='%23b38e5d' stroke-width='0.5' stroke-dasharray='5 10' opacity='0.3'/%3E%3C/svg%3E");
+    background-size: cover;
+}
+
+#o-nas { position: relative; z-index: 1; overflow: hidden; }
+.rings-about { 
+    width: 700px; height: 700px; 
+    right: -150px; top: -100px; 
+    transform: rotate(-10deg); 
+}
+
+
+.fiber-left { width: 150px; height: 100%; left: 0; top: 0; }
+.fiber-right { width: 150px; height: 100%; right: 0; top: 0; }
+
+
+.viz-stump { 
+    width: 1000px; height: 1000px; 
+    left: 10%; top: 50%; 
+    transform: translate(-50%, -50%); 
+    filter: invert(1); opacity: 0.05; 
+}
+
+.gallery-knot { 
+    width: 300px; height: 300px; 
+    right: 10%; top: 5%; 
+    opacity: 0.08; 
 }
