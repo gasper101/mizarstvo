@@ -162,7 +162,7 @@ h1{
     left: 0; 
     width: 100%; 
     height: 100%;
-    background: linear-gradient(to bottom, rgba(45,41,38,0.4) 0%, rgba(45,41,38,0.7) 100%) !important;
+    background: linear-gradient(to bottom, rgba(45,38,34,0.4) 0%, rgba(35,28,24,0.7) 100%) !important;
 }
 
 /* Typography Refinement */
@@ -283,7 +283,7 @@ h1{
     font-weight: 600;
     text-align: center;
     /* Skrijemo ga pod dno kartice */
-    transform: translateY(100%); 
+    transform: translateY(105%); 
     transition: transform 0.3s ease;
 }
 
@@ -543,12 +543,6 @@ h1{
 .hover-effect-container:hover img {
     transform: scale(1.03); 
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important;
-}
-
-.about-img{
-    max-width: 700px !important;    
-    max-height: 500px !important; 
-    margin-left: -100px;
 }
 
 
@@ -1016,7 +1010,7 @@ footer a:hover {
     width: 1000px; height: 1000px; 
     left: 10%; top: 50%; 
     transform: translate(-50%, -50%); 
-    filter: invert(1); opacity: 0.05; 
+    filter: invert(0.2); opacity: 0.1; 
 }
 
 .gallery-knot {
@@ -1025,7 +1019,7 @@ footer a:hover {
     height: 100%;
     left: 0;
     top: 0;
-    opacity: 0.25;
+    opacity: 0.3;
     pointer-events: none;
     z-index: 0;
     
@@ -1108,11 +1102,6 @@ footer a:hover {
     margin-top: 50px;
 }
 
-.process-step-item {
-    flex: 1;
-    text-align: center;
-    transition: all 0.5s ease;
-}
 
 /* Number on top with Underline */
 .step-number-top {
@@ -1152,20 +1141,12 @@ footer a:hover {
     padding: 0 10px;
 }
 
-/* Hover Effect */
-.process-step-item:hover {
-    transform: translateY(-5px);
+.process-step-item {
+    flex: 1;
+    text-align: center;
+    transition: all 0.5s ease;
 }
 
-.process-step-item:hover .step-number-top {
-    opacity: 1;
-}
-
-.process-step-item:hover .step-number-top::after {
-    background-color: var(--primary-color);
-    width: 120%; /* Expands slightly on hover */
-    left: -10%;
-}
 
 /* Responsive adjustment for mobile */
 @media (max-width: 768px) {
@@ -1173,4 +1154,79 @@ footer a:hover {
         flex-direction: column;
         gap: 40px;
     }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+}
+
+/* Stanje, ko element pride v vidno polje */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggering (zamikanje) za procesne korake - da se odkrivajo eden za drugim */
+.reveal-delay-1 { transition-delay: 0.2s; }
+.reveal-delay-2 { transition-delay: 0.4s; }
+.reveal-delay-3 { transition-delay: 0.6s; }
+.reveal-delay-4 { transition-delay: 0.8s; }
+.reveal-delay-5 { transition-delay: 1.0s; }
+
+/* Poseben efekt za številke v procesu */
+.process-step-row .step-number-col {
+    transition: color 0.8s ease, opacity 0.8s ease;
+}
+
+.process-step-row.active .step-number-col {
+    color: var(--primary-color);
+    opacity: 1;
+}.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+}
+
+/* Stanje, ko element pride v vidno polje */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggering (zamikanje) za procesne korake - da se odkrivajo eden za drugim */
+.reveal-delay-1 { transition-delay: 0.2s; }
+.reveal-delay-2 { transition-delay: 0.4s; }
+.reveal-delay-3 { transition-delay: 0.6s; }
+.reveal-delay-4 { transition-delay: 0.8s; }
+.reveal-delay-5 { transition-delay: 1.0s; }
+
+/* Poseben efekt za številke v procesu */
+.process-step-row .step-number-col {
+    transition: color 0.8s ease, opacity 0.8s ease;
+}
+
+.process-step-row.active .step-number-col {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.process-hover{
+    transition: all 0.3s ease;
+}
+.process-hover:hover {
+    transform: translateY(-10px);
+}
+
+.process-hover:hover .step-number-top {
+    opacity: 1;
+}
+
+.process-hover:hover .step-number-top::after {
+    background-color: var(--primary-color);
+    width: 120%; 
+    left: -10%;
 }

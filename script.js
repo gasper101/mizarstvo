@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Smooth scroll za starejše brskalnike (opcijsko, ker CSS scroll-behavior: smooth večinoma deluje)
+    //za starejse browserje
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -312,3 +312,44 @@ if (vizSection && vizStump) {
         vizStump.style.transform = `translate(-49%, -49%) scale(1)`;
     });
 }
+
+const gallerySection = document.querySelector('#galerija');
+const knot = document.querySelector('.gallery-knot');
+
+if (gallerySection && knot) {
+    gallerySection.addEventListener('mousemove', (e) => {
+        const rect = gallerySection.getBoundingClientRect();
+   
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        knot.style.transform = `translate(${x * 30}px, ${y * 20}px) scale(1.03) rotate(${x * 2}deg)`;
+    });
+
+    gallerySection.addEventListener('mouseleave', () => {
+        knot.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal, .process-step-row');
+
+    const observerOptions = {
+        threshold: 0.15, 
+        rootMargin: "0px 0px -50px 0px" 
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Če želiš, da se animacija izvede le enkrat, odkomentiraj spodnjo vrstico:
+                // observer.unobserve(entry.target);
+            } else {
+                // Če želiš, da se ob skrolanju navzgor elementi spet skrijejo:
+                entry.target.classList.remove('active');
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+});
