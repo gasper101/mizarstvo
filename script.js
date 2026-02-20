@@ -353,3 +353,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dot = document.querySelector('.cursor-dot');
+    const outline = document.querySelector('.cursor-outline');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Trenutna pozicija elementov
+    let dotX = 0, dotY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    // Hitrosti (0.1 je zelo mehko, 1.0 je trdo sledenje)
+    const dotSpeed = 1;      
+    const outlineSpeed = 0.5; 
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+
+        dotX += (mouseX - dotX) * dotSpeed;
+        dotY += (mouseY - dotY) * dotSpeed;
+        dot.style.transform = `translate(-50%, -50%) translate3d(${dotX}px, ${dotY}px, 0)`;
+
+        outlineX += (mouseX - outlineX) * outlineSpeed;
+        outlineY += (mouseY - outlineY) * outlineSpeed;
+        outline.style.transform = `translate(-50%, -50%) translate3d(${outlineX}px, ${outlineY}px, 0)`;
+
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+
+    // Hover učinki na elementih
+    const interactives = document.querySelectorAll('a, button, .process-step-item, .gallery-item, img');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            outline.classList.add('cursor-active-outline');
+        });
+        el.addEventListener('mouseleave', () => {
+            outline.classList.remove('cursor-active-outline');
+        });
+    });
+});
