@@ -1,3 +1,18 @@
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    
+    setTimeout(() => {
+        preloader.classList.add('loader-hidden');
+        
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+        }, 800);
+    }, 1000);
+});
+
+// Medtem ko se nalaga, preprečimo skrolanje
+document.body.style.overflow = 'hidden';
+
 document.addEventListener("DOMContentLoaded", function() {
     
     // Sprememba navigacije ob skrolanju
