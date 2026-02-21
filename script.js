@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     //galerija
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const allGalleryItems = document.querySelectorAll('.gallery-card, .gallery-item');
     const galleryModalElement = document.getElementById('galleryModal');
 
     if (galleryModalElement) {
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const modalTitle = document.getElementById('galleryModalLabel');
         const carouselContainer = document.getElementById('carousel-images-container');
 
-        galleryItems.forEach(item => {
+        allGalleryItems.forEach(item => {
             item.addEventListener('click', function() {
                 const title = this.getAttribute('data-title');
                 const imagesString = this.getAttribute('data-images'); 
@@ -152,20 +152,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 const images = imagesString.split(',');
 
-                modalTitle.textContent = title;
+                if (modalTitle) modalTitle.textContent = title;
 
-                //spinner
-                carouselContainer.innerHTML = `
-                    <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Nalaganje...</span>
-                        </div>
-                    </div>`;
+                // Spinner
+                if (carouselContainer) {
+                    carouselContainer.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Nalaganje...</span>
+                            </div>
+                        </div>`;
+                }
 
                 let slidesHtml = '';
                 images.forEach((imgUrl, index) => {
                     const isActive = index === 0 ? 'active' : '';
-                    //lazy da se ne takoj nalozijo
                     const loadingAttr = index === 0 ? 'eager' : 'lazy';
                     
                     slidesHtml += `
@@ -178,8 +179,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     `;
                 });
 
+                // Small timeout to ensure the spinner is replaced correctly
                 setTimeout(() => {
-                    carouselContainer.innerHTML = slidesHtml;
+                    if (carouselContainer) carouselContainer.innerHTML = slidesHtml;
                 }, 100);
 
                 galleryModal.show();
@@ -187,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         galleryModalElement.addEventListener('hidden.bs.modal', function () {
-            carouselContainer.innerHTML = '';
+            if (carouselContainer) carouselContainer.innerHTML = '';
         });
     }
 
@@ -294,25 +296,35 @@ const aboutSection = document.querySelector('#o-nas');
 const ringPaths = document.querySelectorAll('.wood-stump-svg path');
 
 if (aboutSection && ringPaths.length > 0) {
+    let ticking = false;
+
     aboutSection.addEventListener('mousemove', (e) => {
-        const rect = aboutSection.getBoundingClientRect();
-        
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const rect = aboutSection.getBoundingClientRect();
+                
+                // Tvoja originalna matematika
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-        ringPaths.forEach((path, index) => {
-            const depth = (index + 1) * 6; 
-            const rotate = (index + 1) * 0.7;
+                ringPaths.forEach((path, index) => {
+                    const depth = (index + 1) * 6; 
+                    const rotate = (index + 1) * 0.7;
 
-            path.style.transition = 'transform 0.4s ease-out';
-            path.style.transform = `translate(${x * depth}px, ${y * depth}px) rotate(${x * rotate}deg)`;
-        });
+    
+                    path.style.transition = 'transform 0.4s ease-out';
+                    path.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0) rotate(${x * rotate}deg)`;
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
 
     aboutSection.addEventListener('mouseleave', () => {
         ringPaths.forEach((path) => {
             path.style.transition = 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)';
-            path.style.transform = `translate(0, 0) rotate(0deg)`;
+            path.style.transform = `translate3d(0, 0, 0) rotate(0deg)`;
         });
     });
 }

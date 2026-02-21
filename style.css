@@ -549,8 +549,8 @@ h1{
 /*hover za slike*/
 .hover-effect-container img {
     transition: transform 0.2s ease-in-out;
-    max-width: 600px;    
-    max-height: 400px;    
+    max-width: 35vw !important;    
+    max-height: 35vw !important;    
 }
 
 .hover-effect-container:hover img {
@@ -895,14 +895,18 @@ footer a:hover {
 #o-nas { position: relative; z-index: 1; overflow: hidden; }
 
 .rings-about { 
-    width: 700px; 
-    height: 700px; 
+    /* Desktop - privzeta velikost */
+    width: 40vw;         
+    height: 40vw;       
+    max-width: 700px;    
+    max-height: 700px;
+    
     position: absolute;
-    right: -150px; 
-    top: -100px; 
+    right: -12.5vw;       
+    top: -12.5vh; 
     transform: rotate(-10deg); 
-    /* Preprečimo, da bi miška "klikala" na oblike */
     pointer-events: none; 
+    z-index: 0;         
 }
 
 .wood-stump-svg {
@@ -1012,6 +1016,15 @@ footer a:hover {
 
 #vizualizacija:hover .viz-stump {
     transform: scale(1.1) rotate(-3deg) translate(-49%, -49%);
+}
+
+.wood-stump-svg path {
+    /* To "zbudi" grafično kartico prenosnika */
+    will-change: transform;
+    /* Prepričaj se, da se vrti okoli svoje osi */
+    transform-origin: center;
+    /* Izboljša ostrino med premikanjem */
+    backface-visibility: hidden;
 }
 
 /* Horizontal Process List Wrapper */
@@ -1400,6 +1413,155 @@ header#home {
 @keyframes shine {
     100% { left: 125%; }
 }
+
+
+.expanding-gallery {
+    display: flex;
+    gap: 0;
+    height: 80vh; /* Višina galerije */
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.gallery-card {
+    position: relative;
+    flex: 1; /* Vse so enako široke */
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Ko greš z miško čez kartico, se ta razširi */
+.gallery-card:hover {
+    flex: 3; /* Razmerje širjenja */
+}
+
+/* Ozadje slike */
+.card-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(80%); /* Črno-belo kot na tvoji sliki */
+    transition: all 0.8s ease;
+    transform: scale(1);
+}
+
+.gallery-card:hover .card-bg {
+    filter: grayscale(0%); /* Postane barvno */
+    transform: scale(1.05); /* Rahlo se poveča */
+}
+
+/* Tekst v kartici */
+.card-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 10;
+    color: white;
+    opacity: 0.8;
+    transition: opacity 0.4s ease;
+}
+
+.card-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+    opacity: 0.7;
+}
+
+/* Poseben SHINE efekt ob hoverju (dodava tvojo prejšnjo animacijo) */
+.gallery-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 90%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: skewX(-20deg);
+    transition: 0s;
+}
+
+.gallery-card:hover::after {
+    left: 150%;
+    transition: 0.7s ease-in-out;
+}
+
+.gallery-card .corners span {
+    opacity: 0; 
+}
+
+.gallery-card:hover .corners span {
+    opacity: 1; 
+    border-color: #ffffff; 
+}
+
+.carousel-container-outer {
+    max-width: 90vw; 
+    margin: 0 auto;
+}
+
+
+.arrow-button-left, 
+.arrow-button-right {
+    width: 50px;
+    height: 50px;
+    
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    
+    top: -40vh;
+    transform: translateY(-50%);
+
+    background: transparent;
+    border: none;
+    border-radius: 50% !important;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+
+.arrow-button-left {
+    left: -8vw; 
+}
+
+.arrow-button-right {
+    right: -8vw; 
+}
+
+
+.custom-arrow {
+    font-size: 2.5rem;
+    color: var(--primary-color); 
+    font-weight: 300;
+    line-height: 1;
+}
+
+.arrow-button-left:hover, 
+.arrow-button-right:hover {
+    opacity: 1.2;
+}
+
+.arrow-button-left:hover .custom-arrow, 
+.arrow-button-right:hover .custom-arrow {
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.1);
+}
+
+
 
 /* Responsive adjustment for mobile */
 @media (max-width: 768px) {
