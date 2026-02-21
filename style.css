@@ -183,7 +183,7 @@ h1{
     font-family: var(--heading-font);
     font-weight: 600; /* Lighter weight is often more elegant for large text */
     font-size: var(--h1-size);
-    letter-spacing: -0.02em;
+    letter-spacing: 0.0em;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
 }
 
@@ -198,7 +198,7 @@ h1{
 }
 
 @media(max-width: 768px) {
-    .main-title { font-size: 2.5rem; }
+    .main-title { font-size: 2.8rem; }
 }
 
 /* Gumbi */
@@ -559,114 +559,6 @@ h1{
 }
 
 
-@media (min-width: 992px) {
-    .nav-item.dropdown {
-        position: static !important;
-    }
-    #mainNav .container {
-        position: relative;
-    }
-    #produktiDropdown {
-        position: absolute !important;
-        left: 0 !important; 
-        right: auto !important; 
-
-        top: 150% !important; 
-        
-        width: auto; 
-        margin-top: 0; 
-        
-    }
-
-    .dropdown-menu{
-        background: transparent !important; 
-    
-        /* To doda učinek zamegljenega stekla */
-        backdrop-filter: blur(20px); 
-        -webkit-backdrop-filter: blur(10px); /* Za Safari */
-    }
-
-    /* Barva teksta v meniju */
-    .dropdown-item {
-        color: #c0bdbd;
-        padding: 8px 20px;
-    }
-
-
-    .dropdown-item:hover, .dropdown-item:focus {
-        padding: 10px 20px; 
-    }
-
-    .dropdown-item:hover .dropdown-desc {
-        color: #fff;
-        max-height: 50px; 
-        opacity: 1;
-    }
-
-}
-
-
-
-@media (max-width: 991px) {
-    .navbar-collapse {
-        background:white;
-        /* Omejimo višino in omogočimo skrolanje znotraj menija, če je telefon majhen */
-        max-height: 80vh; 
-        overflow-y: auto;
-        color: #444;
-        padding: 20px;
-        margin-right:10px;
-    }
-
-    .nav-link{
-        color:#444;
-    }
-
-    .btn-contact{
-        color:#444 !important;
-    }
-
-    .navbar-dark .dropdown-arrow {
-        color: #444 !important;
-    }
-
-    .nav-link.show{
-        color: #444 !important;
-    }
-
-    .nav-link:focus{
-        color:#444 !important;
-    }
-
-    .navbar-toggler{
-        margin-top:10px !important;
-    }
-
-    .container{
-        width:100vw;
-        margin-right:0px;
-        margin-left:0px;
-    }
-
-    #mainNav{
-        width:100vw;
-    }
-
-    .nav-link.active{
-        color:#444 !important;
-    }
-
-    .logo-img {
-        height: 50px; 
-    }
-
-    .navbar.scrolled .logo-img {
-        height: 40px; 
-    }
-
-}
-
-
 .btn-contact.active {
     background: var(--primary-color);
     color: white !important;
@@ -993,14 +885,7 @@ footer a:hover {
     transition: transform 0.8s ease-out;
 }
 
-/* Wobbly Tree Rings - Not circular, but organic and irregular */
 .wood-stump2 {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M250,230 C270,232 268,260 250,265 C230,268 235,235 250,230' fill='none' stroke='%23b38e5d' stroke-width='1'/%3E%3Cpath d='M250,180 C320,185 330,280 250,310 C160,320 170,190 250,180' fill='none' stroke='%23b38e5d' stroke-width='1.5'/%3E%3Cpath d='M250,120 C380,130 420,350 250,380 C80,400 100,140 250,120' fill='none' stroke='%23b38e5d' stroke-width='1'/%3E%3Cpath d='M250,50 C450,70 480,450 250,470 C20,490 50,60 250,50' fill='none' stroke='%23b38e5d' stroke-width='0.8' opacity='0.5'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.wood-stump {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M250,230 C272,235 274,235 250,265 C226,275 228,240 250,230' fill='none' stroke='%23b38e5d' stroke-width='0.8' opacity='1'/%3E%3Cpath d='M250,215 C294,220 298,250 250,280 C208,290 212,225 250,215' fill='none' stroke='%23b38e5d' stroke-width='1.2' opacity='0.9'/%3E%3Cpath d='M250,180 C332,185 340,285 250,315 C166,325 173,190 250,180' fill='none' stroke='%23b38e5d' stroke-width='1.8' opacity='1'/%3E%3Cpath d='M250,155 C366,160 376,320 250,350 C118,360 129,165 250,155' fill='none' stroke='%23b38e5d' stroke-width='0.6' opacity='0.7'/%3E%3Cpath d='M250,120 C404,125 418,345 250,375 C88,385 102,130 250,120' fill='none' stroke='%23b38e5d' stroke-width='1.0' opacity='1'/%3E%3Cpath d='M250,95 C437,100 454,380 250,410 C52,420 68,105 250,95' fill='none' stroke='%23b38e5d' stroke-width='1.1' opacity='0.8'/%3E%3Cpath d='M250,70 C470,75 490,410 250,440 C16,450 35,80 250,70' fill='none' stroke='%23b38e5d' stroke-width='0.5' opacity='0.6'/%3E%3Cpath d='M250,40 C503,45 526,440 250,470 C-20,480 2,50 250,40' fill='none' stroke='%23b38e5d' stroke-width='0.8' opacity='0.5'/%3E%3Cpath d='M250,10 C530,15 556,465 250,495 C-50,505 -25,20 250,10' fill='none' stroke='%23b38e5d' stroke-width='0.4' opacity='0.4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
@@ -1008,10 +893,26 @@ footer a:hover {
 
 
 #o-nas { position: relative; z-index: 1; overflow: hidden; }
+
 .rings-about { 
-    width: 700px; height: 700px; 
-    right: -150px; top: -100px; 
+    width: 700px; 
+    height: 700px; 
+    position: absolute;
+    right: -150px; 
+    top: -100px; 
     transform: rotate(-10deg); 
+    /* Preprečimo, da bi miška "klikala" na oblike */
+    pointer-events: none; 
+}
+
+.wood-stump-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wood-stump-svg path {
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center center;
 }
 
 .rings-about2 { 
@@ -1166,15 +1067,6 @@ footer a:hover {
     transition: all 0.5s ease;
 }
 
-
-/* Responsive adjustment for mobile */
-@media (max-width: 768px) {
-    .process-horizontal-list {
-        flex-direction: column;
-        gap: 40px;
-    }
-}
-
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -1188,22 +1080,8 @@ footer a:hover {
     transform: translateY(0);
 }
 
-/* Staggering (zamikanje) za procesne korake - da se odkrivajo eden za drugim */
-.reveal-delay-1 { transition-delay: 0.2s; }
-.reveal-delay-2 { transition-delay: 0.4s; }
-.reveal-delay-3 { transition-delay: 0.6s; }
-.reveal-delay-4 { transition-delay: 0.8s; }
-.reveal-delay-5 { transition-delay: 1.0s; }
 
-/* Poseben efekt za številke v procesu */
-.process-step-row .step-number-col {
-    transition: color 0.8s ease, opacity 0.8s ease;
-}
-
-.process-step-row.active .step-number-col {
-    color: var(--primary-color);
-    opacity: 1;
-}.reveal {
+.reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1251,7 +1129,7 @@ footer a:hover {
 }
 
 
-
+/* custom miska
 html, body, a, button, .process-step-item, .gallery-item {
     cursor: none !important;
 }
@@ -1264,7 +1142,6 @@ html, body, a, button, .process-step-item, .gallery-item {
     left: 0;
     border-radius: 50%;
     z-index: 999999;
-    /* Središčenje: pika in krog bosta vedno točno pod konico miške */
     transform: translate(-50%, -50%);
     will-change: transform;
 }
@@ -1272,24 +1149,22 @@ html, body, a, button, .process-step-item, .gallery-item {
 .cursor-dot {
     width: 6px;
     height: 6px;
-    background-color: #8c6a40; /* Temnejša rjava */
+    background-color: #8c6a40; 
 }
 
 .cursor-outline {
     width: 34px;
     height: 34px;
-    border: 1.5px solid #b38e5d; /* Tvoja zlato-rjava */
-    /* Transition samo za velikost, NE za premikanje */
+    border: 1.5px solid #b38e5d; 
     transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Stil ob hoverju */
 .cursor-active-outline {
     width: 50px;
     height: 50px;
     background-color: rgba(179, 142, 93, 0.15);
     border-color: #8c6a40;
-}
+}*/
 
 
 #preloader {
@@ -1342,4 +1217,308 @@ html, body, a, button, .process-step-item, .gallery-item {
 .loader-hidden {
     opacity: 0;
     visibility: hidden;
+}
+
+
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+
+.reveal-box {
+    position: relative;
+    overflow: hidden;
+    /* To zagotovi, da je box širok točno toliko kot slika */
+    display: table; 
+    line-height: 0;
+    margin: 0 auto; /* Centriranje, če je potrebno */
+}
+
+.reveal-box img {
+    max-width: 100%;
+    height: auto;
+    transform: scale(1.1); /* Začetni zoom */
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), 
+                filter 0.5s ease;
+    display: block;
+}
+
+.reveal-box::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #F5F2ED; /* Tvoja bež */
+    transform: translateX(0);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.reveal-box.animated::after {
+    transform: translateX(101%);
+}
+
+.reveal-box.animated img {
+    transform: scale(1);
+}
+
+.reveal-box.animated:hover img {
+    transform: scale(1.2); /* Rahel zoom-in efekt */
+    filter: brightness(0.9); /* Subtilna potemnitev za luksuzen občutek */
+}
+
+.corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Osnovne nastavitve za vse 4 kote */
+.corners span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 1. Zgoraj levo */
+.corners span:nth-child(1) {
+    top: 15px; left: 15px;
+    border-top: 2px solid #b38e5d;
+    border-left: 2px solid #b38e5d;
+    transform: translate(-15px, -15px);
+}
+
+/* 2. Zgoraj desno */
+.corners span:nth-child(2) {
+    top: 15px; right: 15px;
+    border-top: 2px solid #b38e5d;
+    border-right: 2px solid #b38e5d;
+    transform: translate(15px, -15px);
+}
+
+/* 3. Spodaj levo */
+.corners span:nth-child(3) {
+    bottom: 15px; left: 15px;
+    border-bottom: 2px solid #b38e5d;
+    border-left: 2px solid #b38e5d;
+    transform: translate(-15px, 15px);
+}
+
+/* 4. Spodaj desno */
+.corners span:nth-child(4) {
+    bottom: 15px; right: 15px;
+    border-bottom: 2px solid #b38e5d;
+    border-right: 2px solid #b38e5d;
+    transform: translate(15px, 15px);
+}
+
+/* Aktivacija ob hoverju */
+.reveal-box.animated:hover .corners span {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Dodamo še rahel sijaj ob hoverju */
+.reveal-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+    transform: skewX(-25deg);
+    z-index: 4;
+    pointer-events: none;
+}
+
+.reveal-box.animated:hover::before {
+    animation: shine 0.75s;
+}
+
+.heading-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px); 
+    transition: 
+        opacity 0.8s ease-out, 
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1), 
+        filter 0.8s ease-out;
+}
+
+/* Stanje, ko postane vidno */
+.heading-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+header#home {
+    position: relative; /* To postane sidro za canvas */
+    overflow: hidden; /* Prepreči, da bi delci ušli izven headerja */
+}
+
+#dustCanvas {
+    position: absolute; /* Ne več fixed! */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Postavi ga za besedilo, a pred morebitno ozadje */
+    pointer-events: none;
+    opacity: 0.8; 
+}
+
+/* Poskrbi, da je tvoja vsebina nad delci */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes shine {
+    100% { left: 125%; }
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .process-horizontal-list {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-item.dropdown {
+        position: static !important;
+    }
+    #mainNav .container {
+        position: relative;
+    }
+    #produktiDropdown {
+        position: absolute !important;
+        left: 0 !important; 
+        right: auto !important; 
+
+        top: 150% !important; 
+        
+        width: auto; 
+        margin-top: 0; 
+        
+    }
+
+    .dropdown-menu{
+        background: transparent !important; 
+    
+        /* To doda učinek zamegljenega stekla */
+        backdrop-filter: blur(20px); 
+        -webkit-backdrop-filter: blur(10px); /* Za Safari */
+    }
+
+    /* Barva teksta v meniju */
+    .dropdown-item {
+        color: #c0bdbd;
+        padding: 8px 20px;
+    }
+
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        padding: 10px 20px; 
+    }
+
+    .dropdown-item:hover .dropdown-desc {
+        color: #fff;
+        max-height: 50px; 
+        opacity: 1;
+    }
+
+}
+
+
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background:white;
+        /* Omejimo višino in omogočimo skrolanje znotraj menija, če je telefon majhen */
+        max-height: 80vh; 
+        overflow-y: auto;
+        color: #444;
+        padding: 20px;
+        margin-right:10px;
+    }
+
+    .nav-link{
+        color:#444;
+    }
+
+    .btn-contact{
+        color:#444 !important;
+    }
+
+    .navbar-dark .dropdown-arrow {
+        color: #444 !important;
+    }
+
+    .nav-link.show{
+        color: #444 !important;
+    }
+
+    .nav-link:focus{
+        color:#444 !important;
+    }
+
+    .navbar-toggler{
+        margin-top:10px !important;
+    }
+
+    .container{
+        width:100vw;
+        margin-right:0px;
+        margin-left:0px;
+    }
+
+    #mainNav{
+        width:100vw;
+    }
+
+    .nav-link.active{
+        color:#444 !important;
+    }
+
+    .logo-img {
+        height: 50px; 
+    }
+
+    .navbar.scrolled .logo-img {
+        height: 40px; 
+    }
+
+    .progress-bar-container{
+        height: 15px;
+    }
+
+    img{
+        max-width: 90vw !important;
+    }
 }

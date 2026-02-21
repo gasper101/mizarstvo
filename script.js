@@ -290,24 +290,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
 const aboutSection = document.querySelector('#o-nas');
-const ring1 = document.querySelector('.rings-about');
-//const ring2 = document.querySelector('.rings-about2');
+const ringPaths = document.querySelectorAll('.wood-stump-svg path');
 
-if (aboutSection && ring1) {
+if (aboutSection && ringPaths.length > 0) {
     aboutSection.addEventListener('mousemove', (e) => {
         const rect = aboutSection.getBoundingClientRect();
+        
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-        ring1.style.transform = `translate(${x * 40}px, ${y * 40}px) scale(1.05) rotate(${x * 5}deg)`;
-        //ring2.style.transform = `translate(${x * -60}px, ${y * -60}px) scale(1.1) rotate(${x * -10}deg)`;
+        ringPaths.forEach((path, index) => {
+            const depth = (index + 1) * 6; 
+            const rotate = (index + 1) * 0.7;
+
+            path.style.transition = 'transform 0.4s ease-out';
+            path.style.transform = `translate(${x * depth}px, ${y * depth}px) rotate(${x * rotate}deg)`;
+        });
     });
 
     aboutSection.addEventListener('mouseleave', () => {
-        ring1.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
-        //ring2.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+        ringPaths.forEach((path) => {
+            path.style.transition = 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)';
+            path.style.transform = `translate(0, 0) rotate(0deg)`;
+        });
     });
 }
 
@@ -369,22 +375,174 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
 });
 
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.reveal-box').forEach(box => revealObserver.observe(box));
 
 
+// Elegantna animacija naslovov ob skrolu
+const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('heading-visible');
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('h2').forEach(h2 => {
+    h2.classList.add('heading-animate');
+    headingObserver.observe(h2);
+});
+
+const magneticButtons = document.querySelectorAll('.btn-custom2');
+
+window.addEventListener('mousemove', function(e) {
+    magneticButtons.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const distanceX = e.clientX - centerX;
+        const distanceY = e.clientY - centerY;
+        
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        
+        //kk blizo v px
+        const proximity = 120; 
+
+        if (distance < proximity) {
+            // Moč efekta (manjša številka = bolj subtilno, poskusi 0.1 ali 0.15)
+            const strength = 0.1; 
+            const x = distanceX * strength;
+            const y = distanceY * strength;
+
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            btn.style.transition = 'transform 0.1s ease-out'; 
+        } else {
+            btn.style.transform = 'translate(0px, 0px)';
+            btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+        }
+    });
+});
+
+const lenis = new Lenis({
+  duration: 1.2,     // Dolžina trajanja skrola (v sekundah)
+  lerp: 0.1,         // Nižje je bolj "gumijasto", višje je bolj odzivno (poskusi 0.1 ali 0.15)
+  wheelMultiplier: 1, // Moč koleščka na miški
+  orientation: 'vertical',
+  gestureOrientation: 'vertical',
+  smoothWheel: true,
+  smoothTouch: false, // IZKLJUČI na touch napravah, da ne bo laga
+  touchMultiplier: 2,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+
+//floating particles
+const canvas = document.getElementById('dustCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const particleCount = 80; // Število delcev (manj je bolj elegantno)
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Particle {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5; // Zelo majhni delci
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.4 + 0.1; // Padajo rahlo navzdol
+        this.opacity = Math.random() * 0.5;
+        this.fadeSpeed = Math.random() * 0.01 + 0.002;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Če delec zapusti zaslon, ga ponovno ustvarimo na vrhu
+        if (this.y > canvas.height) {
+            this.y = -10;
+            this.x = Math.random() * canvas.width;
+        }
+        if (this.x > canvas.width || this.x < 0) {
+            this.speedX *= -1;
+        }
+
+        // Subtilno utripanje (twinkle)
+        this.opacity += this.fadeSpeed;
+        if (this.opacity > 0.7 || this.opacity < 0.1) {
+            this.fadeSpeed *= -1;
+        }
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(179, 142, 93, ${this.opacity})`; // Tvoja zlato-rjava barva
+        ctx.fill();
+    }
+}
+
+function createParticles() {
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function animateDust() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    requestAnimationFrame(animateDust);
+}
+
+createParticles();
+animateDust();
+
+/*custom miska
 document.addEventListener('DOMContentLoaded', () => {
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
 
     let mouseX = 0;
     let mouseY = 0;
-    
-    // Trenutna pozicija elementov
+
     let dotX = 0, dotY = 0;
     let outlineX = 0, outlineY = 0;
 
     // Hitrosti (0.1 je zelo mehko, 1.0 je trdo sledenje)
-    const dotSpeed = 1;      
-    const outlineSpeed = 0.5; 
+    const dotSpeed = 1.3;      
+    const outlineSpeed = 0.6; 
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -407,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animate();
 
     // Hover učinki na elementih
-    const interactives = document.querySelectorAll('a, button, .process-step-item, .gallery-item, img');
+    const interactives = document.querySelectorAll('a, button, .process-step-item, .gallery-item, img, .material-feature');
     interactives.forEach(el => {
         el.addEventListener('mouseenter', () => {
             outline.classList.add('cursor-active-outline');
@@ -416,4 +574,4 @@ document.addEventListener('DOMContentLoaded', () => {
             outline.classList.remove('cursor-active-outline');
         });
     });
-});
+});*/
