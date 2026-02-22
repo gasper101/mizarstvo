@@ -1683,4 +1683,13 @@ header#home {
     img{
         max-width: 90vw !important;
     }
+
+    .hover-effect-container img {
+        transition: transform 0.2s ease-in-out;
+        max-width: 90vw !important;    
+        max-height: 90vw !important; 
+    }
+    .text-primary-custom{
+        margin-top:20px;
+    }
 }
