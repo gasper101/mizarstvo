@@ -1562,6 +1562,59 @@ header#home {
 }
 
 
+.reveal-wrapper {
+    position: relative;
+    width: 100%;
+    height: 150vh; /* Maximum height as requested */
+    overflow: hidden;
+    background-color: #fff;
+}
+
+/* Push the content to fill the background */
+.reveal-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    padding: 60px 0;
+}
+
+/* The Brown Strips Overlay */
+.reveal-mask-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 10; /* Higher Z-Index to cover the content */
+    pointer-events: none; /* Allows scrolling even if mouse is over mask */
+}
+
+.mask-strip {
+    flex: 1;
+    height: 100%;
+    background-color: #d1bca1; /* Light brown from your image */
+    transform-origin: top;
+    will-change: transform;
+}
+
+.strip-bottom {
+    transform-origin: bottom;
+}
+
+/* Desktop only: Hide reveal logic on mobile if it gets too cramped */
+@media (max-width: 991px) {
+    .reveal-wrapper { height: auto; }
+    .reveal-mask-container { display: none; }
+    .reveal-content { position: relative; height: auto; }
+}
+
+
 
 /* Responsive adjustment for mobile */
 @media (max-width: 768px) {
