@@ -17,14 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Sprememba navigacije ob skrolanju
     const navbar = document.getElementById('mainNav');
-
-    //section mask
-    const wrapper = document.querySelector('.reveal-wrapper');
-    const mask1 = document.getElementById('mask-1');
-    const mask2 = document.getElementById('mask-2');
-    const mask3 = document.getElementById('mask-3');
-
-    if (!wrapper || !mask1) return;
     
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
@@ -36,29 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
             navbar.classList.add('navbar-dark');
             navbar.classList.remove('navbar-light');
         }
-
-        //section reveal
-        const rect = wrapper.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // 1. Calculate how far the top of the section has traveled past the bottom of the screen
-        const distanceFromBottom = windowHeight - 200 - rect.top;
-        
-        // If you want it even earlier, change 2 to 2.5.
-        let progress = distanceFromBottom / (windowHeight / 1); 
-        
-        // Clamp between 0 and 1
-        progress = Math.max(0, Math.min(1, progress));
-
-        // Column 1: Reveals immediately as it enters
-        mask1.style.transform = `scaleY(${1 - progress})`;
-        
-        // Column 2: Slight lag (0.1) 
-        const p2 = Math.max(0, (progress - 0.1) * 1.2);
-        mask2.style.transform = `scaleY(${1 - Math.min(1, p2)})`;
-        
-        const p3 = Math.max(0, (progress - 0.2) * 1.3);
-        mask3.style.transform = `scaleY(${1 - Math.min(1, p3)})`;
     });
 
     // Zapri mobilni meni ko kliknemo na povezavo
@@ -320,7 +289,6 @@ document.addEventListener("DOMContentLoaded", function() {
             modalImage.alt = imageAlt;
         });
     }
-
 });
 
 const aboutSection = document.querySelector('#o-nas');

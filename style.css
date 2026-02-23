@@ -42,7 +42,7 @@ h2 {
     font-size: var(--h2-size);
     text-transform: uppercase;
     letter-spacing: 0.1em; 
-    font-weight: 300; 
+    font-weight: 500; 
     text-align: center;
     margin-bottom: 2rem;
     position: relative;
@@ -1561,50 +1561,12 @@ header#home {
     transform: scale(1.1);
 }
 
-
-.reveal-wrapper {
-    position: relative;
-    width: 100%;
-    height: 150vh; /* Maximum height as requested */
-    overflow: hidden;
-    background-color: #fff;
+.enlarge-pull-left {  
+    margin-left: -15%;   
 }
-
-/* Push the content to fill the background */
-.reveal-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    z-index: 1;
-    padding: 60px 0;
-}
-
-/* The Brown Strips Overlay */
-.reveal-mask-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    z-index: 10; /* Higher Z-Index to cover the content */
-    pointer-events: none; /* Allows scrolling even if mouse is over mask */
-}
-
-.mask-strip {
-    flex: 1;
-    height: 100%;
-    background-color: #d1bca1; /* Light brown from your image */
-    transform-origin: top;
-    will-change: transform;
-}
-
-.strip-bottom {
-    transform-origin: bottom;
+.enlarge-pull-left img{
+    max-height: 45vh !important; 
+    max-width: 45vw !important;      
 }
 
 /* Desktop only: Hide reveal logic on mobile if it gets too cramped */
@@ -1744,5 +1706,19 @@ header#home {
     }
     .text-primary-custom{
         margin-top:20px;
+    }
+
+    .enlarge-pull-left {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .enlarge-pull-left {  
+        margin-left: 0%;   
+    }
+    .enlarge-pull-left img{
+        max-height: 90vh !important; 
+        max-width: 90vw !important;      
     }
 }
