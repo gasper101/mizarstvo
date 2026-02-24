@@ -16,18 +16,124 @@ document.body.style.overflow = 'hidden';
 document.addEventListener("DOMContentLoaded", function() {
     
     // Sprememba navigacije ob skrolanju
+    gsap.registerPlugin(ScrollTrigger);
+
+    const heroText = document.getElementById('heroText');
     const navbar = document.getElementById('mainNav');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-            navbar.classList.remove('navbar-dark');
-            navbar.classList.add('navbar-light');
-        } else {
-            navbar.classList.remove('scrolled');
-            navbar.classList.add('navbar-dark');
-            navbar.classList.remove('navbar-light');
+    const oNasSection = document.getElementById('o-nas');
+
+    let hasScrolledPast = false;
+
+    let mm = gsap.matchMedia();
+
+    //text reveal
+    if (heroText) {
+        const textContent = heroText.innerText;
+        heroText.innerHTML = ''; 
+        
+        let spans = [];
+        textContent.split(' ').forEach(word => {
+            const span = document.createElement('span');
+            span.innerText = word + ' '; 
+            span.style.opacity = 0.1; 
+            heroText.appendChild(span);
+            spans.push(span);
+        });
+
+        mm.add("(min-width: 99px)", () => {
+            
+            let textTl = gsap.timeline({ paused: true });
+            textTl.to(spans, {
+                opacity: 1, 
+                stagger: 0.1, 
+                ease: "none"
+            });
+
+            ScrollTrigger.create({
+                id: "heroIntro", 
+                trigger: "#domov", 
+                start: "top top", 
+                end: "+=150%", 
+                pin: true, 
+                scrub: 1, 
+                
+                onLeave: () => {
+                    hasScrolledPast = true; 
+                    gsap.set(spans, { opacity: 0.1 });
+                },
+                onUpdate: (self) => {
+                    if (!hasScrolledPast) {
+                        textTl.progress(self.progress);
+
+                    } else {
+                        textTl.progress(1 - self.progress);
+                    }
+                }
+            });
+            
+
+            return () => {
+                hasScrolledPast = false;
+            };
+        });
+
+        mm.add("(max-width: 900px)", () => {
+            gsap.set(spans, { opacity: 1 });
+        });
+    }
+
+    window.addEventListener("scroll", () => {
+        if (hasScrolledPast && window.scrollY <= 0) {
+            let introTrigger = ScrollTrigger.getById("heroIntro");
+            if (introTrigger) {
+                introTrigger.kill(true); 
+                gsap.set("#heroText span", { opacity: 1 }); 
+                ScrollTrigger.refresh(); 
+            }
         }
+    });
+
+    //change navbar
+    if (oNasSection && navbar) {
+        ScrollTrigger.create({
+            trigger: oNasSection, 
+            start: "top 80px", 
+            onEnter: () => {
+                navbar.classList.add('scrolled', 'navbar-light');
+                navbar.classList.remove('navbar-dark');
+            },
+            onLeaveBack: () => {
+                navbar.classList.remove('scrolled', 'navbar-light');
+                navbar.classList.add('navbar-dark');
+            }
+        });
+    }
+
+    //glitch
+    document.querySelectorAll('#mainNav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetSection = document.querySelector(targetId);
+            if (!targetSection) return;
+
+            e.preventDefault(); 
+
+            // Only kill the trigger if it actually exists (Desktop only)
+            let introTrigger = ScrollTrigger.getById("heroIntro");
+            if (introTrigger) {
+                introTrigger.kill(true);
+                gsap.set("#heroText span", { opacity: 1 });
+                hasScrolledPast = true; 
+                ScrollTrigger.refresh();
+            }
+
+            window.scrollTo({
+                top: targetSection.offsetTop,
+                behavior: 'smooth'
+            });
+        });
     });
 
     // Zapri mobilni meni ko kliknemo na povezavo
@@ -246,9 +352,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroSection = document.getElementById('domov');
     const imageProgressBar = document.getElementById('imageProgressBar');
     const rotatingImages = [
-        "url('slike/kuhinja_5.webp')", 
+        "url('slike/stopnice_11.webp')", 
         "url('slike/pisarna_3.webp')", 
-        "url('slike/stopnice_11.webp')" 
+        "url('slike/kuhinja_5.webp')" 
     ];
 
     let currentImageIndex = 0;
@@ -539,7 +645,6 @@ function animateDust() {
 
 createParticles();
 animateDust();
-
 /*custom miska
 document.addEventListener('DOMContentLoaded', () => {
     const dot = document.querySelector('.cursor-dot');

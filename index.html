@@ -38,6 +38,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 
     <link rel="stylesheet" href="style.css">
@@ -94,7 +96,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Domov</a>
+                        <a class="nav-link" href="index.html#domov">Domov</a>
                     </li>
 
                     <li class="nav-item">
@@ -188,12 +190,12 @@
         <canvas id="dustCanvas"></canvas>
         <div class="container text-center text-white position-relative">
             <h1 class="display-1 main-title mb-4">Mizarstvo Krebs</h1> 
-            <p class="lead mb-5">Mirna eleganca. Naravni materiali. Premišljena ergonomija. Smo butično mizarstvo, kjer les dobi značaj, prostor pa dušo.</p>
-            <a href="#storitve" class="btn btn-custom2 btn-lg">Naša ponudba</a>
+            <p class="lead mb-5" id="heroText">Mirna eleganca. Naravni materiali. Premišljena ergonomija. Smo butično mizarstvo, kjer les dobi značaj, prostor pa dušo.</p>
+            <a href="#storitve" class="btn btn-custom2 btn-lg" style="z-index: 1000 !important;">Naša ponudba</a>
         </div>
 
         <div class="progress-bar-container">
-            <div class="progress-bar-fill" id="imageProgressBar">
+            <div class="progress-bar-fill" id="imageProgressBar"></div>
         </div>
     </header>
 
@@ -549,7 +551,7 @@
         <!--<div class="gallery-knot gallery-drift"></div>-->
         <div class="container animate-on-scroll">
             <div class="text-center mb-5">
-                <h6 class="text-uppercase text-primary-custom">Portfolio</h6>
+                <h6 class="text-uppercase text-primary-custom">Galerija</h6>
                 <h2 class="section-title">Naši projekti</h2>
             </div>
             

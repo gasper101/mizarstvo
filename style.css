@@ -12,7 +12,7 @@
     --body-font: 'Montserrat', sans-serif;
 
     --wood-texture-opacity: 0.15;
-    --h1-size: clamp(2.5rem, 8vw, 4.5rem);
+    --h1-size: clamp(3.5rem, 9vw, 5.5rem);
     --h2-size: clamp(1.8rem, 5vw, 2.8rem);
 }
 
@@ -50,7 +50,15 @@ h2 {
 }
 
 h1{
-    color: white;
+    color: rgba(255, 255, 255, 1); /* Slightly higher opacity */
+    mix-blend-mode: overlay;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
+    font-weight: 900;
+}
+
+#heroText span {
+    opacity: 0.1; /* Makes the text dim before you scroll */
+    transition: opacity 0.1s ease; /* Smooth transition */
 }
 
 /* Navigacija */
@@ -446,7 +454,7 @@ h1{
 }
 
 .logo-img {
-    height: 60px; 
+    height: 70px; 
     transition: all 0.3s ease;
     width: auto; 
 }
@@ -458,7 +466,7 @@ h1{
 
 /* Prilagoditev logotipa ko je navigacija skrolana */
 .navbar.scrolled .logo-img {
-    height: 50px; /* Manjša višina ob skrolanju */
+    height: 65px; /* Manjša višina ob skrolanju */
 }
 
 /* Poskrbimo, da je 'brand' del navigacije centriran z logotipom, če je logotip manjsi */
@@ -1562,11 +1570,11 @@ header#home {
 }
 
 .enlarge-pull-left {  
-    margin-left: -15%;   
+    margin-left: -20%;   
 }
 .enlarge-pull-left img{
-    max-height: 45vh !important; 
-    max-width: 45vw !important;      
+    max-height: 40vh !important; 
+    max-width: 40vw !important;      
 }
 
 /* Desktop only: Hide reveal logic on mobile if it gets too cramped */
