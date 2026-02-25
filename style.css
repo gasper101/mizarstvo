@@ -12,7 +12,7 @@
     --body-font: 'Montserrat', sans-serif;
 
     --wood-texture-opacity: 0.15;
-    --h1-size: clamp(3.5rem, 9vw, 5.5rem);
+    --h1-size: clamp(4.5rem, 9vw, 6rem);
     --h2-size: clamp(1.8rem, 5vw, 2.8rem);
 }
 
