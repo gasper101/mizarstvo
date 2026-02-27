@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             spans.push(span);
         });
 
-        mm.add("(min-width: 99px)", () => {
+        mm.add("(min-width: 900px)", () => {
             
             let textTl = gsap.timeline({ paused: true });
             textTl.to(spans, {
@@ -94,9 +94,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     //change navbar
-    if (oNasSection && navbar) {
+    const firstContentSection = document.querySelector('section'); 
+    
+    if (firstContentSection && navbar) {
         ScrollTrigger.create({
-            trigger: oNasSection, 
+            trigger: firstContentSection, 
             start: "top 80px", 
             onEnter: () => {
                 navbar.classList.add('scrolled', 'navbar-light');
@@ -190,54 +192,69 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    if (!subpages.includes(currentPage) && window.innerWidth >= 992) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 
-        };
+    
 
-        const sections = document.querySelectorAll('.section-padding, .hero-section, .page-header');
-        
-        const sectionObserver = new IntersectionObserver(entries => {
+    // 2. LOGIKA ZA AKTIVNE POVEZAVE V MENIJU (UNIVERZALNO)
+    const isHomePage = document.getElementById('domov') !== null;
+    
+    if (window.innerWidth >= 992) {
+        const sections = document.querySelectorAll('section, header');
+
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                const id = entry.target.getAttribute('id');
-                // Uporabimo 'let' da lahko kasneje spremenimo navLink
-                let navLink = document.querySelector(`.nav-link[href="index.html#${id}"], .nav-link[href="#${id}"]`);
-                
                 if (entry.isIntersecting) {
-                    // Odstrani aktivni razred z vseh povezav
+                    const target = entry.target;
+                    const tagName = target.tagName.toLowerCase();
+                    const id = target.id || ""; 
+                    
+                    const isHeader = tagName === 'header' || target.classList.contains('page-header') || id === 'domov';
+
+                    // Najprej očistimo vse active razrede
                     document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item').forEach(link => {
                         link.classList.remove('active');
                     });
-                    
-                    // *** KLJUČNI POPRAVEK: Ročno poiščemo 'Storitve' link ***
-                    if (id === 'storitve') {
-                        // Poišči glavno povezavo 'Storitve' preko strukture (.nav-item.dropdown > .nav-link)
-                        navLink = document.querySelector('.nav-item.dropdown > .nav-link');
+
+                    // Če smo na headerju (tudi na podstraneh), pustimo meni neoznačen
+                    if (isHeader) {
+                        return; 
                     }
 
-                    // Določi aktivno povezavo
-                    if (navLink) {
-                        navLink.classList.add('active');
-                        
-                    }
-                    
-                    // Posebna obravnava za AKTIVIRANJE PODLINKOV, če je aktivna sekcija podrejena dropdown meniju
-                    const parentDropdown = navLink ? navLink.closest('.dropdown') : null;
-                    if (parentDropdown) {
-                        // Ta blok ponovno aktivira nadrejeni link (Storitve), kar je redundantno ampak varno
-                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    // Če smo drseli dol na vsebino:
+                    if (isHomePage) {
+                        // LOGIKA ZA PRVO STRAN
+                        if (id) {
+                            let navLink = document.querySelector(`.navbar-nav a[href="#${id}"]`) || 
+                                          document.querySelector(`.navbar-nav a[href="index.html#${id}"]`);
+                            
+                            if (id === 'storitve') {
+                                navLink = document.querySelector('.nav-item.dropdown > .nav-link');
+                            }
+
+                            if (navLink) {
+                                navLink.classList.add('active');
+                                const parentDropdown = navLink.closest('.dropdown');
+                                if (parentDropdown) {
+                                    const parentLink = parentDropdown.querySelector('.nav-link');
+                                    if (parentLink) parentLink.classList.add('active');
+                                }
+                            }
+                        }
+                    } else {
+                        // LOGIKA ZA PODSTRANI (kuhinje, stopnice...)
+                        // Fiksno označi "Produkti-Proizvodi", saj smo na vsebini podstrani
+                        const productDropdown = document.querySelector('.nav-item.dropdown > .nav-link');
+                        if (productDropdown) {
+                            productDropdown.classList.add('active');
+                        }
                     }
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.2 
+        });
 
-        // Začnemo opazovati vse sekcije
         sections.forEach(section => {
-            if (section.getAttribute('id')) {
-                sectionObserver.observe(section);
-            }
+            observer.observe(section);
         });
     }
     //galerija
