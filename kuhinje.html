@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
-<body>
+<body class="bg-studio-textured">
     <div id="preloader">
         <div class="preloader-content">
             <img src="mizarstvo_krebs_nobg.png" alt="Mizarstvo Krebs" class="preloader-logo">
@@ -127,8 +127,9 @@
 
     <header class="page-header d-flex align-items-center">
         <div class="overlay"></div>
+        <canvas id="dustCanvas"></canvas>
         <div class="container text-center text-white position-relative">
-            <h1 class="display-3">Kuhinje po meri</h1>
+            <h1 class="display-3 main-title-other">Kuhinje po meri</h1>
             <p class="lead">Natančno načrtovanje in kakovostna izvedba za kuhinjo po vaših željah.</p>
         </div>
     </header>
@@ -149,14 +150,22 @@
         </div>
     </section>
 
-    <section class="section-padding bg-white">
+    <section class="parallax-separator d-flex align-items-center justify-content-center" style="background-image: url('slike/kuhinja_11.webp'); min-height: 40vh; position: relative;">
+        <div class="overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);"></div>
+        <div class="text-center text-white z-2 position-relative">
+            <h2 class="mb-4 text-white" style="font-size: 2.5rem;">Detajli, ki naredijo razliko</h2>
+            <p class="lead">Kvaliteta, ki jo čutite ob vsakem dotiku.</p>
+        </div>
+    </section>
+
+    <section class="section-padding bg-pure-white overflow-hidden">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">Kater stil kuhinje iščete?</h2>
                 <p class="text-muted">Specializirani smo za različne stile in izvedbe, prilagojene vašim potrebam.</p>
             </div>
 
-            <div id="visok-razred" class="row align-items-center mb-5 pb-4 border-bottom">
+            <div id="visok-razred" class="row align-items-center mb-5 pb-5 position-relative shape-right pt-4">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="slike/kuhinja_2.webp" alt="Kuhinje visokokakovostnega razreda" class="img-fluid shadow rounded" width="600" height="400" loading="lazy">
                 </div>
@@ -172,7 +181,7 @@
                 </div>
             </div>
 
-            <div id="masiva" class="row align-items-center mb-5 pb-4 border-bottom">
+            <div id="masiva" class="row align-items-center mb-5 pb-5 position-relative shape-left pt-4">
                 <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
                     <img src="slike/masiva_7.webp" alt="Masivna lesena kuhinja" class="img-fluid shadow rounded" width="600" height="400" loading="lazy">
                 </div>
@@ -184,7 +193,7 @@
                 </div>
             </div>
 
-            <div id="moderne" class="row align-items-center">
+            <div id="moderne" class="row align-items-center position-relative shape-right pt-4 pb-5">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="slike/kuhinja_6.webp" alt="Moderne klasične kuhinje" class="img-fluid shadow rounded" width="600" height="400" loading="lazy">
                 </div>
@@ -197,16 +206,16 @@
         </div>
     </section>
 
-    <section class="section-padding bg-light text-center">
+    <section class="section-padding bg-dark text-center">
         <div class="container">
-            <h2 class="section-title">Oglejte si več projektov v galeriji</h2>
+            <h2 class="section-title-dark">Oglejte si več projektov v galeriji</h2>
             <p class="lead text-muted mb-4">Želite videti več naših del? Obiščite celotno galerijo!</p>
             <a href="index.html#galerija" class="btn btn-lg btn-custom align-self-center">Odpri celotno galerijo</a>
         </div>
     </section>
 
 
-    <section class="section-padding position-relative">
+    <section class="section-padding position-relative bg-dark">
         <a href="#" class="scroll-to-top" id="scrollToTopBtn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="width: 1.5em; height: 1.5em; fill:white;"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M297.4 169.4C309.9 156.9 330.2 156.9 342.7 169.4L534.7 361.4C547.2 373.9 547.2 394.2 534.7 406.7C522.2 419.2 501.9 419.2 489.4 406.7L320 237.3L150.6 406.6C138.1 419.1 117.8 419.1 105.3 406.6C92.8 394.1 92.8 373.8 105.3 361.3L297.3 169.3z"/></svg>
         </a>

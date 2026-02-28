@@ -14,6 +14,10 @@
     --wood-texture-opacity: 0.15;
     --h1-size: clamp(4.5rem, 9vw, 6rem);
     --h2-size: clamp(1.8rem, 5vw, 2.8rem);
+
+    --studio-white-pure: #ffffff;
+    --studio-dark-wood: #2b2520; 
+    --studio-beige-ghost: #F5F2ED;
 }
 
 body {
@@ -51,7 +55,6 @@ h2 {
 
 h1{
     color: rgba(255, 255, 255, 1); /* Slightly higher opacity */
-    mix-blend-mode: overlay;
     -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
     font-weight: 900;
 }
@@ -189,7 +192,16 @@ h1{
 /* Typography Refinement */
 .main-title {
     font-family: var(--heading-font);
-    font-weight: 600; /* Lighter weight is often more elegant for large text */
+    font-weight: 600;
+    font-size: var(--h1-size);
+    letter-spacing: 0.0em;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    mix-blend-mode: overlay;
+}
+
+.main-title-other {
+    font-family: var(--heading-font);
+    font-weight: 600;
     font-size: var(--h1-size);
     letter-spacing: 0.0em;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
@@ -1577,6 +1589,46 @@ header#home {
     max-width: 40vw !important;      
 }
 
+
+
+.bg-pure-white {
+    background-color: var(--studio-white-pure) !important;
+}
+
+/* Background and Text Class for Dark Wood */
+.bg-dark-wood {
+    background-color: var(--studio-dark-wood) !important;
+    color: #ffffff; 
+}
+/* Ensure headings and paragraphs inside a dark wood section also invert color */
+.bg-dark-wood h2, .bg-dark-wood h3, .bg-dark-wood p {
+    color: #ffffff !important;
+}
+
+/* 2. Texture Background */
+/* This will provide the subtle, high-end stone/plaster texture for the page edges */
+.bg-studio-textured {
+    background-image: url('slike/tekstura_omet.webp'); /* Replace with your actual texture image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: for a subtle parallax feel */
+}
+
+/* 3. Refined Spacing Utilities */
+/* These will ensure the sections have standard, ample spacing (similar to 'section-padding') */
+.studio-p-large {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+.studio-mb-large {
+    margin-bottom: 120px;
+}
+
+.section-title-dark{
+    color:#fff !important;
+}
+
+
 /* Desktop only: Hide reveal logic on mobile if it gets too cramped */
 @media (max-width: 991px) {
     .reveal-wrapper { height: auto; }
@@ -1606,7 +1658,7 @@ header#home {
         left: 0 !important; 
         right: auto !important; 
 
-        top: 150% !important; 
+        top: 133% !important; 
         
         width: auto; 
         margin-top: 0; 
