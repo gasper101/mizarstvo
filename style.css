@@ -217,7 +217,7 @@ h1 {
     transform-style: preserve-3d;
 
     /* Smooth linear transition works best for infinite loops */
-    animation: kenburns-native 30s linear infinite alternate;
+    animation: kenburns-native 15s linear infinite alternate;
 }
 
 @keyframes kenburns-native {
@@ -226,7 +226,7 @@ h1 {
     }
 
     100% {
-        transform: scale(1.05) translateZ(0);
+        transform: scale(1.15) translateZ(0);
         /* 5% zoom avoids pixelation/blur and dizzy feeling */
     }
 }
