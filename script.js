@@ -39,16 +39,31 @@ document.addEventListener("DOMContentLoaded", function () {
             span.style.transform = 'translateY(20px)'; // Added for float effect
             span.style.display = 'inline-block'; // Necessary for transform to work on span
             span.style.whiteSpace = 'pre'; // Preserves the trailing space
+            span.style.filter = 'blur(10px)'; // Start blurred (Idea 2)
             heroText.appendChild(span);
             spans.push(span);
         });
 
         mm.add("(min-width: 900px)", () => {
 
+            // Idea 3: Initial Entry Animation (Title and button enter immediately)
+            gsap.to(".main-title, .btn-custom2", {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.2, // Wait slightly after load
+                onStart: () => {
+                    gsap.set(".main-title, .btn-custom2", { visibility: "visible", y: 20 });
+                }
+            });
+
             let textTl = gsap.timeline({ paused: true });
             textTl.to(spans, {
                 opacity: 1,
                 y: 0, // Animate back to original position
+                filter: 'blur(0px)', // Un-blur as it moves
                 stagger: 0.1,
                 ease: "power2.out" // Use a nicer ease for the float
             });
@@ -63,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 onLeave: () => {
                     hasScrolledPast = true;
-                    gsap.set(spans, { opacity: 0.1, y: 20 });
+                    gsap.set(spans, { opacity: 0.1, y: 20, filter: 'blur(10px)' });
                 },
                 onUpdate: (self) => {
                     if (!hasScrolledPast) {
@@ -82,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         mm.add("(max-width: 900px)", () => {
-            gsap.set(spans, { opacity: 1, y: 0 });
+            gsap.set(spans, { opacity: 1, y: 0, filter: 'blur(0px)' });
+            gsap.set(".main-title, .btn-custom2", { opacity: 1, visibility: "visible", y: 0 });
         });
     }
 
@@ -600,7 +616,7 @@ const canvas = document.getElementById('dustCanvas');
 const ctx = canvas.getContext('2d');
 
 let particles = [];
-const particleCount = 80; // Število delcev (manj je bolj elegantno)
+const particleCount = 85; // Število delcev (manj je bolj elegantno)
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -618,7 +634,7 @@ class Particle {
     init() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.5; // Zelo majhni delci
+        this.size = Math.random() * 1.8 + 0.5; // Zelo majhni delci
         this.speedX = Math.random() * 0.5 - 0.25;
         this.speedY = Math.random() * 0.4 + 0.1; // Padajo rahlo navzdol
         this.opacity = Math.random() * 0.5;
@@ -640,7 +656,7 @@ class Particle {
 
         // Subtilno utripanje (twinkle)
         this.opacity += this.fadeSpeed;
-        if (this.opacity > 0.7 || this.opacity < 0.1) {
+        if (this.opacity > 0.78 || this.opacity < 0.1) {
             this.fadeSpeed *= -1;
         }
     }
