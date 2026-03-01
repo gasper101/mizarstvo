@@ -1,9 +1,9 @@
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const preloader = document.getElementById('preloader');
-    
+
     setTimeout(() => {
         preloader.classList.add('loader-hidden');
-        
+
         setTimeout(() => {
             document.body.style.overflow = 'auto';
         }, 800);
@@ -13,8 +13,8 @@ window.addEventListener('load', function() {
 // Medtem ko se nalaga, preprečimo skrolanje
 document.body.style.overflow = 'hidden';
 
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
+
     // Sprememba navigacije ob skrolanju
     gsap.registerPlugin(ScrollTrigger);
 
@@ -29,37 +29,41 @@ document.addEventListener("DOMContentLoaded", function() {
     //text reveal
     if (heroText) {
         const textContent = heroText.innerText;
-        heroText.innerHTML = ''; 
-        
+        heroText.innerHTML = '';
+
         let spans = [];
         textContent.split(' ').forEach(word => {
             const span = document.createElement('span');
-            span.innerText = word + ' '; 
-            span.style.opacity = 0.1; 
+            span.innerText = word + ' ';
+            span.style.opacity = 0.1;
+            span.style.transform = 'translateY(20px)'; // Added for float effect
+            span.style.display = 'inline-block'; // Necessary for transform to work on span
+            span.style.whiteSpace = 'pre'; // Preserves the trailing space
             heroText.appendChild(span);
             spans.push(span);
         });
 
         mm.add("(min-width: 900px)", () => {
-            
+
             let textTl = gsap.timeline({ paused: true });
             textTl.to(spans, {
-                opacity: 1, 
-                stagger: 0.1, 
-                ease: "none"
+                opacity: 1,
+                y: 0, // Animate back to original position
+                stagger: 0.1,
+                ease: "power2.out" // Use a nicer ease for the float
             });
 
             ScrollTrigger.create({
-                id: "heroIntro", 
-                trigger: "#domov", 
-                start: "top top", 
-                end: "+=150%", 
-                pin: true, 
-                scrub: 1, 
-                
+                id: "heroIntro",
+                trigger: "#domov",
+                start: "top top",
+                end: "+=150%",
+                pin: true,
+                scrub: 1,
+
                 onLeave: () => {
-                    hasScrolledPast = true; 
-                    gsap.set(spans, { opacity: 0.1 });
+                    hasScrolledPast = true;
+                    gsap.set(spans, { opacity: 0.1, y: 20 });
                 },
                 onUpdate: (self) => {
                     if (!hasScrolledPast) {
@@ -70,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
             });
-            
+
 
             return () => {
                 hasScrolledPast = false;
@@ -78,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         mm.add("(max-width: 900px)", () => {
-            gsap.set(spans, { opacity: 1 });
+            gsap.set(spans, { opacity: 1, y: 0 });
         });
     }
 
@@ -86,20 +90,20 @@ document.addEventListener("DOMContentLoaded", function() {
         if (hasScrolledPast && window.scrollY <= 0) {
             let introTrigger = ScrollTrigger.getById("heroIntro");
             if (introTrigger) {
-                introTrigger.kill(true); 
-                gsap.set("#heroText span", { opacity: 1 }); 
-                ScrollTrigger.refresh(); 
+                introTrigger.kill(true);
+                gsap.set("#heroText span", { opacity: 1, y: 0 });
+                ScrollTrigger.refresh();
             }
         }
     });
 
     //change navbar
-    const firstContentSection = document.querySelector('section'); 
-    
+    const firstContentSection = document.querySelector('section');
+
     if (firstContentSection && navbar) {
         ScrollTrigger.create({
-            trigger: firstContentSection, 
-            start: "top 80px", 
+            trigger: firstContentSection,
+            start: "top 80px",
             onEnter: () => {
                 navbar.classList.add('scrolled', 'navbar-light');
                 navbar.classList.remove('navbar-dark');
@@ -113,21 +117,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //glitch
     document.querySelectorAll('#mainNav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
             const targetSection = document.querySelector(targetId);
             if (!targetSection) return;
 
-            e.preventDefault(); 
+            e.preventDefault();
 
             // Only kill the trigger if it actually exists (Desktop only)
             let introTrigger = ScrollTrigger.getById("heroIntro");
             if (introTrigger) {
                 introTrigger.kill(true);
-                gsap.set("#heroText span", { opacity: 1 });
-                hasScrolledPast = true; 
+                gsap.set("#heroText span", { opacity: 1, y: 0 });
+                hasScrolledPast = true;
                 ScrollTrigger.refresh();
             }
 
@@ -140,12 +144,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Zapri mobilni meni ko kliknemo na povezavo
     const linksToCloseMenu = document.querySelectorAll('.nav-link:not([data-bs-toggle="dropdown"]), .dropdown-item');
-    
+
     const menuToggle = document.getElementById('navbarNav');
 
     // Preverimo varnostno, če element obstaja
     if (menuToggle) {
-        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+        const bsCollapse = new bootstrap.Collapse(menuToggle, { toggle: false });
 
         linksToCloseMenu.forEach((l) => {
             l.addEventListener('click', () => {
@@ -192,11 +196,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    
+
 
     // 2. LOGIKA ZA AKTIVNE POVEZAVE V MENIJU (UNIVERZALNO)
     const isHomePage = document.getElementById('domov') !== null;
-    
+
     if (window.innerWidth >= 992) {
         const sections = document.querySelectorAll('section, header');
 
@@ -205,8 +209,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     const tagName = target.tagName.toLowerCase();
-                    const id = target.id || ""; 
-                    
+                    const id = target.id || "";
+
                     const isHeader = tagName === 'header' || target.classList.contains('page-header') || id === 'domov';
 
                     // Najprej očistimo vse active razrede
@@ -216,16 +220,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     // Če smo na headerju (tudi na podstraneh), pustimo meni neoznačen
                     if (isHeader) {
-                        return; 
+                        return;
                     }
 
                     // Če smo drseli dol na vsebino:
                     if (isHomePage) {
                         // LOGIKA ZA PRVO STRAN
                         if (id) {
-                            let navLink = document.querySelector(`.navbar-nav a[href="#${id}"]`) || 
-                                          document.querySelector(`.navbar-nav a[href="index.html#${id}"]`);
-                            
+                            let navLink = document.querySelector(`.navbar-nav a[href="#${id}"]`) ||
+                                document.querySelector(`.navbar-nav a[href="index.html#${id}"]`);
+
                             if (id === 'storitve') {
                                 navLink = document.querySelector('.nav-item.dropdown > .nav-link');
                             }
@@ -250,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }, {
-            threshold: 0.2 
+            threshold: 0.2
         });
 
         sections.forEach(section => {
@@ -267,12 +271,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const carouselContainer = document.getElementById('carousel-images-container');
 
         allGalleryItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const title = this.getAttribute('data-title');
-                const imagesString = this.getAttribute('data-images'); 
-                
+                const imagesString = this.getAttribute('data-images');
+
                 if (!imagesString) return;
-                
+
                 const images = imagesString.split(',');
 
                 if (modalTitle) modalTitle.textContent = title;
@@ -291,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 images.forEach((imgUrl, index) => {
                     const isActive = index === 0 ? 'active' : '';
                     const loadingAttr = index === 0 ? 'eager' : 'lazy';
-                    
+
                     slidesHtml += `
                         <div class="carousel-item ${isActive}">
                             <img src="${imgUrl.trim()}" 
@@ -326,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Dodaj razred, ko je element viden
                     entry.target.classList.add('is-visible');
                     // Preneha opazovati element po animaciji
-                    observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
@@ -341,11 +345,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //to the top button
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    
+
     // Če gumb obstaja, dodamo logiko
     if (scrollToTopBtn) {
         // A. Prikaži/skrij gumb
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             // Prikažemo, ko je skrol večji od 300px
             if (window.scrollY > 300) {
                 scrollToTopBtn.classList.add('show');
@@ -355,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // B. Premik na vrh ob kliku (gladka animacija)
-        scrollToTopBtn.addEventListener('click', function(e) {
+        scrollToTopBtn.addEventListener('click', function (e) {
             e.preventDefault(); // Prepreči skok na #
             window.scrollTo({
                 top: 0,
@@ -369,16 +373,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroSection = document.getElementById('domov');
     const imageProgressBar = document.getElementById('imageProgressBar');
     const rotatingImages = [
-        "url('slike/stopnice_11.webp')", 
-        "url('slike/pisarna_3.webp')", 
-        "url('slike/kuhinja_5.webp')" 
+        "url('slike/stopnice_11.webp')",
+        "url('slike/pisarna_3.webp')",
+        "url('slike/kuhinja_5.webp')"
     ];
 
     let currentImageIndex = 0;
 
     function changeBackgroundImage() {
-        if (!heroSection && !imageProgressBar) return; 
-        
+        if (!heroSection && !imageProgressBar) return;
+
         imageProgressBar.classList.remove('running');
         void imageProgressBar.offsetWidth;
         imageProgressBar.classList.add('running');
@@ -390,10 +394,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 4. Zaženemo menjavo slik
     if (heroSection) {
-        changeBackgroundImage(); 
-        
+        changeBackgroundImage();
+
         // Nastavimo interval menjave (npr. vsakih 6 sekund = 6000 milisekund)
-        setInterval(changeBackgroundImage, 6000); 
+        setInterval(changeBackgroundImage, 6000);
     }
 
 
@@ -403,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (lightboxModal) {
         lightboxModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            
+
             var imageSrc = button.getAttribute('data-bs-img-src');
             var imageAlt = button.getAttribute('data-bs-img-alt');
 
@@ -424,16 +428,16 @@ if (aboutSection && ringPaths.length > 0) {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const rect = aboutSection.getBoundingClientRect();
-                
+
                 // Tvoja originalna matematika
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
 
                 ringPaths.forEach((path, index) => {
-                    const depth = (index + 1) * 6; 
+                    const depth = (index + 1) * 6;
                     const rotate = (index + 1) * 0.7;
 
-    
+
                     path.style.transition = 'transform 0.4s ease-out';
                     path.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0) rotate(${x * rotate}deg)`;
                 });
@@ -474,7 +478,7 @@ const knot = document.querySelector('.gallery-knot');
 if (gallerySection && knot) {
     gallerySection.addEventListener('mousemove', (e) => {
         const rect = gallerySection.getBoundingClientRect();
-   
+
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
         knot.style.transform = `translate(${x * 30}px, ${y * 20}px) scale(1.03) rotate(${x * 2}deg)`;
@@ -489,8 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.reveal, .process-step-row');
 
     const observerOptions = {
-        threshold: 0.15, 
-        rootMargin: "0px 0px -50px 0px" 
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -536,29 +540,29 @@ document.querySelectorAll('h2').forEach(h2 => {
 
 const magneticButtons = document.querySelectorAll('.btn-custom2');
 
-window.addEventListener('mousemove', function(e) {
+window.addEventListener('mousemove', function (e) {
     magneticButtons.forEach(btn => {
         const rect = btn.getBoundingClientRect();
 
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        
+
         const distanceX = e.clientX - centerX;
         const distanceY = e.clientY - centerY;
-        
+
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        
+
         //kk blizo v px
-        const proximity = 120; 
+        const proximity = 120;
 
         if (distance < proximity) {
             // Moč efekta (manjša številka = bolj subtilno, poskusi 0.1 ali 0.15)
-            const strength = 0.1; 
+            const strength = 0.1;
             const x = distanceX * strength;
             const y = distanceY * strength;
 
             btn.style.transform = `translate(${x}px, ${y}px)`;
-            btn.style.transition = 'transform 0.1s ease-out'; 
+            btn.style.transition = 'transform 0.1s ease-out';
         } else {
             btn.style.transform = 'translate(0px, 0px)';
             btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
@@ -567,19 +571,19 @@ window.addEventListener('mousemove', function(e) {
 });
 
 const lenis = new Lenis({
-  duration: 1.2,     // Dolžina trajanja skrola (v sekundah)
-  lerp: 0.1,         // Nižje je bolj "gumijasto", višje je bolj odzivno (poskusi 0.1 ali 0.15)
-  wheelMultiplier: 1, // Moč koleščka na miški
-  orientation: 'vertical',
-  gestureOrientation: 'vertical',
-  smoothWheel: true,
-  smoothTouch: false, // IZKLJUČI na touch napravah, da ne bo laga
-  touchMultiplier: 2,
+    duration: 1.2,     // Dolžina trajanja skrola (v sekundah)
+    lerp: 0.1,         // Nižje je bolj "gumijasto", višje je bolj odzivno (poskusi 0.1 ali 0.15)
+    wheelMultiplier: 1, // Moč koleščka na miški
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    smoothTouch: false, // IZKLJUČI na touch napravah, da ne bo laga
+    touchMultiplier: 2,
 });
 
 function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
+    lenis.raf(time);
+    requestAnimationFrame(raf);
 }
 
 requestAnimationFrame(raf);
@@ -651,7 +655,7 @@ function createParticles() {
 
 function animateDust() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     particles.forEach(particle => {
         particle.update();
         particle.draw();
