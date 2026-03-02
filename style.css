@@ -493,11 +493,30 @@ h1 {
 /* --- STILI ZA PODSTRAN KUHINJE --- */
 .page-header {
     height: 100vh;
-    /* Manjša višina kot na prvi strani */
-    background: url('slike/kuhinja_4.webp') no-repeat center center/cover;
     position: relative;
-    margin-top: 0px;
-    /* Da ne skrijemo pod navbar */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    /* Fallback */
+}
+
+.page-header::before {
+    content: "";
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    right: -5%;
+    bottom: -5%;
+    z-index: 0;
+
+    /* Inherits the background-image set inline on the header element */
+    background-image: inherit;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    animation: kenburns-native 25s ease-out infinite alternate;
 }
 
 .step-number {
@@ -1820,7 +1839,7 @@ header#home {
 }
 
 .enlarge-pull-left {
-    margin-left: -15%;
+    margin-left: -5%;
     transform: translateX(-15%);
 }
 
