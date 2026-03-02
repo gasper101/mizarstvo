@@ -451,6 +451,35 @@ document.addEventListener("DOMContentLoaded", function () {
             modalImage.alt = imageAlt;
         });
     }
+
+    // Contact Form Handler for mailto substitution
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const inputs = contactForm.querySelectorAll('input:not([type="checkbox"]), textarea');
+            const name = inputs[0]?.value || '';
+            const email = inputs[1]?.value || '';
+            const subjectInput = inputs[2]?.value || 'Spletno povpraševanje';
+            const message = inputs[3]?.value || '';
+
+            const receiver = "mizarstvokrebs@gmail.com";
+            const subject = encodeURIComponent(subjectInput + " - " + name);
+            const body = encodeURIComponent(
+                "Ime: " + name + "\n" +
+                "Email: " + email + "\n\n" +
+                "Sporočilo:\n" + message
+            );
+
+            window.location.href = `mailto:${receiver}?subject=${subject}&body=${body}`;
+
+            // Optional: reset form after a short delay
+            setTimeout(() => {
+                contactForm.reset();
+            }, 500);
+        });
+    }
 });
 
 const aboutSection = document.querySelector('#o-nas');
