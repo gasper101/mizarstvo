@@ -1,13 +1,29 @@
 window.addEventListener('load', function () {
     const preloader = document.getElementById('preloader');
 
-    setTimeout(() => {
-        preloader.classList.add('loader-hidden');
-
+    if (preloader) {
         setTimeout(() => {
-            document.body.style.overflow = 'auto';
-        }, 800);
-    }, 1000);
+            preloader.classList.add('loader-hidden');
+
+            setTimeout(() => {
+                document.body.style.overflow = 'auto';
+
+                // Sedaj je skrolanje omogočeno, skočimo na hash
+                if (window.location.hash) {
+                    setTimeout(() => {
+                        lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
+                    }, 50); // Zelo kratek zamik za osvežitev layouta
+                }
+            }, 800);
+        }, 1000);
+    } else {
+        document.body.style.overflow = 'auto';
+        if (window.location.hash) {
+            setTimeout(() => {
+                lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
+            }, 100);
+        }
+    }
 });
 
 // Medtem ko se nalaga, preprečimo skrolanje
@@ -639,17 +655,7 @@ document.querySelectorAll('a[href*="#"]').forEach(anchor => {
     });
 });
 
-// Ko pridemo z druge strani in imamo hash v URL-ju, skočimo na pravo sekcijo
-window.addEventListener('load', () => {
-    if (window.location.hash) {
-        setTimeout(() => {
-            lenis.scrollTo(window.location.hash, {
-                offset: -50,
-                duration: 0.1 // Zelo hiter (ali takojšen) skok
-            });
-        }, 150); // minimalen zamik, da lenis izračuna dimenzije
-    }
-});
+
 
 
 
