@@ -132,29 +132,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //glitch
-    document.querySelectorAll('#mainNav a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('#mainNav a[href*="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            const href = this.getAttribute('href');
+            if (!href) return;
 
-            const targetSection = document.querySelector(targetId);
-            if (!targetSection) return;
-
-            e.preventDefault();
+            const [path, hash] = href.split('#');
+            // If the anchor points to another page, don't do anything here (let browser navigate)
+            if (path && !window.location.pathname.endsWith(path) && !(path === 'index.html' && window.location.pathname.endsWith('/'))) return;
+            if (!hash) return;
 
             // Only kill the trigger if it actually exists (Desktop only)
             let introTrigger = ScrollTrigger.getById("heroIntro");
-            if (introTrigger) {
+            if (introTrigger && hash !== 'domov') {
                 introTrigger.kill(true);
                 gsap.set("#heroText span", { opacity: 1, y: 0 });
                 hasScrolledPast = true;
                 ScrollTrigger.refresh();
             }
 
-            window.scrollTo({
-                top: targetSection.offsetTop,
-                behavior: 'smooth'
-            });
+            // The actual scrolling is now handled universally by the lenis scrollTo click listener below
         });
     });
 
@@ -593,22 +590,67 @@ window.addEventListener('mousemove', function (e) {
 });
 
 const lenis = new Lenis({
-    duration: 1.2,     // Dolžina trajanja skrola (v sekundah)
-    lerp: 0.1,         // Nižje je bolj "gumijasto", višje je bolj odzivno (poskusi 0.1 ali 0.15)
-    wheelMultiplier: 1, // Moč koleščka na miški
+    duration: 1.2,
+    lerp: 0.1,
+    wheelMultiplier: 1,
     orientation: 'vertical',
     gestureOrientation: 'vertical',
     smoothWheel: true,
-    smoothTouch: false, // IZKLJUČI na touch napravah, da ne bo laga
+    smoothTouch: false,
     touchMultiplier: 2,
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
+// 1. Integracija Lenis s ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
 
-requestAnimationFrame(raf);
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
+// 2. Nadomestitev sidrišč z Lenis scrollTo funkcijo (tudi index.html#sidro)
+document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href) return;
+
+        const [path, hash] = href.split('#');
+
+        // Preverimo, ali smo že na ciljni strani
+        const currentPath = window.location.pathname;
+        const isSamePage = !path || currentPath.endsWith(path) || (path === 'index.html' && (currentPath.endsWith('/') || currentPath === ''));
+
+        // Če smo na isti strani in imamo hash, uporabimo lenis za gladek skok
+        if (isSamePage && hash) {
+            e.preventDefault();
+
+            if (hash === 'top' || this.classList.contains('scroll-to-top')) {
+                lenis.scrollTo(0);
+            } else {
+                // Počakamo malo če morda še ni renderirano, ampak običajno ni potrebno
+                lenis.scrollTo('#' + hash, {
+                    offset: -50,
+                    duration: 1.5
+                });
+            }
+        }
+        // V nasprotnem primeru pustimo brskalniku, da naloži drugo stran
+    });
+});
+
+// Ko pridemo z druge strani in imamo hash v URL-ju, skočimo na pravo sekcijo
+window.addEventListener('load', () => {
+    if (window.location.hash) {
+        setTimeout(() => {
+            lenis.scrollTo(window.location.hash, {
+                offset: -50,
+                duration: 0.1 // Zelo hiter (ali takojšen) skok
+            });
+        }, 150); // minimalen zamik, da lenis izračuna dimenzije
+    }
+});
+
 
 
 //floating particles
@@ -675,7 +717,12 @@ function createParticles() {
     }
 }
 
+let isDustVisible = true;
+let animationFrameId;
+
 function animateDust() {
+    if (!isDustVisible) return; // Optimizacija: Ne risi, ce ni vidno
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(particle => {
@@ -683,11 +730,30 @@ function animateDust() {
         particle.draw();
     });
 
-    requestAnimationFrame(animateDust);
+    animationFrameId = requestAnimationFrame(animateDust);
 }
 
 createParticles();
-animateDust();
+
+// Optimizacija: Opazuj hero sekcijo in ustavi animacijo, ko ni vidna
+const heroSectionDust = document.getElementById('domov');
+if (heroSectionDust) {
+    const dustObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                isDustVisible = true;
+                animateDust();
+            } else {
+                isDustVisible = false;
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            }
+        });
+    }, { threshold: 0 });
+
+    dustObserver.observe(heroSectionDust);
+} else {
+    animateDust(); // Fallback, ce hero sekcija ni najdena
+}
 /*custom miska
 document.addEventListener('DOMContentLoaded', () => {
     const dot = document.querySelector('.cursor-dot');

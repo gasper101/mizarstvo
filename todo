@@ -1,13 +1,3 @@
--select images
--images to webp
--strip metadata
--put images in my website
--use lazy load
--srcset for responsive sizing
--fixed size
--alt 
-
-
 previous scores
 MOBILE:
 -69 performance (blocking requests, image delivery, first + largest content)
