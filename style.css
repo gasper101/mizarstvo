@@ -1072,6 +1072,7 @@ footer a:hover {
     opacity: 0.3;
     /* Keeps it premium and subtle */
     transition: transform 0.8s ease-out;
+    will-change: transform;
 }
 
 .wood-stump2 {
@@ -1207,6 +1208,8 @@ footer a:hover {
     transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
     pointer-events: none;
     /* Keep this so they don't block button clicks */
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* 2. When the user hovers over the SECTION, animate the BACKGROUND child */
@@ -1229,6 +1232,8 @@ footer a:hover {
 .viz-stump {
     transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
     pointer-events: none;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 #vizualizacija:hover .viz-stump {
@@ -1529,6 +1534,7 @@ html.lenis body {
     transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
         filter 0.5s ease;
     display: block;
+    will-change: transform, filter;
 }
 
 .reveal-box::after {
@@ -1731,6 +1737,8 @@ header#home {
     /* Črno-belo kot na tvoji sliki */
     transition: all 0.8s ease;
     transform: scale(1);
+    will-change: transform, filter;
+    backface-visibility: hidden;
 }
 
 .gallery-card:hover .card-bg {

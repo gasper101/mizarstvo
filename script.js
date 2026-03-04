@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
             span.style.display = 'inline-block'; // Necessary for transform to work on span
             span.style.whiteSpace = 'pre'; // Preserves the trailing space
             span.style.filter = 'blur(10px)'; // Start blurred (Idea 2)
+            span.style.willChange = 'transform, filter, opacity'; // Optimize for ScrollTrigger Scrubbing
             heroText.appendChild(span);
             spans.push(span);
         });
@@ -523,8 +524,7 @@ const vizStump = document.querySelector('.viz-stump');
 
 if (vizSection && vizStump) {
     let tickingViz = false;
-
-    vizSection.addEventListener('mousemove', (e) => {
+    let vizMouseMove = (e) => {
         if (!tickingViz) {
             window.requestAnimationFrame(() => {
                 const rect = vizSection.getBoundingClientRect();
@@ -536,9 +536,14 @@ if (vizSection && vizStump) {
             });
             tickingViz = true;
         }
+    };
+
+    vizSection.addEventListener('mouseenter', () => {
+        vizSection.addEventListener('mousemove', vizMouseMove, { passive: true });
     });
 
     vizSection.addEventListener('mouseleave', () => {
+        vizSection.removeEventListener('mousemove', vizMouseMove);
         window.requestAnimationFrame(() => {
             vizStump.style.transform = `translate(-49%, -49%) scale(1)`;
         });
@@ -550,8 +555,7 @@ const knot = document.querySelector('.gallery-knot');
 
 if (gallerySection && knot) {
     let tickingGallery = false;
-
-    gallerySection.addEventListener('mousemove', (e) => {
+    let galleryMouseMove = (e) => {
         if (!tickingGallery) {
             window.requestAnimationFrame(() => {
                 const rect = gallerySection.getBoundingClientRect();
@@ -563,9 +567,14 @@ if (gallerySection && knot) {
             });
             tickingGallery = true;
         }
+    };
+
+    gallerySection.addEventListener('mouseenter', () => {
+        gallerySection.addEventListener('mousemove', galleryMouseMove, { passive: true });
     });
 
     gallerySection.addEventListener('mouseleave', () => {
+        gallerySection.removeEventListener('mousemove', galleryMouseMove);
         window.requestAnimationFrame(() => {
             knot.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
         });
@@ -622,36 +631,43 @@ document.querySelectorAll('h2').forEach(h2 => {
 });
 
 const magneticButtons = document.querySelectorAll('.btn-custom2');
+let tickingMagnet = false;
 
 window.addEventListener('mousemove', function (e) {
-    magneticButtons.forEach(btn => {
-        const rect = btn.getBoundingClientRect();
+    if (!tickingMagnet) {
+        window.requestAnimationFrame(() => {
+            magneticButtons.forEach(btn => {
+                const rect = btn.getBoundingClientRect();
 
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
 
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
+                const distanceX = e.clientX - centerX;
+                const distanceY = e.clientY - centerY;
 
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-        //kk blizo v px
-        const proximity = 120;
+                //kk blizo v px
+                const proximity = 120;
 
-        if (distance < proximity) {
-            // Moč efekta (manjša številka = bolj subtilno, poskusi 0.1 ali 0.15)
-            const strength = 0.1;
-            const x = distanceX * strength;
-            const y = distanceY * strength;
+                if (distance < proximity) {
+                    // Moč efekta (manjša številka = bolj subtilno, poskusi 0.1 ali 0.15)
+                    const strength = 0.1;
+                    const x = distanceX * strength;
+                    const y = distanceY * strength;
 
-            btn.style.transform = `translate(${x}px, ${y}px)`;
-            btn.style.transition = 'transform 0.1s ease-out';
-        } else {
-            btn.style.transform = 'translate(0px, 0px)';
-            btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-        }
-    });
-});
+                    btn.style.transform = `translate(${x}px, ${y}px)`;
+                    btn.style.transition = 'transform 0.1s ease-out';
+                } else {
+                    btn.style.transform = 'translate(0px, 0px)';
+                    btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                }
+            });
+            tickingMagnet = false;
+        });
+        tickingMagnet = true;
+    }
+}, { passive: true });
 
 const lenis = new Lenis({
     duration: 1.2,
@@ -665,7 +681,7 @@ const lenis = new Lenis({
 });
 
 // 1. Integracija Lenis s ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update);
+// lenis.on('scroll', ScrollTrigger.update); To preobremeni render cikl. Gsap ticker ze osvezi!
 
 gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
