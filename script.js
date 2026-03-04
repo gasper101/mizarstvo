@@ -522,16 +522,26 @@ const vizSection = document.querySelector('#vizualizacija');
 const vizStump = document.querySelector('.viz-stump');
 
 if (vizSection && vizStump) {
-    vizSection.addEventListener('mousemove', (e) => {
-        const rect = vizSection.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
+    let tickingViz = false;
 
-        vizStump.style.transform = `translate(calc(-49% + ${x * 30}px), calc(-49% + ${y * 30}px)) scale(1.03)`;
+    vizSection.addEventListener('mousemove', (e) => {
+        if (!tickingViz) {
+            window.requestAnimationFrame(() => {
+                const rect = vizSection.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                vizStump.style.transform = `translate(calc(-49% + ${x * 30}px), calc(-49% + ${y * 30}px)) scale(1.03)`;
+                tickingViz = false;
+            });
+            tickingViz = true;
+        }
     });
 
     vizSection.addEventListener('mouseleave', () => {
-        vizStump.style.transform = `translate(-49%, -49%) scale(1)`;
+        window.requestAnimationFrame(() => {
+            vizStump.style.transform = `translate(-49%, -49%) scale(1)`;
+        });
     });
 }
 
@@ -539,16 +549,26 @@ const gallerySection = document.querySelector('#galerija');
 const knot = document.querySelector('.gallery-knot');
 
 if (gallerySection && knot) {
-    gallerySection.addEventListener('mousemove', (e) => {
-        const rect = gallerySection.getBoundingClientRect();
+    let tickingGallery = false;
 
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        knot.style.transform = `translate(${x * 30}px, ${y * 20}px) scale(1.03) rotate(${x * 2}deg)`;
+    gallerySection.addEventListener('mousemove', (e) => {
+        if (!tickingGallery) {
+            window.requestAnimationFrame(() => {
+                const rect = gallerySection.getBoundingClientRect();
+
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                knot.style.transform = `translate(${x * 30}px, ${y * 20}px) scale(1.03) rotate(${x * 2}deg)`;
+                tickingGallery = false;
+            });
+            tickingGallery = true;
+        }
     });
 
     gallerySection.addEventListener('mouseleave', () => {
-        knot.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+        window.requestAnimationFrame(() => {
+            knot.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
+        });
     });
 }
 
