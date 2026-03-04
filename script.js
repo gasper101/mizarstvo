@@ -2,20 +2,19 @@ window.addEventListener('load', function () {
     const preloader = document.getElementById('preloader');
 
     if (preloader) {
+        // Quickly hide preloader to not punish LCP metric layout
+        preloader.classList.add('loader-hidden');
+
         setTimeout(() => {
-            preloader.classList.add('loader-hidden');
+            document.body.style.overflow = 'auto';
 
-            setTimeout(() => {
-                document.body.style.overflow = 'auto';
-
-                // Sedaj je skrolanje omogočeno, skočimo na hash
-                if (window.location.hash) {
-                    setTimeout(() => {
-                        lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
-                    }, 50); // Zelo kratek zamik za osvežitev layouta
-                }
-            }, 800);
-        }, 1000);
+            // Sedaj je skrolanje omogočeno, skočimo na hash
+            if (window.location.hash) {
+                setTimeout(() => {
+                    lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
+                }, 50); // Zelo kratek zamik za osvežitev layouta
+            }
+        }, 800);
     } else {
         document.body.style.overflow = 'auto';
         if (window.location.hash) {
@@ -770,25 +769,28 @@ function animateDust() {
 
 createParticles();
 
-// Optimizacija: Opazuj hero sekcijo in ustavi animacijo, ko ni vidna
-const heroSectionDust = document.getElementById('domov');
-if (heroSectionDust) {
-    const dustObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                isDustVisible = true;
-                animateDust();
-            } else {
-                isDustVisible = false;
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            }
-        });
-    }, { threshold: 0 });
+// Optimizacija: Počakajmo malo z obremenitvijo CPU-ja (canvas animacijo), da damo prioriteto izrisu glavne strani.
+setTimeout(() => {
+    // Opazuj hero sekcijo in ustavi animacijo, ko ni vidna
+    const heroSectionDust = document.getElementById('domov');
+    if (heroSectionDust) {
+        const dustObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    isDustVisible = true;
+                    animateDust();
+                } else {
+                    isDustVisible = false;
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                }
+            });
+        }, { threshold: 0 });
 
-    dustObserver.observe(heroSectionDust);
-} else {
-    animateDust(); // Fallback, ce hero sekcija ni najdena
-}
+        dustObserver.observe(heroSectionDust);
+    } else {
+        animateDust(); // Fallback, ce hero sekcija ni najdena
+    }
+}, 500);
 /*custom miska
 document.addEventListener('DOMContentLoaded', () => {
     const dot = document.querySelector('.cursor-dot');
