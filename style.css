@@ -63,10 +63,8 @@ h2 {
 }
 
 h1 {
-    color: rgba(255, 255, 255, 1);
-    /* Slightly higher opacity */
-    -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
-    font-weight: 900;
+    color: #ffffff;
+    font-weight: 800;
 }
 
 #heroText span {
@@ -79,7 +77,7 @@ h1 {
 /* Navigacija */
 .navbar {
     padding: 20px 0;
-    transition: all 0.3s ease;
+    transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-brand {
@@ -109,7 +107,7 @@ h1 {
 .navbar-toggler {
     border: 2px solid var(--primary-color);
     color: var(--primary-dark) !important;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease;
     margin-right: 10px;
 }
 
@@ -160,8 +158,8 @@ h1 {
     /* Bela v default (dark) stanju */
     padding: 5px 20px !important;
     margin-left: 10px;
-    transition: all 0.3s;
-    /* Dodano all, da vključuje obrobo in barvo */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Dodano za boljšo optimizacijo (namesto all) */
     background: transparent;
     /* Da ni nobenega BG */
 }
@@ -246,22 +244,20 @@ h1 {
 /* Typography Refinement */
 .main-title {
     font-family: var(--heading-font);
-    font-weight: 700;
+    font-weight: 800;
     font-size: var(--h1-size-main);
-    letter-spacing: -0.01em;
-
-    color: rgba(255, 255, 255, 0.5);
-    mix-blend-mode: color-dodge;
-
-    text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .main-title-other {
     font-family: var(--heading-font);
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--h1-size);
     letter-spacing: 0.0em;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section .lead {
@@ -291,7 +287,7 @@ h1 {
     letter-spacing: 0.15em;
     font-size: 0.75rem;
     font-weight: 600;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: background-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -312,7 +308,7 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.85rem;
-    transition: all 0.3s;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
 .btn-custom-out:hover {
@@ -332,7 +328,7 @@ h1 {
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: background-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: 0 0 15px rgba(179, 142, 93, 0.3);
     /* Glow effect */
 }
@@ -382,7 +378,7 @@ h1 {
     border: none;
     border-radius: 0;
     padding: 40px 30px;
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
 }
@@ -472,7 +468,7 @@ h1 {
     justify-content: center;
     color: #fff;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -551,7 +547,7 @@ h1 {
 }
 
 .process-step {
-    transition: all 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background-color 0.4s ease-in-out;
     padding: 10px;
 }
 
@@ -588,17 +584,12 @@ h1 {
     background-size: 50%;
 }
 
-.mb-1 {
-    color: white;
-}
+/* Removed global utility color overrides to prevent invisible text in sections */
 
-.mb-4 {
-    color: white;
-}
 
 .logo-img {
     height: 70px;
-    transition: all 0.3s ease;
+    transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     width: auto;
 }
 
@@ -641,7 +632,7 @@ h1 {
     padding: 12px 20px;
     font-size: 0.9rem;
     font-family: var(--body-font);
-    transition: all 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 /* Barva teksta v meniju */
@@ -702,17 +693,25 @@ h1 {
     transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
 }
 
+.hover-effect-container {
+    background-color: var(--bg-main);
+    /* Matches section background to prevent white flash on lift */
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+}
+
 /*hover za slike*/
 .hover-effect-container img {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     max-width: 100% !important;
     max-height: 600px !important;
     object-fit: cover;
 }
 
 .hover-effect-container:hover img {
-    transform: scale(1.03);
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
 }
 
 
@@ -797,7 +796,7 @@ h1 {
 
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     text-decoration: none;
 }
 
@@ -821,7 +820,7 @@ h1 {
     padding: 20px;
     border-left: 1px solid rgba(179, 142, 93, 0.2);
     /* Very faint gold line */
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), border-left-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     height: 80%;
     position: relative;
     background: transparent;
@@ -999,9 +998,13 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
+.img-fluid {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 .img-fluid:hover {
     transform: translateY(-15px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
 
 img {
@@ -1583,7 +1586,7 @@ html.lenis body {
     width: 20px;
     height: 20px;
     opacity: 0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* 1. Zgoraj levo */
@@ -1714,7 +1717,7 @@ header#home {
     height: 100%;
     cursor: pointer;
     overflow: hidden;
-    transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1);
+    transition: flex 0.7s cubic-bezier(0.25, 1, 0.3, 1);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1731,11 +1734,10 @@ header#home {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    object-fit: cover;
     filter: grayscale(80%);
     /* Črno-belo kot na tvoji sliki */
-    transition: all 0.8s ease;
+    transition: filter 0.8s ease, transform 0.8s ease;
     transform: scale(1);
     will-change: transform, filter;
     backface-visibility: hidden;
@@ -1821,7 +1823,7 @@ header#home {
     background: transparent;
     border: none;
     border-radius: 50% !important;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     opacity: 0.5;
     z-index: 10;
 }
@@ -2088,7 +2090,7 @@ header#home {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-size: 0.9rem;
-    transition: all 0.4s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
     display: inline-block;
 }
 
@@ -2110,4 +2112,83 @@ header#home {
 .col-lg-6 h3 {
     margin-bottom: 1.25rem;
     line-height: 1.3;
+}
+
+/* Editorial Design Utilities */
+.studio-quote {
+    font-style: italic;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.studio-label {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.split-heading {
+    color: var(--studio-dark-wood);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    text-transform: none;
+    padding-bottom: 0;
+}
+
+.split-heading .light {
+    font-weight: 300;
+}
+
+.split-heading .bold {
+    font-weight: 700;
+}
+
+.image-frame-offset {
+    position: relative;
+    z-index: 2;
+}
+
+.image-frame-offset::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--primary-color);
+    opacity: 0.2;
+    z-index: -1;
+    transition: all 0.5s ease;
+}
+
+.image-frame-offset:hover::after {
+    top: -15px;
+    right: -10px;
+    opacity: 0.4;
+}
+
+.ghost-watermark {
+    position: absolute;
+    font-size: 15vw;
+    font-weight: 900;
+    color: rgba(179, 142, 93, 0.03);
+    z-index: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.detail-mark-corner {
+    position: absolute;
+    z-index: 3;
+    opacity: 0.4;
 }

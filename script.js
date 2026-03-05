@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
 // Medtem ko se nalaga, preprečimo skrolanje
 document.body.style.overflow = 'hidden';
 
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
 
     // Sprememba navigacije ob skrolanju
     gsap.registerPlugin(ScrollTrigger);
@@ -356,27 +356,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    const animElements = document.querySelectorAll('.animate-on-scroll');
-
-    if (animElements.length > 0) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Dodaj razred, ko je element viden
-                    entry.target.classList.add('is-visible');
-                    // Preneha opazovati element po animaciji
-                    observer.unobserve(entry.target);
+    // 4. Globalne opazovanje elementov za animacije ob skrolu
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const target = entry.target;
+            if (entry.isIntersecting) {
+                // Skupne animacije
+                if (target.classList.contains('animate-on-scroll')) {
+                    target.classList.add('is-visible');
+                    scrollObserver.unobserve(target);
                 }
-            });
-        }, {
-            rootMargin: '0px',
-            threshold: 0.2
+                if (target.classList.contains('reveal') || target.classList.contains('process-step-row')) {
+                    target.classList.add('active');
+                }
+                if (target.classList.contains('reveal-box')) {
+                    target.classList.add('animated');
+                }
+                if (target.tagName.toLowerCase() === 'h2') {
+                    target.classList.add('heading-visible');
+                }
+            } else {
+                // Skrijemo elemente ob skrolanju navzgor (če je potrebno)
+                if (target.classList.contains('reveal') || target.classList.contains('process-step-row')) {
+                    target.classList.remove('active');
+                }
+            }
         });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
 
-        animElements.forEach(element => {
-            observer.observe(element);
-        });
-    }
+    // Registriramo vse elemente v en sam observer
+    document.querySelectorAll('.animate-on-scroll, .reveal, .process-step-row, .reveal-box, h2').forEach(el => {
+        if (el.tagName.toLowerCase() === 'h2') el.classList.add('heading-animate');
+        scrollObserver.observe(el);
+    });
 
     //to the top button
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
@@ -581,54 +596,9 @@ if (gallerySection && knot) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.reveal, .process-step-row');
+// Reveal animaice so sedaj vključene v globalni scrollObserver v window.load
 
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                // Če želiš, da se animacija izvede le enkrat, odkomentiraj spodnjo vrstico:
-                // observer.unobserve(entry.target);
-            } else {
-                // Če želiš, da se ob skrolanju navzgor elementi spet skrijejo:
-                entry.target.classList.remove('active');
-            }
-        });
-    }, observerOptions);
-
-    revealElements.forEach(el => revealObserver.observe(el));
-});
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-        }
-    });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.reveal-box').forEach(box => revealObserver.observe(box));
-
-
-// Elegantna animacija naslovov ob skrolu
-const headingObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('heading-visible');
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('h2').forEach(h2 => {
-    h2.classList.add('heading-animate');
-    headingObserver.observe(h2);
-});
+// Reveal box in H2 animacije so sedaj vključene v globalni scrollObserver v window.load
 
 const magneticButtons = document.querySelectorAll('.btn-custom2');
 let tickingMagnet = false;
