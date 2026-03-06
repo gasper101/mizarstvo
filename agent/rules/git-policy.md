@@ -4,6 +4,7 @@
 - **DO NOT** execute any `git push` or `git remote` commands without explicit verbal confirmation for each instance.
 - **DO NOT** modify the `.git` directory directly.
 - **DO NOT** create, delete, or force-push branches unless specifically instructed.
+- **DO NOT** run any cmd commands UNLESS absolutelly necessary
 
 ## Required Workflow
 - Before any commit, you must show a summary of the changes you intend to stage.
