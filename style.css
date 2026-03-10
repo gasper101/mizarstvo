@@ -241,6 +241,11 @@ h1 {
     background: linear-gradient(to bottom, rgba(45, 38, 34, 0.4) 0%, rgba(35, 28, 24, 0.7) 100%) !important;
 }
 
+/* Premium Organic Shadow */
+.shadow-premium {
+    box-shadow: 0 20px 50px rgba(45, 38, 34, 0.08), 0 5px 15px rgba(45, 38, 34, 0.04) !important;
+}
+
 /* Typography Refinement */
 .main-title {
     font-family: var(--body-font);
@@ -310,7 +315,8 @@ h1 {
     color: var(--primary-color);
     border-color: var(--primary-color);
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(179, 142, 93, 0.35);
+    box-shadow: 0 15px 35px rgba(179, 142, 93, 0.35), 0 0 15px rgba(179, 142, 93, 0.3);
+    /* Glowing luxury shadow */
 }
 
 .btn-custom-out {
@@ -1895,7 +1901,11 @@ header#home {
 
 
 .bg-pure-white {
-    background-color: var(--studio-white-pure) !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Background and Text Class for Dark Wood */
@@ -2143,12 +2153,38 @@ header#home {
 /* Editorial Design Utilities */
 .studio-quote {
     font-style: italic;
-    border-left: 3px solid var(--primary-color);
+    border-left: 3px solid transparent;
+    /* Hide static border, use pseudo element for animation */
     padding-left: 20px;
     color: var(--text-muted);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     line-height: 1.6;
     margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Animated Intro Line */
+.studio-quote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -3px;
+    /* Align with previous border position */
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;
+    /* Delays slightly after scroll reveal */
+}
+
+/* Triggered when the parent section comes into view */
+.reveal-section.active .studio-quote::before,
+.animate-on-scroll.visible .studio-quote::before,
+.reveal-box.animated+.col-lg-6 .studio-quote::before,
+.reveal-box.animated+* .studio-quote::before {
+    transform: scaleY(1);
 }
 
 .studio-label {
@@ -2206,15 +2242,33 @@ header#home {
     position: absolute;
     font-size: 15vw;
     font-weight: 900;
-    color: rgba(179, 142, 93, 0.03);
+    color: rgba(179, 142, 93, 0.05);
+    /* Slightly increased opacity since multiply darkens it */
     z-index: 0;
     white-space: nowrap;
     pointer-events: none;
     line-height: 1;
+    mix-blend-mode: multiply;
+    /* Integrates text with background textures */
 }
 
 .detail-mark-corner {
     position: absolute;
     z-index: 3;
-    opacity: 0.4;
+    opacity: 0.8;
+    /* Slightly more visible for the animation */
+}
+
+.detail-mark-corner svg path {
+    stroke-dasharray: 100;
+    /* Create a dashed line pattern we can offset */
+    stroke-dashoffset: 100;
+    /* Hide the line initially */
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s;
+}
+
+/* Trigger animation when scrolled into view */
+.animate-on-scroll.visible .detail-mark-corner svg path,
+.reveal-section.active .detail-mark-corner svg path {
+    stroke-dashoffset: 0;
 }
