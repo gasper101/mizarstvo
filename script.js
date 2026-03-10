@@ -602,35 +602,49 @@ if (gallerySection && knot) {
 
 const magneticButtons = document.querySelectorAll('.btn-custom2');
 let tickingMagnet = false;
+let buttonCaches = [];
+
+function cacheMagneticButtons() {
+    buttonCaches = Array.from(magneticButtons).map(btn => {
+        const rect = btn.getBoundingClientRect();
+        // Calculate absolute position on the page (independent of scroll)
+        return {
+            btn: btn,
+            absCenterX: rect.left + window.scrollX + rect.width / 2,
+            absCenterY: rect.top + window.scrollY + rect.height / 2
+        };
+    });
+}
+
+// Initial cache after load & on resize to avoid Layout Thrashing
+window.addEventListener('load', cacheMagneticButtons);
+window.addEventListener('resize', cacheMagneticButtons, { passive: true });
 
 window.addEventListener('mousemove', function (e) {
+    if (buttonCaches.length === 0) return;
+
     if (!tickingMagnet) {
         window.requestAnimationFrame(() => {
-            magneticButtons.forEach(btn => {
-                const rect = btn.getBoundingClientRect();
+            // e.pageX and e.pageY provide absolute document coordinates
+            const mouseX = e.pageX;
+            const mouseY = e.pageY;
 
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-
-                const distanceX = e.clientX - centerX;
-                const distanceY = e.clientY - centerY;
-
+            buttonCaches.forEach(item => {
+                const distanceX = mouseX - item.absCenterX;
+                const distanceY = mouseY - item.absCenterY;
                 const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-                //kk blizo v px
                 const proximity = 120;
-
                 if (distance < proximity) {
-                    // Moč efekta (manjša številka = bolj subtilno, poskusi 0.1 ali 0.15)
                     const strength = 0.1;
                     const x = distanceX * strength;
                     const y = distanceY * strength;
 
-                    btn.style.transform = `translate(${x}px, ${y}px)`;
-                    btn.style.transition = 'transform 0.1s ease-out';
+                    item.btn.style.transform = `translate(${x}px, ${y}px)`;
+                    item.btn.style.transition = 'transform 0.1s ease-out';
                 } else {
-                    btn.style.transform = 'translate(0px, 0px)';
-                    btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                    item.btn.style.transform = 'translate(0px, 0px)';
+                    item.btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
                 }
             });
             tickingMagnet = false;
@@ -698,7 +712,8 @@ const canvas = document.getElementById('dustCanvas');
 const ctx = canvas.getContext('2d');
 
 let particles = [];
-const particleCount = 85; // Število delcev (manj je bolj elegantno)
+// Optimizacija: Manj delcev za manjši zagon procesorja pri velikih ekranih
+const particleCount = window.innerWidth > 768 ? 40 : 25;
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
