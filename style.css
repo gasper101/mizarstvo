@@ -244,8 +244,8 @@ h1 {
 /* Typography Refinement */
 .main-title {
     font-family: var(--body-font);
-    font-weight: 500;
-    font-size: clamp(4rem, 9.5vw, 7.5rem);
+    font-weight: 400;
+    font-size: clamp(4rem, 9vw, 7rem);
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: #ffffff;
@@ -408,9 +408,9 @@ h1 {
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     background-color: #ffffff;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .service-card::after {
@@ -734,9 +734,9 @@ h1 {
 }
 
 .hover-effect-container:hover img {
-    transform: translateY(-20px) scale(1.05);
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25) !important;
-    filter: brightness(1.05);
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2) !important;
+    filter: brightness(1.03);
 }
 
 
