@@ -6,14 +6,14 @@ window.addEventListener('load', function () {
         preloader.classList.add('loader-hidden');
 
         setTimeout(() => {
-            document.body.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
 
-            // Sedaj je skrolanje omogočeno, skočimo na hash
-            if (window.location.hash) {
-                setTimeout(() => {
-                    lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
-                }, 50); // Zelo kratek zamik za osvežitev layouta
-            }
+        // Sedaj je skrolanje omogočeno, skočimo na hash
+        if (window.location.hash) {
+            setTimeout(() => {
+                lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
+            }, 50); // Zelo kratek zamik za osvežitev layouta
+        }
         }, 800);
     } else {
         document.body.style.overflow = 'auto';
@@ -43,11 +43,12 @@ window.addEventListener("load", function () {
 
     //text reveal
     if (heroText) {
-        const textContent = heroText.innerText;
-        heroText.innerHTML = '';
+        setTimeout(() => {
+            const textContent = heroText.innerText;
+            heroText.innerHTML = '';
 
-        let spans = [];
-        textContent.split(' ').forEach(word => {
+            let spans = [];
+            textContent.split(' ').forEach(word => {
             const span = document.createElement('span');
             span.innerText = word + ' ';
             span.style.opacity = 0.1;
@@ -116,6 +117,7 @@ window.addEventListener("load", function () {
             gsap.set(spans, { opacity: 1, y: 0, filter: 'blur(0px)' });
             gsap.set(".main-title, .btn-custom2", { opacity: 1, visibility: "visible", y: 0 });
         });
+        }, 200); // Deferred execution for LCP boost
     }
 
     window.addEventListener("scroll", () => {
@@ -130,17 +132,17 @@ window.addEventListener("load", function () {
     });
 
     //change navbar
-    const firstContentSection = document.querySelector('section');
+    const mainHeader = document.querySelector('header');
 
-    if (firstContentSection && navbar) {
+    if (mainHeader && navbar) {
         ScrollTrigger.create({
-            trigger: firstContentSection,
-            start: "top 80px",
-            onEnter: () => {
+            trigger: mainHeader,
+            start: "bottom 80px",
+            onLeave: () => {
                 navbar.classList.add('scrolled', 'navbar-light');
                 navbar.classList.remove('navbar-dark');
             },
-            onLeaveBack: () => {
+            onEnterBack: () => {
                 navbar.classList.remove('scrolled', 'navbar-light');
                 navbar.classList.add('navbar-dark');
             }
