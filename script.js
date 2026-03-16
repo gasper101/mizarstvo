@@ -6,14 +6,14 @@ window.addEventListener('load', function () {
         preloader.classList.add('loader-hidden');
 
         setTimeout(() => {
-        document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto';
 
-        // Sedaj je skrolanje omogočeno, skočimo na hash
-        if (window.location.hash) {
-            setTimeout(() => {
-                lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
-            }, 50); // Zelo kratek zamik za osvežitev layouta
-        }
+            // Sedaj je skrolanje omogočeno, skočimo na hash
+            if (window.location.hash) {
+                setTimeout(() => {
+                    lenis.scrollTo(window.location.hash, { offset: -50, duration: 1.5 });
+                }, 50); // Zelo kratek zamik za osvežitev layouta
+            }
         }, 800);
     } else {
         document.body.style.overflow = 'auto';
@@ -49,74 +49,74 @@ window.addEventListener("load", function () {
 
             let spans = [];
             textContent.split(' ').forEach(word => {
-            const span = document.createElement('span');
-            span.innerText = word + ' ';
-            span.style.opacity = 0.1;
-            span.style.transform = 'translateY(20px)'; // Added for float effect
-            span.style.display = 'inline-block'; // Necessary for transform to work on span
-            span.style.whiteSpace = 'pre'; // Preserves the trailing space
-            span.style.filter = 'blur(10px)'; // Start blurred (Idea 2)
-            span.style.willChange = 'transform, filter, opacity'; // Optimize for ScrollTrigger Scrubbing
-            heroText.appendChild(span);
-            spans.push(span);
-        });
-
-        mm.add("(min-width: 900px)", () => {
-
-            // Idea 3: Initial Entry Animation (Title and button enter immediately)
-            gsap.to(".main-title, .btn-custom2", {
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                stagger: 0.2,
-                ease: "power3.out",
-                delay: 0.2, // Wait slightly after load
-                onStart: () => {
-                    gsap.set(".main-title, .btn-custom2", { visibility: "visible", y: 20 });
-                }
+                const span = document.createElement('span');
+                span.innerText = word + ' ';
+                span.style.opacity = 0.1;
+                span.style.transform = 'translateY(20px)'; // Added for float effect
+                span.style.display = 'inline-block'; // Necessary for transform to work on span
+                span.style.whiteSpace = 'pre'; // Preserves the trailing space
+                span.style.filter = 'blur(10px)'; // Start blurred (Idea 2)
+                span.style.willChange = 'transform, filter, opacity'; // Optimize for ScrollTrigger Scrubbing
+                heroText.appendChild(span);
+                spans.push(span);
             });
 
-            let textTl = gsap.timeline({ paused: true });
-            textTl.to(spans, {
-                opacity: 1,
-                y: 0, // Animate back to original position
-                filter: 'blur(0px)', // Un-blur as it moves
-                stagger: 0.1,
-                ease: "power2.out" // Use a nicer ease for the float
-            });
+            mm.add("(min-width: 900px)", () => {
 
-            ScrollTrigger.create({
-                id: "heroIntro",
-                trigger: "#domov",
-                start: "top top",
-                end: "+=150%",
-                pin: true,
-                scrub: 1,
-
-                onLeave: () => {
-                    hasScrolledPast = true;
-                    gsap.set(spans, { opacity: 0.1, y: 20, filter: 'blur(10px)' });
-                },
-                onUpdate: (self) => {
-                    if (!hasScrolledPast) {
-                        textTl.progress(self.progress);
-
-                    } else {
-                        textTl.progress(1 - self.progress);
+                // Idea 3: Initial Entry Animation (Title and button enter immediately)
+                gsap.to(".main-title, .btn-custom2", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    delay: 0.2, // Wait slightly after load
+                    onStart: () => {
+                        gsap.set(".main-title, .btn-custom2", { visibility: "visible", y: 20 });
                     }
-                }
+                });
+
+                let textTl = gsap.timeline({ paused: true });
+                textTl.to(spans, {
+                    opacity: 1,
+                    y: 0, // Animate back to original position
+                    filter: 'blur(0px)', // Un-blur as it moves
+                    stagger: 0.1,
+                    ease: "power2.out" // Use a nicer ease for the float
+                });
+
+                ScrollTrigger.create({
+                    id: "heroIntro",
+                    trigger: "#domov",
+                    start: "top top",
+                    end: "+=150%",
+                    pin: true,
+                    scrub: 1,
+
+                    onLeave: () => {
+                        hasScrolledPast = true;
+                        gsap.set(spans, { opacity: 0.1, y: 20, filter: 'blur(10px)' });
+                    },
+                    onUpdate: (self) => {
+                        if (!hasScrolledPast) {
+                            textTl.progress(self.progress);
+
+                        } else {
+                            textTl.progress(1 - self.progress);
+                        }
+                    }
+                });
+
+
+                return () => {
+                    hasScrolledPast = false;
+                };
             });
 
-
-            return () => {
-                hasScrolledPast = false;
-            };
-        });
-
-        mm.add("(max-width: 900px)", () => {
-            gsap.set(spans, { opacity: 1, y: 0, filter: 'blur(0px)' });
-            gsap.set(".main-title, .btn-custom2", { opacity: 1, visibility: "visible", y: 0 });
-        });
+            mm.add("(max-width: 900px)", () => {
+                gsap.set(spans, { opacity: 1, y: 0, filter: 'blur(0px)' });
+                gsap.set(".main-title, .btn-custom2", { opacity: 1, visibility: "visible", y: 0 });
+            });
         }, 200); // Deferred execution for LCP boost
     }
 
@@ -137,7 +137,7 @@ window.addEventListener("load", function () {
     if (mainHeader && navbar) {
         ScrollTrigger.create({
             trigger: mainHeader,
-            start: "bottom 80px",
+            start: "bottom -100px",
             onLeave: () => {
                 navbar.classList.add('scrolled', 'navbar-light');
                 navbar.classList.remove('navbar-dark');

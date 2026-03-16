@@ -1,7 +1,15 @@
 :root {
+    /* OPTION 1: Balanced Oak (Active - Right between Walnut and Original) */
+    --primary-color: #9F794B;
+    --primary-light: #C4A47A;
+    --primary-dark: #785832;
+
+    /* OPTION 4: Your Original Gold-Brown */
+    /*
     --primary-color: #b38e5d;
     --primary-light: #d4bc96;
     --primary-dark: #8c6a40;
+    */
 
     --text-main: #2d2d2d;
     --text-muted: #666666;
@@ -40,6 +48,10 @@ body {
     background-color: var(--bg-card) !important;
 }
 
+.bg-premium-pad {
+    background-color: rgba(212, 188, 150, 0.05) !important;
+}
+
 h1,
 h2,
 h3,
@@ -54,12 +66,12 @@ h6 {
 h2 {
     font-size: var(--h2-size);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
+    letter-spacing: 0.15em;
+    font-weight: 600;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
 
 h1 {
@@ -368,10 +380,186 @@ h1 {
     /* Stronger white glow on hover */
 }
 
+/* Isolated Premium Hero Button Style (Main Dark Hero) */
+.btn-premium-hero {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 0;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: none;
+    background: var(--primary-color);
+    color: #fff !important;
+    padding: 13px 32px;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
 
-/* Splošne sekcije */
+/* Thicker, bolder arrow indicator */
+.btn-premium-hero::after,
+.btn-premium-out::after {
+    content: '\2192';
+    display: inline-block;
+    margin-left: 14px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-premium-hero:hover::after,
+.btn-premium-out:hover::after {
+    transform: translateX(8px);
+}
+
+.btn-premium-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--primary-light);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-premium-hero:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-premium-hero:hover {
+    color: #fff !important;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Isolated Premium Outline Button (For Sections like O-Nas) */
+.btn-premium-out {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 0;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color) !important;
+    padding: 12px 30px;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.btn-premium-out::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-premium-out:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-premium-out:hover {
+    color: #fff !important;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(179, 142, 93, 0.2);
+}
+
+/* Architectural Technical Borders - Wrapper version to handle overflow:hidden children */
+.arch-border-wrapper {
+    position: relative;
+    padding: 10px; 
+    display: inline-block;
+    max-width: 100%;
+}
+
+.arch-border-wrapper::before,
+.arch-border-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.arch-border-wrapper::before {
+    top: 0;
+    left: 0;
+    border-top: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+}
+
+.arch-border-wrapper::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+}
+
+.arch-border-wrapper:hover::before {
+    top: -10px;
+    left: -10px;
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+}
+
+.arch-border-wrapper:hover::after {
+    bottom: -10px;
+    right: -10px;
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+}
+
+/* Blueprint Pattern Utility */
+.bg-blueprint {
+    background-image: 
+        linear-gradient(var(--accent-line) .5px, transparent .5px),
+        linear-gradient(90deg, var(--accent-line) .5px, transparent .5px);
+    background-size: 50px 50px;
+}
+
+.bg-blueprint-fine {
+    background-image: 
+        linear-gradient(var(--accent-line) .3px, transparent .3px),
+        linear-gradient(90deg, var(--accent-line) .3px, transparent .3px);
+    background-size: 20px 20px;
+}
+
+/* Studio Label Polish */
+.studio-label {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
 .section-padding {
-    padding: 120px 0;
+    padding: 160px 0;
     content-visibility: auto;
     contain-intrinsic-size: 1000px;
 }
@@ -616,7 +804,7 @@ h1 {
 
 
 .logo-img {
-    height: 70px;
+    height: 75px;
     transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     width: auto;
 }
@@ -628,7 +816,7 @@ h1 {
 
 /* Prilagoditev logotipa ko je navigacija skrolana */
 .navbar.scrolled .logo-img {
-    height: 65px;
+    height: 70px;
     /* Manjša višina ob skrolanju */
 }
 
@@ -847,9 +1035,9 @@ h1 {
 
 .material-feature {
     padding: 20px;
-    border-left: 1px solid rgba(179, 142, 93, 0.2);
+    border-left: 3px solid rgba(179, 142, 93, 0.2);
     /* Very faint gold line */
-    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), border-left-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.3s ease;
     height: 80%;
     position: relative;
     background: transparent;
@@ -1032,7 +1220,7 @@ body {
 }
 
 .img-fluid:hover {
-    transform: translateY(-20px) scale(1.03);
+    transform: translateY(-20px) scale(1.08);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     filter: brightness(1.05);
 }
@@ -2215,6 +2403,11 @@ header#home {
 .image-frame-offset {
     position: relative;
     z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.image-frame-offset:hover {
+    transform: translateY(-20px) scale(1.04);
 }
 
 .image-frame-offset::after {
