@@ -491,6 +491,12 @@ h1 {
     padding: 10px; 
     display: inline-block;
     max-width: 100%;
+    transition: transform 0.65s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.65s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.arch-border-wrapper:hover {
+    transform: translateY(-20px) scale(1.04);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.1);
 }
 
 .arch-border-wrapper::before,
@@ -1166,8 +1172,57 @@ h1 {
 
 #galleryCarouselMobile .carousel-control-prev,
 #galleryCarouselMobile .carousel-control-next {
-    width: 15%;
-    opacity: 1;
+    width: 44px; /* Optimal size for touch target */
+    height: 44px;
+    background: transparent;
+    opacity: 0.8;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
+
+#galleryCarouselMobile .carousel-control-prev:active,
+#galleryCarouselMobile .carousel-control-next:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+/* Minimalist seamless version: transparent background with primary color arrows */
+#galleryCarouselMobile .carousel-control-prev-icon,
+#galleryCarouselMobile .carousel-control-next-icon {
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    filter: none;
+    background-image: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+}
+
+#galleryCarouselMobile .carousel-control-prev-icon::before,
+#galleryCarouselMobile .carousel-control-next-icon::before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-left: 2.5px solid var(--primary-color);
+    border-bottom: 2.5px solid var(--primary-color);
+}
+
+#galleryCarouselMobile .carousel-control-prev-icon::before {
+    transform: rotate(45deg);
+    margin-left: 3px;
+}
+
+#galleryCarouselMobile .carousel-control-next-icon::before {
+    transform: rotate(-135deg);
+    margin-right: 3px;
 }
 
 html,
@@ -2406,9 +2461,7 @@ header#home {
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.image-frame-offset:hover {
-    transform: translateY(-20px) scale(1.04);
-}
+
 
 .image-frame-offset::after {
     content: '';
@@ -2445,10 +2498,25 @@ header#home {
 
 .detail-mark-corner {
     position: absolute;
-    z-index: 3;
+    z-index: 3; /* Back to original to stay visible over lift */
     opacity: 0.8;
-    /* Slightly more visible for the animation */
+    transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    pointer-events: none; /* Let hovers pass through to the image */
 }
+
+/* Ensure initial path is visible for standard brackets */
+.brackets-offset svg path {
+    stroke-dashoffset: 0 !important;
+}
+
+/* Option 1: Animated version - synchronized move with image-frame-offset */
+.position-relative:hover .brackets-offset.brackets-animate,
+.arch-border-wrapper:hover + .brackets-offset.brackets-animate,
+.brackets-offset.brackets-animate:hover {
+    transform: translateY(-30px) !important;
+    opacity: 1;
+}
+
 
 .detail-mark-corner svg path {
     stroke-dasharray: 100;

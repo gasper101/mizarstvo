@@ -137,7 +137,7 @@ window.addEventListener("load", function () {
     if (mainHeader && navbar) {
         ScrollTrigger.create({
             trigger: mainHeader,
-            start: "bottom -100px",
+            start: "bottom",
             onLeave: () => {
                 navbar.classList.add('scrolled', 'navbar-light');
                 navbar.classList.remove('navbar-dark');
