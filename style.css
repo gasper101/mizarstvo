@@ -768,8 +768,7 @@ ORIGINAL DARKER OVERLAY (Commented out for backup)
 }
 .section-padding {
     padding: 160px 0;
-    content-visibility: auto;
-    contain-intrinsic-size: 1000px;
+    /* content-visibility removed to fix 1px white line rendering gaps between identical background colors */
 }
 
 .text-primary-custom {
