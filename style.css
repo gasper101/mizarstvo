@@ -1,23 +1,25 @@
 :root {
-    /* OPTION 1: Balanced Oak (Active - Right between Walnut and Original) */
+    /* OPTION 5: Lighter Golden Oak (New Improvement Ideas) */
+    --primary-color: #C19A6B; /* Brighter, warmer wood tone */
+    --primary-light: #DFBC95;
+    --primary-dark: #9A7242;
+
+    --text-main: #333333; /* Slightly softer than 2d2d2d */
+    --text-muted: #777777;
+    --bg-main: #FDFBFA; /* Significantly lighter, more breathable off-white */
+    --bg-card: #FFFFFF; /* Pure white for cards to contrast gently */
+    
+    /* ORIGINAL COLORS AND OPACITY (Commented out)
     --primary-color: #9F794B;
     --primary-light: #C4A47A;
     --primary-dark: #785832;
 
-    /* OPTION 4: Your Original Gold-Brown */
-    /*
-    --primary-color: #b38e5d;
-    --primary-light: #d4bc96;
-    --primary-dark: #8c6a40;
-    */
-
     --text-main: #2d2d2d;
     --text-muted: #666666;
     --bg-main: #f4f0e9;
-    /* Deepened from #F5F2ED for richer beige */
     --bg-card: #fdfaf6;
-    /* Deepened from #FAF8F5 */
-    --accent-line: rgba(179, 142, 93, 0.2);
+    */
+    --accent-line: rgba(193, 154, 107, 0.2);
     --heading-font: 'Arimo', sans-serif;
     --body-font: 'Montserrat', sans-serif;
 
@@ -97,6 +99,21 @@ h1 {
     font-weight: 700;
     letter-spacing: 2px;
     font-size: 1.5rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Visibility Glow & Higher Opacity for Light Images */
+.navbar:not(.scrolled) .navbar-brand {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255, 1) !important;
+}
+.navbar:not(.scrolled) .nav-link {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+.navbar:not(.scrolled) .nav-link:hover,
+.navbar:not(.scrolled) .nav-link.active {
+    color: rgba(255, 255, 255, 1) !important;
 }
 
 /* Stil navigacije ko se skrola dol */
@@ -139,6 +156,7 @@ h1 {
     padding: 0 15px !important;
     text-decoration: none !important;
     padding-right: 10px !important;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 
@@ -224,6 +242,7 @@ h1 {
     will-change: transform;
     backface-visibility: hidden;
     transform-style: preserve-3d;
+    transition: opacity 0.6s ease-in-out;
 
     /* Smooth linear transition works best for infinite loops */
     animation: kenburns-native 15s linear infinite alternate;
@@ -246,12 +265,31 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
+    /* Reduced opacity from 0.4->0.7 down to 0.15->0.45 for more visible hero images */
+    background: linear-gradient(to bottom, rgba(45, 38, 34, 0.15) 0%, rgba(35, 28, 24, 0.45) 100%) !important;
+}
+
+/* 
+ORIGINAL DARKER OVERLAY (Commented out for backup)
+.overlay {
     background: linear-gradient(to bottom, rgba(45, 38, 34, 0.4) 0%, rgba(35, 28, 24, 0.7) 100%) !important;
 }
+*/
 
 /* Premium Organic Shadow */
 .shadow-premium {
-    box-shadow: 0 20px 50px rgba(45, 38, 34, 0.08), 0 5px 15px rgba(45, 38, 34, 0.04) !important;
+    box-shadow: 0 20px 50px rgba(193, 154, 107, 0.08), 0 5px 15px rgba(193, 154, 107, 0.04) !important;
+}
+
+/* Softer Bootstrap Shadows to avoid darkness */
+.shadow-sm {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+}
+.shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+.shadow-lg {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Typography Refinement */
@@ -538,6 +576,170 @@ h1 {
     width: 80px;
     height: 80px;
     border-width: 2px;
+}
+
+/* ARCH BORDER WRAPPER MODIFIERS */
+/* 1. Both Left Corners (Top-Left & Bottom-Left) - for stopnice.html */
+.arch-border-wrapper.arch-border-left::after {
+    bottom: 0;
+    left: 0;
+    right: auto;
+    border-bottom: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+    border-right: none;
+}
+.arch-border-wrapper.arch-border-left:hover::after {
+    bottom: -10px;
+    left: -10px;
+    right: auto;
+}
+
+/* 2. Top Corners (Top-Left & Top-Right) - for vrata.html */
+.arch-border-wrapper.arch-border-top::after {
+    top: 0;
+    bottom: auto;
+    right: 0;
+    border-top: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+    border-bottom: none;
+}
+.arch-border-wrapper.arch-border-top:hover::after {
+    top: -10px;
+    bottom: auto;
+    right: -10px;
+}
+
+/* 3. Opposite Corners (Top-Right & Bottom-Left) - for prostori.html */
+.arch-border-wrapper.arch-border-opposite::before {
+    top: 0;
+    right: 0;
+    left: auto;
+    border-top: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+    border-left: none;
+}
+.arch-border-wrapper.arch-border-opposite:hover::before {
+    top: -10px;
+    right: -10px;
+    left: auto;
+}
+.arch-border-wrapper.arch-border-opposite::after {
+    bottom: 0;
+    left: 0;
+    right: auto;
+    border-bottom: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+    border-right: none;
+}
+.arch-border-wrapper.arch-border-opposite:hover::after {
+    bottom: -10px;
+    left: -10px;
+    right: auto;
+}
+
+/* 4. Heavy Bottom-Right Only - for izdelki.html */
+.arch-border-wrapper.arch-border-heavy-br::before {
+    display: none;
+}
+.arch-border-wrapper.arch-border-heavy-br::after {
+    border-bottom: 3px solid var(--primary-color);
+    border-right: 3px solid var(--primary-color);
+    width: 60px;
+    height: 60px;
+}
+.arch-border-wrapper.arch-border-heavy-br:hover::after {
+    width: 100px;
+    height: 100px;
+    border-width: 4px;
+}
+
+/* 5. Minimal / No Border Corners (To keep hover effects but drop brackets) - for pohistvo.html */
+.arch-border-wrapper.arch-border-none::before,
+.arch-border-wrapper.arch-border-none::after {
+    display: none !important;
+}
+
+/* 6. All 4 Corners (TL, TR, BL, BR) - requires an inner span for the extra two corners */
+.arch-border-wrapper.arch-border-full::before,
+.arch-border-wrapper.arch-border-full::after {
+    display: block !important;
+}
+/* By default, arch-border-wrapper provides TL (::before) and BR (::after).
+   We create a shared utility span for the other two. */
+.arch-border-extras {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+.arch-border-extras::before,
+.arch-border-extras::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.arch-border-extras::before { /* TR */
+    top: 0; right: 0;
+    border-top: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+}
+.arch-border-extras::after { /* BL */
+    bottom: 0; left: 0;
+    border-bottom: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+}
+.arch-border-wrapper:hover .arch-border-extras::before {
+    top: -10px; right: -10px; width: 80px; height: 80px; border-width: 2px;
+}
+.arch-border-wrapper:hover .arch-border-extras::after {
+    bottom: -10px; left: -10px; width: 80px; height: 80px; border-width: 2px;
+}
+
+/* 7. Circle with Plus (For izdelki.html) */
+.arch-border-wrapper.arch-border-circle-plus::before {
+    /* The Circle */
+    content: '';
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+.arch-border-wrapper.arch-border-circle-plus::after {
+    /* The Plus */
+    content: '+';
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--primary-color);
+    font-family: var(--heading-font);
+}
+.arch-border-wrapper.arch-border-circle-plus:hover::before {
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+    border-width: 2px;
+    transform: scale(1.1);
+}
+.arch-border-wrapper.arch-border-circle-plus:hover::after {
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    transform: scale(1.1) rotate(90deg);
 }
 
 /* Blueprint Pattern Utility */

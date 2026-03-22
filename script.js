@@ -424,10 +424,11 @@ window.addEventListener("load", function () {
     //menjavanje slik na gl strnai
     const heroSection = document.getElementById('domov');
     const imageProgressBar = document.getElementById('imageProgressBar');
+
     const rotatingImages = [
-        "url('slike/stopnice_11.webp')",
-        "url('slike/pisarna_3.webp')",
-        "url('slike/kuhinja_5.webp')"
+        "slike/stopnice_11.webp",
+        "slike/pisarna_3.webp",
+        "slike/kuhinja_5.webp"
     ];
 
     let currentImageIndex = 0;
@@ -439,7 +440,35 @@ window.addEventListener("load", function () {
         void imageProgressBar.offsetWidth;
         imageProgressBar.classList.add('running');
 
-        heroSection.style.backgroundImage = rotatingImages[currentImageIndex];
+        const overlay = heroSection.querySelector('.overlay');
+        
+        if (overlay) {
+            // Create a brand new image node for the crossfade
+            const newImg = document.createElement('img');
+            newImg.className = 'hero-bg-img';
+            newImg.src = rotatingImages[currentImageIndex];
+            newImg.style.opacity = '0'; // Start invisible
+            newImg.style.transition = 'opacity 1.5s ease-in-out'; // Long, elegant fade
+            newImg.style.animation = 'kenburns-native 15s linear infinite alternate'; // Start Ken Burns instantly
+
+            // Insert it behind the overlay
+            heroSection.insertBefore(newImg, overlay);
+
+            newImg.onload = () => {
+                newImg.style.opacity = '1'; // Fade into view
+                
+                // Find all existing background images to fade out and destroy
+                const allBgImgs = heroSection.querySelectorAll('.hero-bg-img');
+                allBgImgs.forEach(img => {
+                    if (img !== newImg) {
+                        img.style.opacity = '0'; // Fade out existing
+                        setTimeout(() => img.remove(), 1500); // Remove from DOM after fade
+                    }
+                });
+            };
+        } else if (heroSection) {
+            heroSection.style.backgroundImage = `url('${rotatingImages[currentImageIndex]}')`;
+        }
 
         currentImageIndex = (currentImageIndex + 1) % rotatingImages.length;
     }
