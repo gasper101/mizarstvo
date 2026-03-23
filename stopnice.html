@@ -316,23 +316,41 @@
         </div>
     </section>
 
-    <section class="section-padding position-relative bg-dark">
+    <section class="scroll-to-top-container">
         <a href="#" class="scroll-to-top" id="scrollToTopBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
-                style="width: 1.5em; height: 1.5em; fill:white;"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                 <path
                     d="M297.4 169.4C309.9 156.9 330.2 156.9 342.7 169.4L534.7 361.4C547.2 373.9 547.2 394.2 534.7 406.7C522.2 419.2 501.9 419.2 489.4 406.7L320 237.3L150.6 406.6C138.1 419.1 117.8 419.1 105.3 406.6C92.8 394.1 92.8 373.8 105.3 361.3L297.3 169.3z" />
             </svg>
         </a>
     </section>
 
-    <footer class="bg-black py-4 text-center text-white-50">
-        <div class="container">
-            <p class="mb-2">&copy; 2025 Mizarstvo Krebs. Vse pravice pridržane.</p>
-            <div class="small">
-                <a href="podatki.html" class="text-white-50 text-decoration-none mx-2">Podatki o podjetju</a> |
-                <a href="zasebnost.html" class="text-white-50 text-decoration-none mx-2">Politika zasebnosti</a> |
-                <a href="pogoji.html" class="text-white-50 text-decoration-none mx-2">Splošni pogoji</a>
+    <footer class="bg-black text-white-50 position-relative overflow-hidden pt-5 pb-4">
+        <!-- Giant faint watermark -->
+        <div class="position-absolute translate-middle-y opacity-10" style="top: 50%; left: -5%; width: 110%; z-index: 0; pointer-events: none;">
+            <h1 class="display-1 fw-bold text-nowrap text-white m-0" style="font-size: 15vw; letter-spacing: -0.05em; opacity: 0.05;">MIZARSTVO KREBS</h1>
+        </div>
+
+        <div class="container position-relative z-1 mt-4">
+            <div class="row align-items-center mb-5 pb-4 border-bottom border-secondary border-opacity-25">
+                <div class="col-md-6 mb-4 mb-md-0 text-center text-md-start">
+                    <img src="mizarstvo_krebs_nobg.png" alt="Mizarstvo Krebs Logo" class="mb-3" width="200" height="auto" style="filter: brightness(0) invert(1) opacity(0.8);">
+                    <p class="lead mb-0 text-white-50">Ustvarjamo prostore z dušo.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="index.html#kontakt" class="btn btn-outline-light rounded-0 px-4 py-3 text-uppercase fw-bold" style="letter-spacing: 2px;">Stopite v stik &rarr;</a>
+                </div>
+            </div>
+
+            <div class="row align-items-center pt-2">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 small">&copy; 2025 Mizarstvo Krebs. Vse pravice pridržane.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end small">
+                    <a href="podatki.html" class="text-white-50 text-decoration-none ms-md-4 me-3 me-md-0">Podatki o podjetju</a>
+                    <a href="zasebnost.html" class="text-white-50 text-decoration-none ms-md-4 me-3 me-md-0">Politika zasebnosti</a>
+                    <a href="pogoji.html" class="text-white-50 text-decoration-none ms-md-4">Splošni pogoji</a>
+                </div>
             </div>
         </div>
     </footer>
