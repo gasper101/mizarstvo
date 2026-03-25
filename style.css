@@ -221,9 +221,9 @@ h1 {
 .hero-section {
     height: 100vh;
     position: relative;
-    display: flex;
-    align-items: center;
     overflow: hidden;
+    display: flex;
+    align-items: flex-end; /* Anchor content to bottom */
 }
 
 /* Native Image Ken Burns background scaling */
@@ -245,101 +245,198 @@ h1 {
     transition: opacity 0.6s ease-in-out;
 
     /* Smooth linear transition works best for infinite loops */
-    animation: kenburns-native 15s linear infinite alternate;
+    animation: kenburns-native 18s linear infinite alternate;
 }
 
+/* Zoom-in: used by default on all subpage heroes */
 @keyframes kenburns-native {
-    0% {
-        transform: scale(1) translateZ(0);
-    }
-
-    100% {
-        transform: scale(1.15) translateZ(0);
-        /* 5% zoom avoids pixelation/blur and dizzy feeling */
-    }
+    0%   { transform: scale(1)    translateZ(0); }
+    100% { transform: scale(1.12) translateZ(0); }
 }
 
+/* Horizontal pan — index.html only (applied via JS) */
+@keyframes kenburns-pan {
+    0%   { transform: scale(1.06) translateX(-3%) translateZ(0); }
+    100% { transform: scale(1.06) translateX( 3%) translateZ(0); }
+}
+
+@keyframes kenburns-pan-reverse {
+    0%   { transform: scale(1.06) translateX( 3%) translateZ(0); }
+    100% { transform: scale(1.06) translateX(-3%) translateZ(0); }
+}
+
+/* Premium layered overlay: dark vignette on bottom-left, lighter top-right */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Reduced opacity from 0.4->0.7 down to 0.15->0.45 for more visible hero images */
-    background: linear-gradient(to bottom, rgba(45, 38, 34, 0.15) 0%, rgba(35, 28, 24, 0.45) 100%) !important;
+    background:
+        linear-gradient(to top, rgba(20, 15, 10, 0.85) 0%, rgba(20, 15, 10, 0.3) 50%, rgba(20, 15, 10, 0.1) 100%),
+        linear-gradient(to right, rgba(20, 15, 10, 0.5) 0%, rgba(20, 15, 10, 0) 60%);
+    z-index: 1;
 }
 
-/* 
-ORIGINAL DARKER OVERLAY (Commented out for backup)
-.overlay {
-    background: linear-gradient(to bottom, rgba(45, 38, 34, 0.4) 0%, rgba(35, 28, 24, 0.7) 100%) !important;
-}
-*/
-
-/* Premium Organic Shadow */
-.shadow-premium {
-    box-shadow: 0 20px 50px rgba(193, 154, 107, 0.08), 0 5px 15px rgba(193, 154, 107, 0.04) !important;
-}
-
-/* Softer Bootstrap Shadows to avoid darkness */
-.shadow-sm {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
-}
-.shadow {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-}
-.shadow-lg {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+/* ── Hero Content Wrapper ─────────────────── */
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    padding: 0 8vw 7vh 8vw; /* bottom-left padding for editorial feel */
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* Typography Refinement */
+/* Eyebrow / label above the title */
+.hero-eyebrow {
+    display: block;
+    font-family: var(--heading-font);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    /* Entry animation: slide in from left */
+    transform: translateX(-30px);
+    animation: hero-slide-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* ── Main Title (two-line, editorial style) ── */
 .main-title {
-    font-family: var(--body-font);
-    font-weight: 400;
-    font-size: clamp(4rem, 9vw, 7rem);
+    font-family: var(--heading-font);
+    font-weight: 800;
+    font-size: clamp(3.8rem, 9vw, 7rem);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.01em;
     color: #ffffff;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    line-height: 1;
-    white-space: nowrap;
-    /* Forces one line on desktop */
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    line-height: 0.92;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: hero-slide-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
-@media (max-width: 991px) {
-    .main-title {
-        white-space: normal;
-        /* Allows wrap on mobile */
-        font-size: 2.5rem;
-    }
+/* Thin weight contrast for the second line ("Krebs") */
+.main-title .main-title-thin {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    display: block;
 }
 
-.main-title-other {
-    font-family: var(--body-font);
-    font-weight: 500;
-    font-size: var(--h1-size);
-    letter-spacing: 0.06em;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    line-height: 1.1;
-}
-
-.hero-section .lead {
+/* ── Hero Lead Text ─────────────────────────── */
+.hero-lead {
     font-family: var(--body-font);
     font-weight: 300;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 0.02rem;
-    opacity: 0.9;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.85;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: hero-slide-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
 }
 
-@media(max-width: 768px) {
-    .main-title {
-        font-size: 2.8rem;
+/* ── Hero CTA Row ───────────────────────────── */
+.hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: hero-slide-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+}
+
+/* Secondary ghost link next to the button */
+.hero-link-secondary {
+    font-family: var(--heading-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.hero-link-secondary:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.hero-link-arrow {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: 4px;
+}
+
+.hero-link-secondary:hover .hero-link-arrow {
+    transform: translateX(6px);
+}
+
+/* ── The core keyframe for all hero reveals ── */
+@keyframes hero-slide-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
+
+/* Hero lead word-span opacity initially for scroll reveal */
+#heroText span {
+    opacity: 0.1;
+    transition: opacity 0.1s ease;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 991px) {
+    .main-title {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+    }
+    .hero-content-wrapper {
+        padding: 0 6vw 8vh 6vw;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        align-items: flex-end;
+    }
+    .main-title {
+        font-size: 3rem;
+        line-height: 0.95;
+    }
+    .hero-lead {
+        font-size: 0.875rem;
+        max-width: 100%;
+    }
+    .hero-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+    .hero-content-wrapper {
+        padding: 0 5vw 6vh 5vw;
+    }
+    /* Static background on mobile — no pan, no zoom */
+    .hero-bg-img {
+        animation: none !important;
+        transform: scale(1.06) translateZ(0); /* slight scale to stay full-coverage */
+    }
+}
+
 
 /* Gumbi */
 .btn-custom {

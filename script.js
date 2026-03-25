@@ -441,7 +441,10 @@ window.addEventListener("load", function () {
         imageProgressBar.classList.add('running');
 
         const overlay = heroSection.querySelector('.overlay');
-        
+
+        // Pick direction: even index = left→right, odd = right→left (index.html only)
+        const animName = (currentImageIndex % 2 === 0) ? 'kenburns-pan' : 'kenburns-pan-reverse';
+
         if (overlay) {
             // Create a brand new image node for the crossfade
             const newImg = document.createElement('img');
@@ -449,14 +452,14 @@ window.addEventListener("load", function () {
             newImg.src = rotatingImages[currentImageIndex];
             newImg.style.opacity = '0'; // Start invisible
             newImg.style.transition = 'opacity 1.5s ease-in-out'; // Long, elegant fade
-            newImg.style.animation = 'kenburns-native 15s linear infinite alternate'; // Start Ken Burns instantly
+            newImg.style.animation = `${animName} 18s linear infinite`; // Direction-aware Ken Burns
 
             // Insert it behind the overlay
             heroSection.insertBefore(newImg, overlay);
 
             newImg.onload = () => {
                 newImg.style.opacity = '1'; // Fade into view
-                
+
                 // Find all existing background images to fade out and destroy
                 const allBgImgs = heroSection.querySelectorAll('.hero-bg-img');
                 allBgImgs.forEach(img => {
@@ -738,111 +741,7 @@ document.querySelectorAll('a[href*="#"]').forEach(anchor => {
 
 
 
-//floating particles
-const canvas = document.getElementById('dustCanvas');
-const ctx = canvas.getContext('2d');
-
-let particles = [];
-// Optimizacija: Manj delcev za manjši zagon procesorja pri velikih ekranih
-const particleCount = window.innerWidth > 768 ? 40 : 25;
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.8 + 0.5; // Zelo majhni delci
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.4 + 0.1; // Padajo rahlo navzdol
-        this.opacity = Math.random() * 0.5;
-        this.fadeSpeed = Math.random() * 0.01 + 0.002;
-    }
-
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // Če delec zapusti zaslon, ga ponovno ustvarimo na vrhu
-        if (this.y > canvas.height) {
-            this.y = -10;
-            this.x = Math.random() * canvas.width;
-        }
-        if (this.x > canvas.width || this.x < 0) {
-            this.speedX *= -1;
-        }
-
-        // Subtilno utripanje (twinkle)
-        this.opacity += this.fadeSpeed;
-        if (this.opacity > 0.78 || this.opacity < 0.1) {
-            this.fadeSpeed *= -1;
-        }
-    }
-
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(179, 142, 93, ${this.opacity})`; // Tvoja zlato-rjava barva
-        ctx.fill();
-    }
-}
-
-function createParticles() {
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-}
-
-let isDustVisible = true;
-let animationFrameId;
-
-function animateDust() {
-    if (!isDustVisible) return; // Optimizacija: Ne risi, ce ni vidno
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-    });
-
-    animationFrameId = requestAnimationFrame(animateDust);
-}
-
-createParticles();
-
-// Optimizacija: Počakajmo malo z obremenitvijo CPU-ja (canvas animacijo), da damo prioriteto izrisu glavne strani.
-setTimeout(() => {
-    // Opazuj hero sekcijo in ustavi animacijo, ko ni vidna
-    const heroSectionDust = document.getElementById('domov');
-    if (heroSectionDust) {
-        const dustObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    isDustVisible = true;
-                    animateDust();
-                } else {
-                    isDustVisible = false;
-                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                }
-            });
-        }, { threshold: 0 });
-
-        dustObserver.observe(heroSectionDust);
-    } else {
-        animateDust(); // Fallback, ce hero sekcija ni najdena
-    }
-}, 500);
+// Dust particle system removed.
 /*custom miska
 document.addEventListener('DOMContentLoaded', () => {
     const dot = document.querySelector('.cursor-dot');

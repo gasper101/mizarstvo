@@ -188,20 +188,23 @@
         </div>
     </nav>
 
-    <header id="domov" class="page-top hero-section d-flex align-items-center">
+    <header id="domov" class="page-top hero-section">
         <!-- Native LCP Image for immediate preload scanner pickup -->
         <img src="slike/stopnice_11.webp" alt="Mizarstvo Krebs" class="hero-bg-img" fetchpriority="high" width="1920"
             height="1080">
 
         <div class="overlay"></div>
-        <canvas id="dustCanvas"></canvas>
-        <div class="container text-center text-white position-relative">
-            <h1 class="display-1 main-title mb-4">Mizarstvo Krebs</h1>
-            <p class="lead mb-5" id="heroText">Mirna eleganca. Naravni materiali. Premišljena ergonomija. Smo butično
-                mizarstvo, kjer les dobi značaj, prostor pa dušo.</p>
-            <a href="#storitve" class="btn btn-custom2 btn-lg" style="z-index: 1000 !important;">Naša ponudba</a>
-        </div>
 
+        <div class="hero-content-wrapper">
+            <span class="hero-eyebrow">Mizarstvo Krebs · Lesena umetnost po meri</span>
+            <h1 class="main-title" id="heroTitle">Mizarstvo<br><span class="main-title-thin">Krebs</span></h1>
+            <p class="hero-lead" id="heroText">Mirna eleganca. Naravni materiali. Premišljena ergonomija. Smo butično
+                mizarstvo, kjer les dobi značaj, prostor pa dušo.</p>
+            <div class="hero-cta-row">
+                <a href="#storitve" class="btn btn-custom2 btn-lg">Naša ponudba</a>
+                <a href="#o-nas" class="hero-link-secondary">Spoznajte nas <span class="hero-link-arrow">→</span></a>
+            </div>
+        </div>
 
         <div class="progress-bar-container">
             <div class="progress-bar-fill" id="imageProgressBar"></div>
