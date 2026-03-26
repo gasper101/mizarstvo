@@ -481,7 +481,7 @@ window.addEventListener("load", function () {
         changeBackgroundImage();
 
         // Nastavimo interval menjave (npr. vsakih 6 sekund = 6000 milisekund)
-        setInterval(changeBackgroundImage, 6000);
+        setInterval(changeBackgroundImage, 8000);
     }
 
 

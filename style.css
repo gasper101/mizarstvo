@@ -20,7 +20,7 @@
     --bg-card: #fdfaf6;
     */
     --accent-line: rgba(193, 154, 107, 0.2);
-    --heading-font: 'Arimo', sans-serif;
+    --heading-font: 'Montserrat', sans-serif;
     --body-font: 'Montserrat', sans-serif;
 
     --wood-texture-opacity: 0.15;
@@ -40,6 +40,13 @@ body {
     background-color: var(--bg-main);
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden; /* Prevent horizontal scroll bug from wide fonts/elements */
+    width: 100%;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .bg-white {
@@ -273,8 +280,8 @@ h1 {
     width: 100%;
     height: 100%;
     background:
-        linear-gradient(to top, rgba(20, 15, 10, 0.85) 0%, rgba(20, 15, 10, 0.3) 50%, rgba(20, 15, 10, 0.1) 100%),
-        linear-gradient(to right, rgba(20, 15, 10, 0.5) 0%, rgba(20, 15, 10, 0) 60%);
+        linear-gradient(to top, rgba(10, 7, 5, 0.92) 0%, rgba(10, 7, 5, 0.6) 30%, rgba(10, 7, 5, 0.2) 70%, rgba(10, 7, 5, 0.02) 100%),
+        linear-gradient(to right, rgba(10, 7, 5, 0.5) 0%, rgba(10, 7, 5, 0) 60%);
     z-index: 1;
 }
 
@@ -294,7 +301,7 @@ h1 {
     display: block;
     font-family: var(--heading-font);
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--primary-color);
@@ -304,29 +311,45 @@ h1 {
     transform: translateX(-30px);
     animation: hero-slide-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
+/* ── Subpage Hero Titles ────────────────── */
+.main-title-other {
+    font-family: var(--heading-font);
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
 
 /* ── Main Title (two-line, editorial style) ── */
 .main-title {
     font-family: var(--heading-font);
-    font-weight: 800;
-    font-size: clamp(3.8rem, 9vw, 7rem);
+    font-weight: 400; /* Increased from 200 to 400 for more legibility */
+    font-size: clamp(3.8rem, 9.5vw, 7.5rem);
     text-transform: uppercase;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.05em; /* Slightly tighter than hairline */
     color: #ffffff;
-    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    line-height: 0.92;
-    margin-bottom: 1.8rem;
+    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow for 400 weight */
+    line-height: 0.95;
+    margin-bottom: 2rem;
     opacity: 0;
     transform: translateX(-40px);
     animation: hero-slide-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
-/* Thin weight contrast for the second line ("Krebs") */
-.main-title .main-title-thin {
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.9);
+/* Light weight contrast for "Mizarstvo" */
+.main-title .main-title-light {
+    font-weight: 200; /* Increased from 100 to 200 */
+    color: rgba(255, 255, 255, 0.92);
     display: block;
+    letter-spacing: 0.12em;
+    font-size: 0.82em;
+    margin-bottom: 0.5rem;
 }
+
+/* Line removed */
 
 /* ── Hero Lead Text ─────────────────────────── */
 .hero-lead {
@@ -356,29 +379,49 @@ h1 {
 
 /* Secondary ghost link next to the button */
 .hero-link-secondary {
+    position: relative;
     font-family: var(--heading-font);
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
     transition: color 0.3s ease;
     white-space: nowrap;
+    padding-bottom: 4px;
+}
+
+.hero-link-secondary::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary-light);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-link-secondary:hover {
     color: rgba(255, 255, 255, 1);
 }
 
+.hero-link-secondary:hover::after {
+    transform: scaleX(1);
+}
+
 .hero-link-arrow {
     display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
     margin-left: 4px;
 }
 
 .hero-link-secondary:hover .hero-link-arrow {
     transform: translateX(6px);
+    color: var(--primary-color);
 }
 
 /* ── The core keyframe for all hero reveals ── */
@@ -408,15 +451,137 @@ h1 {
         padding: 0 6vw 8vh 6vw;
         max-width: 100%;
     }
+
+    /* ── Mobile Menu Overlay Fix ──────────────── */
+    .navbar .container {
+        position: relative; /* Anchor for absolute collapse */
+    }
+
+    .navbar .navbar-collapse {
+        position: absolute !important;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff !important;
+        padding: 1rem 1.5rem !important; /* Slightly tighter padding */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000 !important;
+        margin: 0 !important;
+        max-height: 80vh; /* Prevent it from being taller than the screen */
+        overflow-y: auto;
+    }
+
+    /* Force dark text on mobile to override all previous white-on-dark rules */
+    .navbar .navbar-nav .nav-link,
+    .navbar .navbar-nav .nav-link:hover, 
+    .navbar .navbar-nav .nav-link.active,
+    .navbar .navbar-nav .nav-link[aria-expanded="true"],
+    .navbar .navbar-collapse .dropdown-item,
+    .navbar .navbar-collapse .main-link-text,
+    .navbar .navbar-collapse .dropdown-desc {
+        color: #1a1a1a !important; 
+        text-shadow: none !important; 
+        opacity: 1 !important;
+        font-weight: 500 !important;
+        display: block !important;
+        background: transparent !important;
+    }
+
+    .navbar .navbar-nav .nav-link {
+        padding: 15px 0 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Slightly different styling for dropdown internal items */
+    .navbar .navbar-collapse .dropdown-item {
+        padding: 10px 0 !important;
+        white-space: normal; /* Allow text wrapping */
+    }
+    
+    .navbar .navbar-collapse .main-link-text {
+        font-weight: 600 !important;
+        margin-bottom: 4px;
+    }
+
+    .navbar .navbar-collapse .dropdown-desc {
+        color: #555 !important; /* Slightly lighter for distinction */
+        font-size: 0.8em;
+        padding-left: 10px;
+    }
+
+    /* Fix Kontakt Button padding on mobile - must restore horizontal padding */
+    .navbar .navbar-nav .nav-link.btn-contact {
+        padding: 10px 20px !important;
+        margin: 15px 0 5px 0 !important;
+        border: 2px solid var(--primary-color) !important;
+        text-align: center;
+        border-bottom: 2px solid var(--primary-color) !important; /* Override the border-bottom rule above */
+    }
+
+    .nav-link.active {
+        color: var(--primary-color) !important;
+    }
+
+    .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    /* Style for the dropdown link when it's open on mobile */
+    .navbar .navbar-nav .nav-link[aria-expanded="true"] {
+        border-left: 3px solid var(--primary-color);
+        padding-left: 15px !important;
+        background: rgba(0, 0, 0, 0.02) !important;
+    }
+
+    /* Rotate the arrow inside the link when the dropdown is open */
+    .navbar .navbar-nav .nav-link[aria-expanded="true"] .dropdown-arrow {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    /* Strict enforcement: Hide dropdown by default on mobile so it doesn't take space */
+    .navbar .navbar-collapse .dropdown-menu {
+        display: none !important; 
+        background: rgba(0, 0, 0, 0.02) !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding-left: 1.5rem !important;
+        margin-top: 5px !important;
+    }
+
+    /* Only show and take space when toggled Open */
+    .navbar .navbar-collapse .dropdown-menu.show {
+        display: block !important; 
+    }
+
+    /* Absolute guarantee that all text inside the dropdown is dark on mobile */
+    .navbar .navbar-collapse .dropdown-menu a,
+    .navbar .navbar-collapse .dropdown-menu div,
+    .navbar .navbar-collapse .dropdown-menu span {
+        color: #1a1a1a !important;
+        text-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
 }
+
 
 @media (max-width: 768px) {
     .hero-section {
         align-items: flex-end;
     }
     .main-title {
-        font-size: 3rem;
-        line-height: 0.95;
+        font-size: clamp(2.4rem, 14vw, 3.5rem); /* Increased size for bolder impact on mobile */
+        line-height: 1;
+        margin-bottom: 2rem;
+    }
+    .main-title-other {
+        font-size: clamp(2.4rem, 14vw, 3.5rem); /* Subpage titles scale up too */
     }
     .hero-lead {
         font-size: 0.875rem;
@@ -430,10 +595,11 @@ h1 {
     .hero-content-wrapper {
         padding: 0 5vw 6vh 5vw;
     }
-    /* Static background on mobile — no pan, no zoom */
+    /* Static background on mobile — precisely centered for full coverage */
     .hero-bg-img {
         animation: none !important;
-        transform: scale(1.06) translateZ(0); /* slight scale to stay full-coverage */
+        left: 50% !important;
+        transform: translate(-50%, 0) scale(1.1) !important; /* Centered with a healthy scale buffer */
     }
 }
 
@@ -1422,7 +1588,7 @@ h1 {
 
 /* Razred, ki sproži animacijo */
 .progress-bar-fill.running {
-    animation: fillProgress 6s linear forwards;
+    animation: fillProgress 8s linear forwards;
 }
 
 
