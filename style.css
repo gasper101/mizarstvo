@@ -257,19 +257,19 @@ h1 {
 
 /* Zoom-in: used by default on all subpage heroes */
 @keyframes kenburns-native {
-    0%   { transform: scale(1)    translateZ(0); }
-    100% { transform: scale(1.12) translateZ(0); }
+    0%   { transform: scale(1)    translate3d(0, 0, 0); }
+    100% { transform: scale(1.12) translate3d(0, 0, 0); }
 }
 
 /* Horizontal pan — index.html only (applied via JS) */
 @keyframes kenburns-pan {
-    0%   { transform: scale(1.06) translateX(-3%) translateZ(0); }
-    100% { transform: scale(1.06) translateX( 3%) translateZ(0); }
+    0%   { transform: scale(1.06) translate3d(-3%, 0, 0); }
+    100% { transform: scale(1.06) translate3d( 3%, 0, 0); }
 }
 
 @keyframes kenburns-pan-reverse {
-    0%   { transform: scale(1.06) translateX( 3%) translateZ(0); }
-    100% { transform: scale(1.06) translateX(-3%) translateZ(0); }
+    0%   { transform: scale(1.06) translate3d( 3%, 0, 0); }
+    100% { transform: scale(1.06) translate3d(-3%, 0, 0); }
 }
 
 /* Premium layered overlay: dark vignette on bottom-left, lighter top-right */
@@ -307,9 +307,15 @@ h1 {
     color: var(--primary-color);
     margin-bottom: 1.4rem;
     opacity: 0;
-    /* Entry animation: slide in from left */
     transform: translateX(-30px);
     animation: hero-slide-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    will-change: transform, opacity;
+}
+
+/* Optimize off-screen sections: Browser skips rendering until needed */
+#o-nas, #storitve, #vizualizacija, #materiali, #galerija, #kontakt {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
 }
 /* ── Subpage Hero Titles ────────────────── */
 .main-title-other {
