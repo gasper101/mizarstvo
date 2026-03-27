@@ -436,43 +436,46 @@ window.addEventListener("load", function () {
     function changeBackgroundImage() {
         if (!heroSection && !imageProgressBar) return;
 
+        // Reset progress bar to 8s sync
         imageProgressBar.classList.remove('running');
         void imageProgressBar.offsetWidth;
         imageProgressBar.classList.add('running');
 
         const overlay = heroSection.querySelector('.overlay');
+        const oldImgs = Array.from(heroSection.querySelectorAll('.hero-bg-img'));
 
-        // Pick direction: even index = left→right, odd = right→left (index.html only)
+        // Prepare the new image
         const animName = (currentImageIndex % 2 === 0) ? 'kenburns-pan' : 'kenburns-pan-reverse';
-
+        const newImg = document.createElement('img');
+        newImg.className = 'hero-bg-img';
+        
+        // Initial state before loading to ensure transition triggers
+        newImg.style.opacity = '0';
+        newImg.style.transition = 'opacity 1.2s ease-in-out';
+        newImg.style.animation = `${animName} 8s linear infinite`;
+        
         if (overlay) {
-            // Create a brand new image node for the crossfade
-            const newImg = document.createElement('img');
-            newImg.className = 'hero-bg-img';
-            newImg.src = rotatingImages[currentImageIndex];
-            newImg.style.opacity = '0'; // Start invisible
-            newImg.style.transition = 'opacity 1.5s ease-in-out'; // Long, elegant fade
-            newImg.style.animation = `${animName} 18s linear infinite`; // Direction-aware Ken Burns
-
-            // Insert it behind the overlay
             heroSection.insertBefore(newImg, overlay);
-
-            newImg.onload = () => {
-                newImg.style.opacity = '1'; // Fade into view
-
-                // Find all existing background images to fade out and destroy
-                const allBgImgs = heroSection.querySelectorAll('.hero-bg-img');
-                allBgImgs.forEach(img => {
-                    if (img !== newImg) {
-                        img.style.opacity = '0'; // Fade out existing
-                        setTimeout(() => img.remove(), 1500); // Remove from DOM after fade
-                    }
-                });
-            };
-        } else if (heroSection) {
-            heroSection.style.backgroundImage = `url('${rotatingImages[currentImageIndex]}')`;
         }
 
+        newImg.onload = () => {
+            // Use double-RAF to ensure the browser registers the 0 -> 1 change even if cached
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    newImg.style.opacity = '1';
+                });
+            });
+
+            // Simultaneously fade out old images
+            oldImgs.forEach(img => {
+                img.style.transition = 'opacity 1.2s ease-in-out';
+                img.style.opacity = '0';
+                setTimeout(() => img.remove(), 1300); 
+            });
+        };
+
+        // Set src AFTER onload for maximum reliability with cached images
+        newImg.src = rotatingImages[currentImageIndex];
         currentImageIndex = (currentImageIndex + 1) % rotatingImages.length;
     }
 
@@ -480,7 +483,7 @@ window.addEventListener("load", function () {
     if (heroSection) {
         changeBackgroundImage();
 
-        // Nastavimo interval menjave (npr. vsakih 6 sekund = 6000 milisekund)
+        // Nastavimo interval menjave (8 sekund = 8000 milisekund)
         setInterval(changeBackgroundImage, 8000);
     }
 

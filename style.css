@@ -251,25 +251,25 @@ h1 {
     transform-style: preserve-3d;
     transition: opacity 0.6s ease-in-out;
 
-    /* Smooth linear transition works best for infinite loops */
-    animation: kenburns-native 18s linear infinite alternate;
+    /* 8s total duration: 7s movement + 1s pause at the end */
+    animation: kenburns-native 8s linear infinite alternate;
 }
 
-/* Zoom-in: used by default on all subpage heroes */
+/* Zoom-in: used by default on all subpage heroes (Continuous 8s) */
 @keyframes kenburns-native {
-    0%   { transform: scale(1)    translate3d(0, 0, 0); }
-    100% { transform: scale(1.12) translate3d(0, 0, 0); }
+    0%    { transform: scale(1)    translate3d(0, 0, 0); }
+    100%  { transform: scale(1.08) translate3d(0, 0, 0); }
 }
 
-/* Horizontal pan — index.html only (applied via JS) */
+/* Horizontal pan — index.html only (Continuous 8s) */
 @keyframes kenburns-pan {
-    0%   { transform: scale(1.06) translate3d(-3%, 0, 0); }
-    100% { transform: scale(1.06) translate3d( 3%, 0, 0); }
+    0%    { transform: scale(1.1) translate3d(-5%, 0, 0); }
+    100%  { transform: scale(1.1) translate3d( 5%, 0, 0); }
 }
 
 @keyframes kenburns-pan-reverse {
-    0%   { transform: scale(1.06) translate3d( 3%, 0, 0); }
-    100% { transform: scale(1.06) translate3d(-3%, 0, 0); }
+    0%    { transform: scale(1.1) translate3d( 5%, 0, 0); }
+    100%  { transform: scale(1.1) translate3d(-5%, 0, 0); }
 }
 
 /* Premium layered overlay: dark vignette on bottom-left, lighter top-right */
