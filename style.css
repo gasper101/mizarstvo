@@ -342,7 +342,8 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #ffffff;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    /* Enhanced shadow for extra punch */
     margin-bottom: 1rem;
 }
 
@@ -1262,6 +1263,11 @@ h1 {
     /* Fallback */
 }
 
+/* Ensure the text is on top of the overlay */
+.page-header .container {
+    z-index: 2;
+}
+
 .page-header::before {
     content: "";
     position: absolute;
@@ -1488,24 +1494,53 @@ h1 {
 
 .hover-effect-container {
     background-color: var(--bg-main);
-    /* Matches section background to prevent white flash on lift */
-    border-radius: 4px;
+    border-radius: 8px; /* Slightly more rounded for products */
     overflow: hidden;
     display: block;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Initial soft shadow */
 }
 
-/*hover za slike*/
+/* Glass Shine Sweep Animation */
+.hover-effect-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.45) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
 .hover-effect-container img {
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                box-shadow 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                filter 0.5s ease;
     max-width: 100% !important;
     max-height: 600px !important;
     object-fit: cover;
+    z-index: 1;
 }
 
+/* Enhanced Hover State */
 .hover-effect-container:hover img {
-    transform: translateY(-15px) scale(1.03);
-    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2) !important;
-    filter: brightness(1.03);
+    transform: translateY(-30px) scale(1.18); /* Stronger lift and zoom enhancement */
+    box-shadow: 0 45px 90px rgba(0, 0, 0, 0.3) !important;
+    filter: brightness(1.06) contrast(1.06); /* Slightly more pop */
+}
+
+.hover-effect-container:hover::after {
+    left: 150%;
+    transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 
