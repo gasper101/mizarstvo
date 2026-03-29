@@ -63,16 +63,28 @@ window.addEventListener("load", function () {
 
             mm.add("(min-width: 900px)", () => {
 
-                // Idea 3: Initial Entry Animation (Title and button enter immediately)
-                gsap.to(".main-title, .btn-custom2", {
+                // Initial Entry Animation (Title and button enter gracefully)
+                gsap.to(".main-title", {
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    y: 0,
+                    duration: 2.2,
+                    ease: "expo.out",
+                    delay: 0.4,
+                    onStart: () => {
+                        gsap.set(".main-title", { visibility: "visible", filter: "blur(20px)", y: 30 });
+                    }
+                });
+
+                gsap.to(".hero-eyebrow, .hero-cta-row, .scroll-indicator", {
                     opacity: 1,
                     y: 0,
-                    duration: 1.2,
-                    stagger: 0.2,
-                    ease: "power3.out",
-                    delay: 0.2, // Wait slightly after load
+                    duration: 1.5,
+                    stagger: 0.3,
+                    ease: "power2.out",
+                    delay: 0.8,
                     onStart: () => {
-                        gsap.set(".main-title, .btn-custom2", { visibility: "visible", y: 20 });
+                        gsap.set(".hero-eyebrow, .hero-cta-row, .scroll-indicator", { visibility: "visible", y: 20 });
                     }
                 });
 
@@ -100,13 +112,16 @@ window.addEventListener("load", function () {
                     onUpdate: (self) => {
                         if (!hasScrolledPast) {
                             textTl.progress(self.progress);
-
+                            
+                            // Parallax Background (Quiet Luxury - Subtle scale only)
+                            gsap.set(".hero-bg-img", { 
+                                scale: 1 + (self.progress * 0.05) 
+                            });
                         } else {
                             textTl.progress(1 - self.progress);
                         }
                     }
                 });
-
 
                 return () => {
                     hasScrolledPast = false;
