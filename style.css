@@ -303,7 +303,7 @@ h1 {
     position: relative;
     z-index: 5;
     width: 100%;
-    padding: 0 10% 8% 10%; /* Spaced for luxury feel */
+    padding: 0 10% 4% 10%; /* Spaced for luxury feel - moved down */
     pointer-events: none; /* Let mouse glow pass through to header */
 }
 
