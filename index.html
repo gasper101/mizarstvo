@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- 2. Preloads (Strategic) -->
-    <link rel="preload" as="image" href="slike/stopnice_11.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="slike/stopnice_11-small.webp" imagesrcset="slike/stopnice_11-small.webp 800w, slike/stopnice_11-medium.webp 1600w, slike/stopnice_11.webp 2560w" imagesizes="100vw" fetchpriority="high">
     <link rel="preload" as="image" href="mizarstvo_krebs_nobg.png">
     
     <!-- 3. Stylesheets & Fonts (Optimized) -->
@@ -191,8 +191,11 @@
 
     <header id="domov" class="page-top hero-section">
         <!-- Native LCP Image for immediate preload scanner pickup -->
-        <img src="slike/stopnice_11.webp" alt="Mizarstvo Krebs" class="hero-bg-img" fetchpriority="high" width="1920"
-            height="1080">
+        <img src="slike/stopnice_11.webp" 
+             srcset="slike/stopnice_11-small.webp 800w, slike/stopnice_11-medium.webp 1600w, slike/stopnice_11.webp 2560w"
+             sizes="100vw"
+             alt="Mizarstvo Krebs" class="hero-bg-img" fetchpriority="high" width="1920"
+             height="1080">
 
         <div class="overlay"></div>
         <div class="hero-content-wrapper">

@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <link rel="preload" as="image" href="slike/stopnice_17-small.webp" imagesrcset="slike/stopnice_17-small.webp 800w, slike/stopnice_17-medium.webp 1600w, slike/stopnice_17.webp 2560w" imagesizes="100vw" fetchpriority="high">
 </head>
 
 <body class="bg-studio-textured">
@@ -145,7 +146,11 @@
     </nav>
 
     <!-- HEADER -->
-    <header class="page-header d-flex align-items-center" style="background-image: url('slike/stopnice_17.webp');">
+    <header class="page-header d-flex align-items-center">
+        <img src="slike/stopnice_17.webp" 
+             srcset="slike/stopnice_17-small.webp 800w, slike/stopnice_17-medium.webp 1600w, slike/stopnice_17.webp 2560w"
+             sizes="100vw"
+             alt="Stopnice po meri" class="hero-bg-img" fetchpriority="high" width="1920" height="1080">
         <div class="overlay"></div>
         <canvas id="dustCanvas"></canvas>
         <div class="container text-center text-white position-relative">

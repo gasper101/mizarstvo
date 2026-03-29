@@ -145,7 +145,11 @@
         </div>
     </nav>
 
-    <header class="page-header d-flex align-items-center" style="background-image: url('slike/kuhinja_4.webp');">
+    <header class="page-header d-flex align-items-center">
+        <img src="slike/kuhinja_4.webp" 
+             srcset="slike/kuhinja_4-small.webp 800w, slike/kuhinja_4-medium.webp 1600w, slike/kuhinja_4.webp 2560w"
+             sizes="100vw"
+             alt="Kuhinje po meri" class="hero-bg-img" fetchpriority="high" width="1920" height="1080">
         <div class="overlay"></div>
         <canvas id="dustCanvas"></canvas>
         <div class="container text-center text-white position-relative">
