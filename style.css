@@ -611,6 +611,15 @@ h1 {
         align-items: flex-end;
     }
 
+    .page-header {
+        align-items: flex-start !important;
+        padding-top: 25vh;
+    }
+
+    .hero-eyebrow {
+        display: none !important;
+    }
+
     .main-title {
         font-size: clamp(2.4rem, 14vw, 3.5rem);
         /* Increased size for bolder impact on mobile */
@@ -635,7 +644,7 @@ h1 {
     }
 
     .hero-content-wrapper {
-        padding: 0 5vw 6vh 5vw;
+        padding: 0 5vw 22vh 5vw;
     }
 
     /* Static background on mobile — precisely centered for full coverage */
