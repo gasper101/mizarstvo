@@ -1,8 +1,8 @@
 # Robots.txt za Mizarstvo Krebs
-# https://www.mizarstvo-krebs.si/
+# https://www.kuhinjapomeri.si/
 
 User-agent: *
 Allow: /
 
 # Povezava do tvojega sitemapa (nujno za hitrejše indeksiranje)
-Sitemap: https://www.mizarstvo-krebs.si/sitemap.xml
+Sitemap: https://www.kuhinjapomeri.si/sitemap.xml
