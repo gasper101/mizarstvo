@@ -3245,3 +3245,12 @@ header#home {
     white-space: nowrap;
     text-transform: uppercase;
 }
+
+/* Omejitev visine slik glede na zaslon (samo na namizjih) */
+@media (min-width: 900px) {
+    img:not(.hero-bg-img) {
+        max-height: 75vh;
+        width: auto; /* Ohrani razmerje - ce je sirina fiksna, se slika ne deformira */
+        object-fit: contain; /* Preprecimo popacenje */
+    }
+}
