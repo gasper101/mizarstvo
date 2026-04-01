@@ -1385,7 +1385,7 @@ h1 {
 
 
 .logo-img {
-    height: 75px;
+    height: 80px;
     transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     width: auto;
 }
@@ -1397,7 +1397,7 @@ h1 {
 
 /* Prilagoditev logotipa ko je navigacija skrolana */
 .navbar.scrolled .logo-img {
-    height: 70px;
+    height: 75px;
     /* Manjša višina ob skrolanju */
 }
 
@@ -2323,11 +2323,18 @@ html, body, a, button, .process-step-item, .gallery-item {
 }
 
 .preloader-logo {
-    width: 150px;
-    /* Prilagodi velikost */
+    width: 120px;
+    /* Majhna velikost */
     margin-bottom: 20px;
     opacity: 0;
     animation: fadeInLogo 1s ease forwards;
+}
+
+.footer-logo {
+    max-width: 240px !important;
+    width: 100%;
+    height: auto;
+    filter: brightness(0) invert(1) opacity(0.8);
 }
 
 .preloader-bar {
@@ -3248,9 +3255,16 @@ header#home {
 
 /* Omejitev visine slik glede na zaslon (samo na namizjih) */
 @media (min-width: 900px) {
-    img:not(.hero-bg-img) {
+    img:not(.hero-bg-img):not(.preloader-logo) {
         max-height: 75vh;
         width: auto; /* Ohrani razmerje - ce je sirina fiksna, se slika ne deformira */
         object-fit: contain; /* Preprecimo popacenje */
+    }
+
+    /* Galerije naj zasedajo celoten okvir */
+    .gallery-item img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
     }
 }
