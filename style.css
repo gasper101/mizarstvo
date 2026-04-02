@@ -240,6 +240,9 @@ h1 {
     bottom: -5%;
     width: 110%;
     height: 110%;
+    max-width: 2560px; /* Omejitev za performance (PageSpeed) */
+    max-height: 1440px; /* Omejitev za performance (PageSpeed) */
+    margin: 0 auto; /* Centriranje v primeru, da je zaslon zelo širok */
     object-fit: cover;
     z-index: 0;
 
