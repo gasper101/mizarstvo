@@ -231,6 +231,22 @@ h1 {
     /* Anchor content to bottom */
 }
 
+/* Podstrani hero header (kuhinje, vrata, stopnice, ...) */
+.page-header {
+    height: 100vh;
+    min-height: 400px; /* Zagotavlja minimalno višino na manjših zaslonih */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Na mobilnih napravah rahlo manjši hero */
+@media (max-width: 900px) {
+    .page-header {
+        height: 60vh;
+        min-height: 300px;
+    }
+}
+
 /* Native Image Ken Burns background scaling */
 .hero-bg-img {
     position: absolute;
@@ -240,11 +256,12 @@ h1 {
     bottom: -5%;
     width: 110%;
     height: 110%;
-    max-width: 2560px; /* Omejitev za performance (PageSpeed) */
-    max-height: 1440px; /* Omejitev za performance (PageSpeed) */
-    margin: 0 auto; /* Centriranje v primeru, da je zaslon zelo širok */
+    max-width: none !important; /* Preprečimo omejitev na mobilcih */
+    max-height: none !important;
+    margin: 0 auto;
     object-fit: cover;
-    z-index: 0;
+    z-index: 1;
+    display: block;
 
     /* Prevent lag, jitter, and blur during scale */
     will-change: transform;
@@ -298,7 +315,8 @@ h1 {
     background:
         linear-gradient(to top, rgba(10, 7, 5, 0.95) 0%, rgba(10, 7, 5, 0.4) 35%, rgba(10, 7, 5, 0.2) 75%, rgba(10, 7, 5, 0.05) 100%),
         linear-gradient(to right, rgba(10, 7, 5, 0.6) 0%, rgba(10, 7, 5, 0) 65%);
-    z-index: 1;
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* ── Hero Content Wrapper ─────────────────── */
@@ -2946,7 +2964,7 @@ header#home {
         height: 15px;
     }
 
-    img {
+    img:not(.hero-bg-img):not(.preloader-logo):not(.logo-img) {
         max-width: 90vw !important;
     }
 
