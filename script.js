@@ -443,7 +443,7 @@ window.addEventListener("load", function () {
     const rotatingImages = [
         "slike/stopnice_11.webp",
         "slike/pisarna_3.webp",
-        "slike/kuhinja_2.webp"
+        "slike/kuhinja_13.webp"
     ];
 
     let currentImageIndex = 0;
