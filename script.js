@@ -441,10 +441,12 @@ window.addEventListener("load", function () {
     const imageProgressBar = document.getElementById('imageProgressBar');
 
     const rotatingImages = [
-        "slike/stopnice_11.webp",
+        "slike/hodnik.webp",
         "slike/pisarna_3.webp",
         "slike/kuhinja_13.webp"
     ];
+
+
 
     let currentImageIndex = 0;
 
